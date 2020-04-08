@@ -7,16 +7,16 @@
   display: flex;
   flex-direction: column;
   margin: 0;
-  padding: 106px 0 0 105px;
+  padding: 105px 0 0 105px;
   background: url('images/grid.png');
 }
 .battleFieldWrap {
   display: flex;
 }
 .battleField {
-  width: 335px;
-  height: 335px;
-  padding: 25px 0 0 27px;
+  width: 340px;
+  height: 340px;
+  padding: 25px 0 0 25px;
   background: url('images/bg_play_field.png') no-repeat;
 }
 .battleField:last-child {

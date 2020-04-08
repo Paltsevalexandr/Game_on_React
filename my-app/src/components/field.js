@@ -1,6 +1,7 @@
 import React from 'react';
 import {BattleField} from './battleField.js';
 import {ShipField} from './shipField.js';
+import {calcShipPosition} from './positionFunctions/calcShipPosition.js';
 
 export class Field extends React.Component {
   constructor() {
@@ -23,13 +24,12 @@ export class Field extends React.Component {
   }
 
   addShip(e, shipName) {
-    console.log(this.state.currentShipOffsetY);
     this.setState({
       battleShips: [
         ...this.state.battleShips, 
         {shipName: shipName,
-         shipX: this.calcShipPosition(e.nativeEvent.pageX, this.state.currentShipOffsetX),
-         shipY: this.calcShipPosition(e.nativeEvent.pageY, this.state.currentShipOffsetY)
+         shipX: calcShipPosition(e.nativeEvent.pageX, this.state.currentShipOffsetX),
+         shipY: calcShipPosition(e.nativeEvent.pageY, this.state.currentShipOffsetY)
         }
       ]
     });
@@ -41,11 +41,6 @@ export class Field extends React.Component {
       return {checkingShips,}
     });
   }
-  calcShipPosition(a, b) {
-    let shipPosition = a - b + 'px';
-    return shipPosition;
-  }
-
 
   getOffsets(e) {
     this.setState({
