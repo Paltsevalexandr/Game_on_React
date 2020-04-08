@@ -23,14 +23,16 @@ export class Field extends React.Component {
   }
 
   addShip(e, shipName) {
-    console.log(shipName);
+    console.log(this.state.currentShipOffsetY);
     this.setState({
       battleShips: [
         ...this.state.battleShips, 
         {shipName: shipName,
-         shipX: e.nativeEvent.offsetX - 27 + 105 - this.state.currentShipOffsetX + 'px', // 27 - padding-left 
-         shipY: e.nativeEvent.offsetY - 25 + 106 - this.state.currentShipOffsetY + 'px'  // 25 - padding-top
-        }]}, ()=>console.log(this.state.battleShips));
+         shipX: this.calcShipPosition(e.nativeEvent.pageX, this.state.currentShipOffsetX),
+         shipY: this.calcShipPosition(e.nativeEvent.pageY, this.state.currentShipOffsetY)
+        }
+      ]
+    });
   }
 
   deleteCheckingShip(shipName) {
@@ -39,11 +41,16 @@ export class Field extends React.Component {
       return {checkingShips,}
     });
   }
+  calcShipPosition(a, b) {
+    let shipPosition = a - b + 'px';
+    return shipPosition;
+  }
+
 
   getOffsets(e) {
     this.setState({
-      battleShipOffsetX: e.nativeEvent.offsetX,
-      battleShipOffsetY: e.nativeEvent.offsetY
+      currentShipOffsetX: e.nativeEvent.offsetX,
+      currentShipOffsetY: e.nativeEvent.offsetY
     })
   }
   render() {
