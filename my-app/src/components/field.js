@@ -48,6 +48,18 @@ export class Field extends React.Component {
       currentShipOffsetY: e.nativeEvent.offsetY
     })
   }
+  foundForbiddenCells(e) {
+    for(let ship of this.state.battleShips) {
+      if(((e.pageY < parseInt(ship.shipY) + 66) &&
+          (e.pageY > parseInt(ship.shipY) - 33)) &&
+         ((e.pageX < parseInt(ship.shipX) + 66) &&
+          (e.pageX > parseInt(ship.shipX) - 33))) {
+        this.setState({canPut: false});
+      }else {
+        this.setState({canPut: true});
+      }
+    }
+  }
   render() {
     return(
       <div className = "gameField">
@@ -59,6 +71,7 @@ export class Field extends React.Component {
             addShip = {this.addShip}
             handleShip = {this.handleShip.bind(this)}
             getOffsets = {e=>this.getOffsets(e)}
+            foundForbiddenCells = {e=>this.foundForbiddenCells(e)}
           />
           <BattleField
             battleShips = {[]}
@@ -68,6 +81,7 @@ export class Field extends React.Component {
           checkingShips = {this.state.checkingShips}
           handleShip = {this.handleShip.bind(this)}
           getOffsets = {e=>this.getOffsets(e)}
+          foundForbiddenCells = {e=>this.foundForbiddenCells(e)}
         />
       </div>
     )

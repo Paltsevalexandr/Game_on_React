@@ -15,6 +15,7 @@ export class Ship extends React.Component {
           this.props.handleShip(this.props.shipSize);
           this.props.getOffsets(e)
         }}
+        onDrag = {e=>this.props.foundForbiddenCells(e)}
         draggable = 'true'>
       </div>
     )

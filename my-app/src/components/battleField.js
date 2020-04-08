@@ -22,6 +22,7 @@ export class BattleField extends React.Component {
             shipSize = {item.shipName +' battleShip'}
             handleShip = {this.props.handleShip.bind(null)}
             getOffsets = {e=>this.props.getOffsets(e)}
+            foundForbiddenCells = {e=>this.props.foundForbiddenCells(e)}
             shipX = {item.shipX}
             shipY = {item.shipY}
           />
@@ -32,10 +33,8 @@ export class BattleField extends React.Component {
       <div className = "battleField" 
         onDrop = {(e)=>{
             this.props.addShip(e, this.props.currentShip);
-            console.log(this.props.currentShip)
             this.props.deleteCheckingShip(this.props.currentShip);
           }}
-
         onClick = {this.test.bind(this)}
         onDragOver = {this.prevDefault.bind(this)}>
         {battleShips}

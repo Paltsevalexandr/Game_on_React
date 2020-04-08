@@ -12,6 +12,7 @@ export class ShipField extends React.Component {
         <Ship
         shipSize = {item} 
         handleShip = {this.props.handleShip.bind(null)}
+        foundForbiddenCells = {e=>this.props.foundForbiddenCells(e)}
         getOffsets = {e=>this.props.getOffsets(e)}
         key = {index} 
         />
