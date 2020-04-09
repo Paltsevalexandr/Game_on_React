@@ -16,6 +16,7 @@ export class Ship extends React.Component {
           this.props.getOffsets(e)
         }}
         onDrag = {e=>this.props.foundForbiddenCells(e)}
+        onDoubleClick = {()=>alert('cool')}
         draggable = 'true'>
       </div>
     )

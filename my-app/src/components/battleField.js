@@ -20,7 +20,7 @@ export class BattleField extends React.Component {
           <Ship
             key = {index}
             shipSize = {item.shipName +' battleShip'}
-            handleShip = {this.props.handleShip.bind(null)}
+            handleShip = {this.props.handleShip}
             getOffsets = {e=>this.props.getOffsets(e)}
             foundForbiddenCells = {e=>this.props.foundForbiddenCells(e)}
             shipX = {item.shipX}

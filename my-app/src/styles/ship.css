@@ -33,20 +33,13 @@
   margin-left: 30px;
   background-position-x: -360px;
 }
-.twodeck1,
-.twodeck2,
-.twodeck3,
-.onedeck1,
-.onedeck2,
-.onedeck3,
-.onedeck4,
-.threedeck1,
-.threedeck2,
-.fourdeck1 {
-  margin: 0;
-}
 .battleShip {
   margin: 0;
   position: absolute;
   background-position-y: -50px;
+}
+.rotate {
+  -webkit-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
 }
