@@ -1,7 +1,7 @@
 import React from 'react';
 import {BattleField} from './battleField.js';
-import {ShipField} from './shipField.js';
-import {RotateShip} from './positionFunctions/rotateShip.js';
+import {CheckingShipsField} from './checkingShipsField.js';
+// import {RotateShip} from './positionFunctions/rotateShip.js';
 import {calcShipPosition} from './positionFunctions/calcShipPosition.js';
 
 export class Field extends React.Component {
@@ -12,51 +12,49 @@ export class Field extends React.Component {
         'threedeck1', 'threedeck2', 'twodeck1',
         'twodeck2', 'twodeck3', 'onedeck1',
         'onedeck2', 'onedeck3', 'onedeck4'], 
-        battleShips: [], currentShip: '',
+        battleShips: [],
+        currentShip: '',
         currentShipOffsetX: '', currentShipOffsetY: '',
         canPlaceShip: true,
-      };
-
-    this.handleShip = this.handleShip.bind(this);
-    this.addShip = this.addShip.bind(this);
-    this.deleteCheckingShip = this.deleteCheckingShip.bind(this);
+    };
   }
 
-  handleShip(currentShip) {
+  handleShip = (currentShip) => {
     this.setState({currentShip,});
   }
 
-  addShip(e, shipName) {
+  deleteSelectedShip = () => {
+    this.setState(state => {
+      const checkingShips = state.checkingShips.filter((item)=>item !== state.currentShip);
+      return {checkingShips,} 
+    });
+  }
+
+  addShip = (e) => {
     this.setState({
       battleShips: [
         ...this.state.battleShips, 
-        {shipName,
-         shipX: calcShipPosition(e.nativeEvent.pageX, this.state.currentShipOffsetX),
-         shipY: calcShipPosition(e.nativeEvent.pageY, this.state.currentShipOffsetY)
+        {shipName: this.state.currentShip,
+         leftIndent: calcShipPosition(e.nativeEvent.pageX, this.state.currentShipOffsetX),
+         topIndent: calcShipPosition(e.nativeEvent.pageY, this.state.currentShipOffsetY),
+         isRotate: false,
         }
       ]
     });
   }
 
-  deleteCheckingShip(shipName) {
-    this.setState(state => {
-      const checkingShips = state.checkingShips.filter((item)=>item !== shipName);
-      return {checkingShips,} 
-    });
-  }
-
-  getOffsets(e) {
+  getCurrenShipOffsets(e) {
     this.setState({
       currentShipOffsetX: e.nativeEvent.offsetX,
       currentShipOffsetY: e.nativeEvent.offsetY
     })
   }
-  foundForbiddenCells(e) {
+  foundForbiddenCells = e => {
     for(let ship of this.state.battleShips) {
-      if(((e.pageY - this.state.currentShipOffsetY < parseInt(ship.shipY) + 66) &&
-          (e.pageY - this.state.currentShipOffsetY + 35 > parseInt(ship.shipY) - 33)) &&
-         ((e.pageX - this.state.currentShipOffsetX < parseInt(ship.shipX) + this.shipSize(ship.shipName) + 33) &&
-          (e.pageX - this.state.currentShipOffsetX + this.shipSize(this.state.currentShip) > parseInt(ship.shipX) - 33))) {
+      if(((e.pageY - this.state.currentShipOffsetY < parseInt(ship.topIndent) + 66) &&
+          (e.pageY - this.state.currentShipOffsetY + 35 > parseInt(ship.topIndent) - 33)) &&
+         ((e.pageX - this.state.currentShipOffsetX < parseInt(ship.leftIndent) + this.shipSize(ship.shipName) + 33) &&
+          (e.pageX - this.state.currentShipOffsetX + this.shipSize(this.state.currentShip) > parseInt(ship.leftIndent) - 33))) {
         this.setState({canPlaceShip: false});
       }else {
         this.setState({canPlaceShip: true});
@@ -74,34 +72,65 @@ export class Field extends React.Component {
       return 33;
     }
   }
-  
+
+  changeBattleShipPosition = e => {
+    const selectedChipPageX = e.nativeEvent.pageX;
+    const selectedChipPageY = e.nativeEvent.pageY;
+    this.setState(state => {
+      const battleShips = state.battleShips.map(item => {
+        if(item.shipName === state.currentShip){
+          item.leftIndent = calcShipPosition(selectedChipPageX, state.currentShipOffsetX);
+          item.topIndent = calcShipPosition(selectedChipPageY, state.currentShipOffsetY);
+          return item;
+        }else {
+          return item;
+        }
+      });
+      return {battleShips,};
+    });
+  }
+
+  rotateShip = () => {
+    this.setState(state => {
+      const battleShips = state.battleShips.map(item => {
+        if(item.shipName === state.currentShip){
+          item.isRotate = !item.isRotate;
+          return item;
+        }else {
+          return item;
+        }
+      });
+      return {battleShips,};
+    });
+  }
   render() {
     return(
       <div className = "gameField">
         <div className = "battleFieldWrap">
           <BattleField
-            battleShips = {this.state.battleShips}
             currentShip = {this.state.currentShip}
-            deleteCheckingShip = {this.deleteCheckingShip}
+            battleShips = {this.state.battleShips}
+            checkingShips = {this.state.checkingShips}
+            deleteSelectedShip = {this.deleteSelectedShip}
             addShip = {this.addShip}
             handleShip = {this.handleShip}
-            getOffsets = {e=>this.getOffsets(e)}
-            foundForbiddenCells = {e=>this.foundForbiddenCells(e)}
+            changeBattleShipPosition = {this.changeBattleShipPosition}
+            foundForbiddenCells = {this.foundForbiddenCells}
+            rotateShip = {this.rotateShip}
+            getCurrenShipOffsets = {e=>this.getCurrenShipOffsets(e)}
           />
           <BattleField
             battleShips = {[]}
           />
         </div>
-        <ShipField
+        <CheckingShipsField
           checkingShips = {this.state.checkingShips}
           handleShip = {this.handleShip}
-          getOffsets = {e=>this.getOffsets(e)}
-          foundForbiddenCells = {e=>this.foundForbiddenCells(e)}
+          foundForbiddenCells = {this.foundForbiddenCells}
+          rotateShip = {null}
+          getCurrenShipOffsets = {e=>this.getCurrenShipOffsets(e)}
         />
-        <RotateShip
-
-        />
-        <div style = {{color: this.state.canPlaceShip ? 'black' : 'red'}}>{this.state.canPlaceShip ? 'cool' : 'bad'}</div>
+        <div style = {{color: this.state.canPlaceShip ? 'black' : 'red'}}>{this.state.canPlaceShip ? 'cool' : 'BAD!!!'}</div>
       </div>
     )
   }

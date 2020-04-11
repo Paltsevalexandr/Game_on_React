@@ -1,7 +1,12 @@
 .ship{
   height: 35px;
   margin-top: 25px;
-  background: url('../images/sprite.png');
+  &::after{
+    content: '';
+    display: block;
+    height: 35px;
+    background: url('../images/sprite.png');
+  }
 }
 .fourdeck1{
   width: 135px;
@@ -11,13 +16,17 @@
 .threedeck1, .threedeck2{
   width: 101px;
   margin-left: 28px;
-  background-position-x: -150px;
+  &::after{
+    background-position-x: -150px;
+  }
 }
 .twodeck1, .twodeck2, .twodeck3{
   width: 70px;
   margin-left: 30px;
   margin-bottom: 5px;
-  background-position-x: -270px;
+  &::after{
+    background-position-x: -270px;
+  }
 }
 .twodeck3{
   margin-left: 28px;
@@ -25,15 +34,55 @@
 .onedeck1, .onedeck2, .onedeck3, .onedeck4{
   width: 35px;
   margin-left: 30px;
-  background-position-x: -360px;
+  &::after{
+    background-position-x: -360px;
+  }
 }
 .battleShip{
   margin: 0;
   position: absolute;
-  background-position-y: -50px;
+  &::after{
+    background-position-y: -50px;
+  }
 }
-.rotate{
-  -webkit-transform: rotate(90deg);
-  -ms-transform: rotate(90deg); 
-  transform: rotate(90deg);
+.onedeckVertical, .twodeckVertical, .threedeckVertical, .fourdeckVertical{
+  width: 35px;
+  &::after{
+    -webkit-transform: rotate(90deg);
+    -ms-transform: rotate(90deg); 
+    transform: rotate(90deg) translateY(-35px);
+    transform-origin: left top 0;
+  }
+}
+.twodeckVertical{
+  height: 70px;
+  &::after{
+    width: 70px;
+  }
+}
+.threedeckVertical{
+  height: 101px;
+  &::after{
+    width: 101px;
+  }
+}
+.fourdeckVertical{
+  height: 135px;
+  &::after{
+    width: 135px;
+  }
+}
+.rots {
+  width: 35px;
+  height: 135px;
+  border: 1px solid;
+  &::after{
+    content: '';
+    display: block;
+    background: url('../images/sprite.png');
+    transform-origin: left bottom 0;
+    transform: rotate(90deg)  translateX(-35px);
+  width: 135px;
+  height: 35px;
+  }
 }

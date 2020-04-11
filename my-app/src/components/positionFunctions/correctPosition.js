@@ -10,6 +10,8 @@ export function correctPosition(indentValue) {
 
   }else if(indentValue >=145 && indentValue <= 165) {
     return indentValue = 165;
+  }else if(indentValue >= 429){
+    return indentValue = 429;
   }else if(indentValue < 145) {
     return indentValue = 133;
   }

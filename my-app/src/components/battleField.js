@@ -1,44 +1,33 @@
 import React from 'react';
-import {Ship} from './ship.js';
+import {BattleShip} from './battleShip.js';
 
-export class BattleField extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
+export function BattleField(props) {
+  let battleShips;
+  if(props.battleShips.length > 0) {
+    battleShips = props.battleShips.map((item, index) => {
+      return(
+        <BattleShip
+          key = {index}
+          ship = {item}
+          handleShip = {props.handleShip}
+          getCurrenShipOffsets = {e=>props.getCurrenShipOffsets(e)}
+          foundForbiddenCells = {e=>props.foundForbiddenCells(e)}
+          rotateShip = {props.rotateShip}
+        />
+      );
+    });
   }
-  prevDefault(e) {
-    e.preventDefault();
+  function isBattleShip() {
+    return props.battleShips.find(({ shipName }) => shipName === props.currentShip);
   }
-  test() {
-    alert('cool')
-  }
-  render() {
-    let battleShips;
-    if(this.props.battleShips.length > 0) {
-      battleShips = this.props.battleShips.map((item, index) => {
-        return(
-          <Ship
-            key = {index}
-            shipSize = {item.shipName +' battleShip'}
-            handleShip = {this.props.handleShip}
-            getOffsets = {e=>this.props.getOffsets(e)}
-            foundForbiddenCells = {e=>this.props.foundForbiddenCells(e)}
-            shipX = {item.shipX}
-            shipY = {item.shipY}
-          />
-        );
-      });
-    }
-    return(
-      <div className = "battleField" 
-        onDrop = {(e)=>{
-            this.props.addShip(e, this.props.currentShip);
-            this.props.deleteCheckingShip(this.props.currentShip);
-          }}
-        onClick = {this.test.bind(this)}
-        onDragOver = {this.prevDefault.bind(this)}>
+  return(
+    <div className = "battleField" 
+      onDrop = {(e)=>{
+        isBattleShip() ? props.changeBattleShipPosition(e) : props.addShip(e);
+        props.deleteSelectedShip();
+      }}
+      onDragOver = {e => e.preventDefault()}>
         {battleShips}
-      </div>
-    )
-  }
+    </div>
+  )
 }
