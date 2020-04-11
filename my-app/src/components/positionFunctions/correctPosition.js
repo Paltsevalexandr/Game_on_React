@@ -1,4 +1,4 @@
-export function correctPosition(indentValue) {
+export function correctPosition(indentValue, shipSize) {
   if(indentValue > 165) {
     let excess = (indentValue - 132) % 33;
 

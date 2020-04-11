@@ -1,8 +1,8 @@
 import React from 'react';
 import {BattleField} from './battleField.js';
 import {CheckingShipsField} from './checkingShipsField.js';
-// import {RotateShip} from './positionFunctions/rotateShip.js';
-import {calcShipPosition} from './positionFunctions/calcShipPosition.js';
+import {calcShipHeight} from './positionFunctions/calcShipHeight.js';
+import {calcShipWidth} from './positionFunctions/calcShipWidth.js';
 
 export class Field extends React.Component {
   constructor() {
@@ -35,9 +35,11 @@ export class Field extends React.Component {
       battleShips: [
         ...this.state.battleShips, 
         {shipName: this.state.currentShip,
-         leftIndent: calcShipPosition(e.nativeEvent.pageX, this.state.currentShipOffsetX),
-         topIndent: calcShipPosition(e.nativeEvent.pageY, this.state.currentShipOffsetY),
-         isRotate: false,
+         shipWidth: calcShipWidth(this.state.currentShip, false),
+         shipHeight: calcShipHeight(this.state.currentShip, false),
+         leftIndent: this.calcShipPosition(e.nativeEvent.pageX, this.state.currentShipOffsetX, calcShipWidth(this.state.currentShip, false)),
+         topIndent: this.calcShipPosition(e.nativeEvent.pageY, this.state.currentShipOffsetY, calcShipHeight(this.state.currentShip, false)),
+         isVertical: false,
         }
       ]
     });
@@ -51,17 +53,18 @@ export class Field extends React.Component {
   }
   foundForbiddenCells = e => {
     for(let ship of this.state.battleShips) {
-      if(((e.pageY - this.state.currentShipOffsetY < parseInt(ship.topIndent) + 66) &&
-          (e.pageY - this.state.currentShipOffsetY + 35 > parseInt(ship.topIndent) - 33)) &&
-         ((e.pageX - this.state.currentShipOffsetX < parseInt(ship.leftIndent) + this.shipSize(ship.shipName) + 33) &&
-          (e.pageX - this.state.currentShipOffsetX + this.shipSize(this.state.currentShip) > parseInt(ship.leftIndent) - 33))) {
+      if(((e.pageY - this.state.currentShipOffsetY < parseInt(ship.topIndent) + ship.shipHeight + 33) &&
+          (e.pageY - this.state.currentShipOffsetY + 33 > parseInt(ship.topIndent) - 33)) &&
+         ((e.pageX - this.state.currentShipOffsetX < parseInt(ship.leftIndent) + ship.shipWidth + 33) &&
+          (e.pageX - this.state.currentShipOffsetX + this.currentShipWidth(this.state.currentShip) > parseInt(ship.leftIndent) - 33))) {
         this.setState({canPlaceShip: false});
       }else {
         this.setState({canPlaceShip: true});
       }
     }
   }
-  shipSize(shipName) {
+
+  currentShipWidth(shipName) {
     if(shipName.slice(0, -1) === 'fourdeck'){
       return 132;
     }else if(shipName.slice(0, -1) === 'threedeck'){
@@ -79,8 +82,8 @@ export class Field extends React.Component {
     this.setState(state => {
       const battleShips = state.battleShips.map(item => {
         if(item.shipName === state.currentShip){
-          item.leftIndent = calcShipPosition(selectedChipPageX, state.currentShipOffsetX);
-          item.topIndent = calcShipPosition(selectedChipPageY, state.currentShipOffsetY);
+          item.leftIndent = this.calcShipPosition(selectedChipPageX, state.currentShipOffsetX, item.shipWidth);
+          item.topIndent = this.calcShipPosition(selectedChipPageY, state.currentShipOffsetY, item.shipHeight);
           return item;
         }else {
           return item;
@@ -90,11 +93,36 @@ export class Field extends React.Component {
     });
   }
 
+  calcShipPosition = (shipPageXY, shipOffsetXY, shipSize) => {
+    let shipCoordinates = shipPageXY - shipOffsetXY;
+
+    if(shipCoordinates > 165) {
+      let excess = (shipCoordinates - 132) % 33;
+  
+      if(shipCoordinates >= (462 - shipSize)) {
+        return shipCoordinates = (462 - shipSize);
+      }else if(excess >= 15) {
+        return shipCoordinates += (33 - excess);
+      }else if(excess < 15) {
+        return shipCoordinates -= excess;
+      }
+  
+    }else if(shipCoordinates >=145 && shipCoordinates <= 165) {
+      return shipCoordinates = 165;
+    }else if(shipCoordinates < 145) {
+      return shipCoordinates = 133;
+    }
+  }
+
   rotateShip = () => {
     this.setState(state => {
       const battleShips = state.battleShips.map(item => {
         if(item.shipName === state.currentShip){
-          item.isRotate = !item.isRotate;
+          item.shipWidth = calcShipWidth(item.shipName, !item.isVertical);
+          item.shipHeight = calcShipHeight(item.shipName, !item.isVertical);
+          item.leftIndent = this.calcShipPosition(item.leftIndent, 0, item.shipWidth);
+          item.topIndent = this.calcShipPosition(item.topIndent, 0, item.shipHeight);
+          item.isVertical = !item.isVertical;
           return item;
         }else {
           return item;
@@ -103,6 +131,7 @@ export class Field extends React.Component {
       return {battleShips,};
     });
   }
+
   render() {
     return(
       <div className = "gameField">
