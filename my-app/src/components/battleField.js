@@ -7,7 +7,7 @@ export function BattleField(props) {
     battleShips = props.battleShips.map((item, index) => {
       return(
         <BattleShip
-          key = {index}
+          key  = {index}
           ship = {item}
           getCurrentShip = {props.getCurrentShip}
           canPlaceShip   = {props.canPlaceShip}
