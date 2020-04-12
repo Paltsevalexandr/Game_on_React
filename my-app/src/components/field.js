@@ -37,7 +37,7 @@ export class Field extends React.Component {
         {shipName: this.state.currentShip,
          leftIndent: calcShipPosition(e.nativeEvent.pageX, this.state.currentShipOffsetX),
          topIndent: calcShipPosition(e.nativeEvent.pageY, this.state.currentShipOffsetY),
-         isVertical: false,
+         isRotate: false,
         }
       ]
     });

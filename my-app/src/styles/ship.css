@@ -87,17 +87,9 @@
 .fourdeckVertical::after {
   width: 135px;
 }
-.rots {
-  width: 35px;
-  height: 135px;
-  border: 1px solid;
+.green::after {
+  background-position-y: -50px;
 }
-.rots::after {
-  content: '';
-  display: block;
-  background: url('../images/sprite.png');
-  transform-origin: left bottom 0;
-  transform: rotate(90deg) translateX(-35px);
-  width: 135px;
-  height: 35px;
+.red::after {
+  background-position-y: -100px;
 }
