@@ -20,7 +20,6 @@
 }
 .threedeck1::after,
 .threedeck2::after {
-  width: 101px;
   background-position-x: -150px;
 }
 .twodeck1,
@@ -33,7 +32,6 @@
 .twodeck1::after,
 .twodeck2::after,
 .twodeck3::after {
-  width: 70px;
   background-position-x: -270px;
 }
 .twodeck3 {
@@ -50,7 +48,6 @@
 .onedeck2::after,
 .onedeck3::after,
 .onedeck4::after {
-  width: 35px;
   background-position-x: -360px;
 }
 .battleShip {
@@ -90,9 +87,17 @@
 .fourdeckVertical::after {
   width: 135px;
 }
-.green::after {
-  background-position-y: -50px;
+.rots {
+  width: 35px;
+  height: 135px;
+  border: 1px solid;
 }
-.red::after {
-  background-position-y: -100px;
+.rots::after {
+  content: '';
+  display: block;
+  background: url('../images/sprite.png');
+  transform-origin: left bottom 0;
+  transform: rotate(90deg) translateX(-35px);
+  width: 135px;
+  height: 35px;
 }
