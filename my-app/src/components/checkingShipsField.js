@@ -6,9 +6,11 @@ export function CheckingShipsField(props) {
     return(
       <CheckingShip
         shipName = {item}
-        handleShip = {props.handleShip}
-        foundForbiddenCells = {e=>props.foundForbiddenCells(e)}
-        getCurrenShipOffsets = {e=>props.getCurrenShipOffsets(e)}
+        currentShip = {props.currentShip}
+        getCurrentShip = {props.getCurrentShip}
+        canPlaceShip   = {props.canPlaceShip}
+        foundForbiddenCells  = {props.foundForbiddenCells}
+        getCurrenShipOffsets = {props.getCurrenShipOffsets}
         key = {index} 
       />
     );

@@ -5,15 +5,15 @@ export function BattleShip(props) {
   return(
     <div 
       className = {"ship " + props.ship.shipName + " battleShip " + 
-      (props.ship.isVertical ? (props.ship.shipName.slice(0, -1) + 'Vertical') : '')}
+      (props.ship.isVertical ? (props.ship.shipName.slice(0, -1) + 'Vertical ') : '')}
 
-      style = {{left: props.ship.leftIndent, top: props.ship.topIndent}}
+      style = {{left: props.ship.leftIndent + 'px', top: props.ship.topIndent + 'px'}}
 
       onDragStart = {e => {
-        props.handleShip(props.ship.shipName);
+        props.getCurrentShip(props.ship.shipName);
         props.getCurrenShipOffsets(e)
       }}
-      onClick = {() => props.handleShip(props.ship.shipName)}
+      onClick = {() => props.getCurrentShip(props.ship.shipName)}
       onDrag = {e => props.foundForbiddenCells(e)}
       onDoubleClick = {() => props.rotateShip()}
       draggable = 'true'>

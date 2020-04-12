@@ -57,9 +57,6 @@
   margin: 0;
   position: absolute;
 }
-.battleShip::after {
-  background-position-y: -50px;
-}
 .onedeckVertical,
 .twodeckVertical,
 .threedeckVertical,
@@ -92,4 +89,10 @@
 }
 .fourdeckVertical::after {
   width: 135px;
+}
+.green::after {
+  background-position-y: -50px;
+}
+.red::after {
+  background-position-y: -100px;
 }

@@ -9,10 +9,11 @@ export function BattleField(props) {
         <BattleShip
           key = {index}
           ship = {item}
-          handleShip = {props.handleShip}
-          getCurrenShipOffsets = {e=>props.getCurrenShipOffsets(e)}
-          foundForbiddenCells = {e=>props.foundForbiddenCells(e)}
-          rotateShip = {props.rotateShip}
+          getCurrentShip = {props.getCurrentShip}
+          canPlaceShip   = {props.canPlaceShip}
+          getCurrenShipOffsets = {props.getCurrenShipOffsets}
+          foundForbiddenCells  = {props.foundForbiddenCells}
+          rotateShip           = {props.rotateShip}
         />
       );
     });
