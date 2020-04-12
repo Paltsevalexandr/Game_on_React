@@ -5,9 +5,9 @@ export function BattleShip(props) {
   return(
     <div 
       className = {"ship " + props.ship.shipName + " battleShip " + 
-      (props.ship.isRotate ? (props.ship.shipName.slice(0, -1) + 'Vertical') : '')}
+      (props.ship.isVertical ? (props.ship.shipName.slice(0, -1) + 'Vertical') : '')}
 
-      style = {{left: props.ship.leftIndent, top: props.ship.topIndent}}
+      style = {{left: props.ship.leftIndent + 'px', top: props.ship.topIndent + 'px'}}
 
       onDragStart = {e => {
         props.getCurrentShip(props.ship.shipName);
