@@ -20,13 +20,8 @@ export function CheckingShip(props) {
   return(
     <div 
       className = {"ship " + props.shipName}
-      onDragStart = {e=>{
-        props.getCurrentShip(props.shipName);
-        props.getCurrenShipOffsets(e);
-      }}
-      onDrag = {e=>{
-        props.foundForbiddenCells(e);
-      }}
+      onDragStart = {e=>props.createCurrentShip(e, props.shipName)}
+      onDrag = {e=>props.foundForbiddenCells(e)}
       draggable = 'true'>
     </div>
   )

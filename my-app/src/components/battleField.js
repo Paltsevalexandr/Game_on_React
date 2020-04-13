@@ -7,10 +7,10 @@ export function BattleField(props) {
     battleShips = props.battleShips.map((item, index) => {
       return(
         <BattleShip
-          key = {index}
+          key  = {index}
           ship = {item}
-          getCurrentShip = {props.getCurrentShip}
-          canPlaceShip   = {props.canPlaceShip}
+          createCurrentShip    = {props.createCurrentShip}
+          canPlaceShip         = {props.canPlaceShip}
           getCurrenShipOffsets = {props.getCurrenShipOffsets}
           foundForbiddenCells  = {props.foundForbiddenCells}
           rotateShip           = {props.rotateShip}
@@ -19,15 +19,20 @@ export function BattleField(props) {
     });
   }
   function isBattleShip() {
-    return props.battleShips.find(({ shipName }) => shipName === props.currentShip);
+    return props.battleShips.find(item => item.shipName === props.currentShipName);
+  }
+  function placeShip(e) {
+    if(props.canPlaceShip === true) {
+      isBattleShip() ? props.moveBattleShip(e) : props.addShip(e);
+      props.deleteSelectedShip();
+    }else if(props.canPlaceShip === false) {
+      return;
+    }
   }
   return(
-    <div className = "battleField" 
-      onDrop = {(e)=>{
-        isBattleShip() ? props.changeBattleShipPosition(e) : props.addShip(e);
-        props.deleteSelectedShip();
-      }}
-      onDragOver = {e => e.preventDefault()}>
+    <div className   = "battleField" 
+         onDrop      = {e => placeShip(e)}
+         onDragOver  = {e => e.preventDefault()}>
         {battleShips}
     </div>
   )
