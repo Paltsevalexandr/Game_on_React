@@ -124,7 +124,6 @@ export class Field extends React.Component {
         if(item.shipName === state.currentShip.name){
           item.leftIndent = this.calcShipPosition(selectedChipPageX, state.currentShip.offsetX, item.shipWidth);
           item.topIndent = this.calcShipPosition(selectedChipPageY, state.currentShip.offsetY, item.shipHeight);
-          console.log(selectedChipPageX);
           return item;
         }else {
           return item;
@@ -137,13 +136,19 @@ export class Field extends React.Component {
   rotateShip = () => {
     this.setState(state => {
       const battleShips = state.battleShips.map(item => {
-        if(item.shipName === state.currentShip.name) {
-          item.shipWidth  = item.shipHeight;
-          item.shipHeight = item.shipWidth;
-          item.leftIndent = this.calcShipPosition(item.leftIndent, 0, item.shipWidth);
-          item.topIndent  = this.calcShipPosition(item.topIndent, 0, item.shipHeight);
-          item.isVertical = !item.isVertical;
-          return item;
+        if(this.canRotate(item)) {
+          if(item.shipName === state.currentShip.name) {
+
+            item.shipWidth  = item.shipHeight;
+            item.shipHeight = calcShipHeight(item.shipName, !item.isVertical);
+            item.leftIndent = this.calcShipPosition(item.leftIndent, 0, item.shipWidth);
+            item.topIndent  = this.calcShipPosition(item.topIndent, 0, item.shipHeight);
+            item.isVertical = !item.isVertical;
+  
+            return item;
+          }else {
+            return item;
+          }
         }else {
           return item;
         }
@@ -151,12 +156,61 @@ export class Field extends React.Component {
       return {battleShips,};
     });
   }
+
+  canRotate = (currentShip) => {
+    let shipSizeIndex = this.calcShipSizeIndex(currentShip.shipName);
+    let canRotate = true;
+    if(currentShip.isVertical === true) {
+      if(this.state.battleShips.length > 0){
+        for(let ship of this.state.battleShips) {
+          if(this.checkTopIndent(ship, currentShip, shipSizeIndex) === false) {
+            canRotate = false;
+          }
+        }
+      }
+    }
+    return canRotate;
+  }
+
+  checkTopIndent = (battleShip, currentShip, index) => {
+    let currentShipFuturePosition = currentShip.topIndent - 33;
+    for(let i = 1; i < index; i++) {
+      if(battleShip.topIndent === currentShipFuturePosition) {
+        return this.checkLeftIndent(battleShip, currentShip, index);
+      }
+      currentShipFuturePosition += 33;
+    }
+    return true;
+  }
+  checkLeftIndent = (battleShip, currentShip, index) => {
+    let currentShipFuturePosition = currentShip.leftIndent + 66;
+    for(let i = 1; i < index; i++) {
+      if(battleShip.leftIndent === currentShipFuturePosition) {
+        return false;
+      }
+      currentShipFuturePosition += 33;
+    }
+    return true;
+  }
+
+  calcShipSizeIndex = (shipName) => {
+    if(shipName === 'fourdeck1') {
+      return 4;
+    }else if(shipName.slice(0, -1) === 'threedeck') {
+      return 3;
+    }else if(shipName.slice(0, -1) === 'twodeck') {
+      return 2;
+    }else if(shipName.slice(0, -1) === 'onedeck') {
+      return 1;
+    }
+  }
+
   render() {
     return(
       <div className = "gameField">
         <div className = "battleFieldWrap">
           <BattleField
-            currentShip   = {this.state.currentShip}
+            currentShipName   = {this.state.currentShip.name}
             battleShips       = {this.state.battleShips}
             checkingShips     = {this.state.checkingShips}
             canPlaceShip      = {this.state.canPlaceShip}

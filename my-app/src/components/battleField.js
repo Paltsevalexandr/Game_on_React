@@ -19,14 +19,7 @@ export function BattleField(props) {
     });
   }
   function isBattleShip() {
-    let isShip = false;
-    for(let ship of props.battleShips) {
-      if(ship.shipName === props.currentShip.name) {
-        return isShip = true;
-      }
-    }
-    return isShip;
-    //return props.battleShips.find(({ shipName }) => shipName === props.currentShipName);
+    return props.battleShips.find(item => item.shipName === props.currentShipName);
   }
   function placeShip(e) {
     if(props.canPlaceShip === true) {
