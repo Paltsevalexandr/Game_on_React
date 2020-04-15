@@ -1,7 +1,7 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
 
-export function CheckingShip(props) {
+export function CheckingShips(props) {
   /*let shipBorderColor = '';
   function setShipBorder(e) {
     if(props.currentShip === props.shipName) {
@@ -17,12 +17,18 @@ export function CheckingShip(props) {
   function startDrag(e) {
     e.dataTransfer.setDragImage(i, 10, 10);
   }*/
+  let ships = props.checkingShips.map((item, index)=> {
+    return(
+      <div 
+        className = {"ship " + item}
+        draggable = 'true' key = {index}
+
+        onMouseDown = {e => props.createCurrentShip(e, item)}
+        onDrag      = {e => props.foundForbiddenCells(e)}>
+      </div>
+    );
+  });
   return(
-    <div 
-      className = {"ship " + props.shipName}
-      onDragStart = {e=>props.createCurrentShip(e, props.shipName)}
-      onDrag = {e=>props.foundForbiddenCells(e)}
-      draggable = 'true'>
-    </div>
+    <>{ships}</>
   )
 }

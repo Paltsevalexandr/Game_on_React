@@ -1,8 +1,8 @@
 import React from 'react';
 import {BattleField} from './battleField.js';
+import {BattleShips} from './battleShips.js';
 import {CheckingShipsField} from './checkingShipsField.js';
-// import {RotateShip} from './positionFunctions/rotateShip.js';
-//import {calcShipPosition} from './positionFunctions/calcShipPosition.js';
+import {CheckingShips} from './checkingShips.js';
 import {calcShipWidth} from './positionFunctions/calcShipWidth.js';
 import {calcShipHeight} from './positionFunctions/calcShipHeight.js';
 
@@ -227,7 +227,7 @@ export class Field extends React.Component {
 
   isHorizontalShipCanRotate = (currentShip, shipSizeIndex) => {
     for(let ship of this.state.battleShips) {
-      if(this.checkBottomShipsLeftIndent(ship, currentShip, shipSizeIndex) === false/* || this.checkHorizontalShips(currentShip) === false*/) {
+      if(this.checkBottomShipsLeftIndent(ship, currentShip, shipSizeIndex) === false || this.checkHorizontalShips(currentShip) === false) {
         return false;
       }
     }
@@ -297,27 +297,32 @@ export class Field extends React.Component {
       <div className = "gameField">
         <div className = "battleFieldWrap">
           <BattleField
-            currentShipName   = {this.state.currentShip.name}
-            battleShips       = {this.state.battleShips}
-            checkingShips     = {this.state.checkingShips}
-            canPlaceShip      = {this.state.canPlaceShip}
-            addShip              = {this.addShip}
-            deleteSelectedShip   = {this.deleteSelectedShip}
-            createCurrentShip    = {this.createCurrentShip}
-            foundForbiddenCells  = {this.foundForbiddenCells}
-            moveBattleShip       = {this.moveBattleShip}
-            rotateShip           = {this.rotateShip}
-          />
+            currentShipName    = {this.state.currentShip.name}
+            battleShips        = {this.state.battleShips}
+            canPlaceShip       = {this.state.canPlaceShip}
+            addShip            = {this.addShip}
+            deleteSelectedShip = {this.deleteSelectedShip}
+            moveBattleShip     = {this.moveBattleShip}>
+              <BattleShips
+                battleShips         = {this.state.battleShips}
+                canPlaceShip        = {this.state.canPlaceShip}
+                createCurrentShip   = {this.createCurrentShip}
+                rotateShip          = {this.rotateShip}
+                foundForbiddenCells = {this.foundForbiddenCells}
+              />
+          </BattleField>
           <BattleField
             battleShips = {[]}
           />
         </div>
-        <CheckingShipsField
-          checkingShips        = {this.state.checkingShips}
-          canPlaceShip         = {this.state.canPlaceShip}
-          createCurrentShip    = {this.createCurrentShip}
-          foundForbiddenCells  = {this.foundForbiddenCells}
-        />
+        <CheckingShipsField>
+            <CheckingShips
+              checkingShips       = {this.state.checkingShips}
+              canPlaceShip        = {this.state.canPlaceShip}
+              createCurrentShip   = {this.createCurrentShip}
+              foundForbiddenCells = {this.foundForbiddenCells}
+            />
+          </CheckingShipsField>
         <div style = {{color: this.state.canPlaceShip ? 'black' : 'red'}}>{this.state.canPlaceShip ? 'cool' : 'BAD!!!'}</div>
       </div>
     )
