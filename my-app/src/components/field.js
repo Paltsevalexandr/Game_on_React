@@ -138,7 +138,7 @@ export class Field extends React.Component {
     this.setState(state => {
       const battleShips = state.battleShips.map(item => {
         if(item.shipName === state.currentShip.name) {
-          if(this.canRotate(item)) {
+          if(this.isCanRotate(item)) {
             item.shipWidth  = item.shipHeight;
             item.shipHeight = calcShipHeight(item.shipName, !item.isVertical);
             item.leftIndent = this.calcShipPosition(item.leftIndent, 0, item.shipWidth);
@@ -157,19 +157,26 @@ export class Field extends React.Component {
     });
   }
 
-  canRotate = (currentShip) => {
+  isCanRotate = (currentShip) => {
     let shipSizeIndex = this.calcShipSizeIndex(currentShip.shipName);
     let canRotate = true;
-    if(currentShip.isVertical === true) {
-      if(this.state.battleShips.length > 0){
-        for(let ship of this.state.battleShips) {
-          if(this.checkRightSideShips(ship, currentShip, shipSizeIndex) === false || this.checkVerticalShips(currentShip) === false) {
-            canRotate = false;
-          }
-        }
+    if(this.state.battleShips.length > 0){
+      if(currentShip.isVertical === true) {
+        canRotate = this.isVerticalShipCanRotate(currentShip, shipSizeIndex);
+      }else if(currentShip.isVertical === false) {
+        canRotate = this.isHorizontalShipCanRotate(currentShip, shipSizeIndex);
       }
     }
     return canRotate;
+  }
+
+  isVerticalShipCanRotate = (currentShip, shipSizeIndex) => {
+    for(let ship of this.state.battleShips) {
+      if(this.checkRightSideShipsTopIndent(ship, currentShip, shipSizeIndex) === false || this.checkVerticalShips(currentShip) === false) {
+        return false;
+      }
+    }
+    return true;
   }
 
   checkVerticalShips = (currentShip) => {
@@ -185,8 +192,6 @@ export class Field extends React.Component {
   }
 
   checkVerticalShipsTopIndent = (currentShipTopIndent, battleShip) => {
-    //console.log(battleShip.topIndent + battleShip.shipHeight <= currentShipTopIndent + 66);
-    //console.log(currentShipTopIndent);
     if(battleShip.topIndent + battleShip.shipHeight >= currentShipTopIndent - 33
     && battleShip.topIndent + battleShip.shipHeight <= (currentShipTopIndent + 66)) {
         return false;
@@ -198,18 +203,18 @@ export class Field extends React.Component {
     return this.state.battleShips.filter(item => item.isVertical === true && item.shipName !== this.state.currentShip.name);
   }
 
-  checkRightSideShips = (battleShip, currentShip, index) => {
+  checkRightSideShipsTopIndent = (battleShip, currentShip, index) => {
     let currentShipFuturePosition = currentShip.topIndent - 33;
 
     for(let i = 1; i < index; i++) {
       if(battleShip.topIndent === currentShipFuturePosition) {
-        return this.checkLeftIndent(battleShip, currentShip, index);
+        return this.checkRightSideShipsLeftIndent(battleShip, currentShip, index);
       }
       currentShipFuturePosition += 33;
     }
     return true;
   }
-  checkLeftIndent = (battleShip, currentShip, index) => {
+  checkRightSideShipsLeftIndent = (battleShip, currentShip, index) => {
     let currentShipFuturePosition = currentShip.leftIndent + 66;
     for(let i = 1; i < index; i++) {
       if(battleShip.leftIndent === currentShipFuturePosition) {
@@ -218,6 +223,61 @@ export class Field extends React.Component {
       currentShipFuturePosition += 33;
     }
     return true;
+  }
+
+  isHorizontalShipCanRotate = (currentShip, shipSizeIndex) => {
+    for(let ship of this.state.battleShips) {
+      if(this.checkBottomShipsLeftIndent(ship, currentShip, shipSizeIndex) === false/* || this.checkHorizontalShips(currentShip) === false*/) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  checkBottomShipsLeftIndent = (battleShip, currentShip, index) => {
+    let currentShipFuturePosition = currentShip.leftIndent - 33;
+
+    for(let i = 1; i < index; i++) {
+      if(battleShip.leftIndent === currentShipFuturePosition) {
+        return this.checkBottomShipsTopIndent(battleShip, currentShip, index);
+      }
+      currentShipFuturePosition += 33;
+    }
+    return true;
+  }
+
+  checkBottomShipsTopIndent = (battleShip, currentShip, index) => {
+    let currentShipFuturePosition = currentShip.topIndent + 66;
+    for(let i = 1; i < index; i++) {
+      if(battleShip.topIndent === currentShipFuturePosition) {
+        return false;
+      }
+      currentShipFuturePosition += 33;
+    }
+    return true;
+  }
+
+  checkHorizontalShips = (currentShip) => {
+    let battleShips = this.getVerticalShips();
+    for(let ship of battleShips) {
+      if(ship.topIndent <= currentShip.topIndent + currentShip.shipWidth // shipWidth will be shipHeight when ship rotate
+      && ship.topIndent >= currentShip.topIndent) {
+        return this.checkVerticalShipsTopIndent(currentShip.leftIndent, ship);
+      }
+    }
+    return true;
+  }
+
+  checkHorizontalShipsTopIndent = (currentShipLeftIndent, battleShip) => {
+    if(battleShip.leftIndent + battleShip.shipHeight >= currentShipLeftIndent - 33
+    && battleShip.leftIndent + battleShip.shipHeight <= (currentShipLeftIndent + 66)) {
+        return false;
+    }
+    return true;
+  }
+
+  getHorizontalShips = () => {
+    return this.state.battleShips.filter(item => item.isVertical === false && item.shipName !== this.state.currentShip.name);
   }
 
   calcShipSizeIndex = (shipName) => {
