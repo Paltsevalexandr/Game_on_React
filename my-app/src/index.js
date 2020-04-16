@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import {Field} from './components/field.js'
 import './index.css';
 import './styles/ship.css';
-import './styles/dots.css';
 
 function App() {
   return (
