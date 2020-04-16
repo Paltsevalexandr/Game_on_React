@@ -1,0 +1,7 @@
+.dot {
+  width: 33px;
+  height: 33px;
+  position: absolute;
+  background: url(../images/sprite.png);
+  background-position-x: -408px;
+}

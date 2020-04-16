@@ -14,7 +14,7 @@ export function BattleShips(props) {
           draggable = 'true'
 
           onMouseDown = {e => props.createCurrentShip(e, item.shipName)}
-          onDrag = {e => props.foundForbiddenCells(e)}
+          onMouseMove = {e => props.foundForbiddenCells(e)}
           onDoubleClick = {() => props.rotateShip()}
           key = {index}>
         </div>

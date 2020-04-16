@@ -1,6 +1,7 @@
 import React from 'react';
 import {BattleField} from './battleField.js';
 import {BattleShips} from './battleShips.js';
+import {DotsCreator} from './dotsCreator.js'
 import {CheckingShipsField} from './checkingShipsField.js';
 import {CheckingShips} from './checkingShips.js';
 import {calcShipWidth} from './positionFunctions/calcShipWidth.js';
@@ -17,6 +18,8 @@ export class Field extends React.Component {
         battleShips: [],
         currentShip: {},
         canPlaceShip: true,
+        pageX: '',
+        pageY: '',
     };
     // height and width of cells = 33px
   }
@@ -72,9 +75,9 @@ export class Field extends React.Component {
   
       if(shipCoordinates >= (462 - shipSize)) {
         return shipCoordinates = (462 - shipSize);
-      }else if(excess >= 18) {
+      }else if(excess > 17) {
         return shipCoordinates += (33 - excess);
-      }else if(excess < 18) {
+      }else if(excess <= 17) {
         return shipCoordinates -= excess;
       }
   
@@ -92,39 +95,59 @@ export class Field extends React.Component {
          (((e.pageX - this.state.currentShip.offsetX) < (ship.leftIndent + ship.shipWidth + 33)) &&   //right side
           ((e.pageX - this.state.currentShip.offsetX + this.state.currentShip.width, false)) > (ship.leftIndent - 33))) {  // left side
         this.setState({canPlaceShip: false});
-        console.log(this.state.battleShips)
       }else {
         this.setState({canPlaceShip: true});
       }
     }
   }*/
   foundForbiddenCells = e => {
-    const selectChipPageX = e.nativeEvent.pageX;
-    const selectChipPageY = e.nativeEvent.pageY;
+    if(this.state.battleShips.length >= 1){
+      for(let ship of this.state.battleShips) {
+        console.log(ship.shipName)
+        if(ship.shipName === this.state.currentShip.name) {
+          continue;
+        }
+        if(e.pageY - this.state.currentShip.offsetY < ship.topIndent + ship.shipHeight + 33
+        && e.pageY - this.state.currentShip.offsetY + this.state.currentShip.height > ship.topIndent - 33
+        && e.pageX - this.state.currentShip.offsetX < ship.leftIndent + ship.shipWidth + 33
+        && e.pageX - this.state.currentShip.offsetX + this.state.currentShip.width > ship.leftIndent - 33){
+          this.setState({canPlaceShip: false}, ()=>console.log(ship));
+        }else {
+          this.setState({canPlaceShip: true});
+        }
+      }
+    }
+  }
+  /*foundForbiddenCells = e => {
+    const currentChipPageX = e.nativeEvent.pageX;
+    const currentChipPageY = e.nativeEvent.pageY;
     this.setState(state => {
       let canPlaceShip = true;
       if(state.battleShips.length >= 1){
-        state.battleShips.map(ship => {
-        if(selectChipPageY - this.state.currentShip.offsetY < ship.topIndent + ship.shipHeight + 33
-        && selectChipPageY - this.state.currentShip.offsetY + this.state.currentShip.height > ship.topIndent - 33
-        && selectChipPageX - this.state.currentShip.offsetX < ship.leftIndent + ship.shipWidth + 33
-        && selectChipPageX - this.state.currentShip.offsetX + this.state.currentShip.width > ship.leftIndent - 33){
-          return canPlaceShip = false;
-        }else {
-          return canPlaceShip = true;
+        for(let ship of this.state.battleShips) {
+          if(ship.shipName === this.state.currentShip.name) {
+            continue;
+          }else if(currentChipPageY - this.state.currentShip.offsetY < ship.topIndent + ship.shipHeight + 33
+          && currentChipPageY - this.state.currentShip.offsetY + this.state.currentShip.height > ship.topIndent - 33
+          && currentChipPageX - this.state.currentShip.offsetX < ship.leftIndent + ship.shipWidth + 33
+          && currentChipPageX - this.state.currentShip.offsetX + this.state.currentShip.width > ship.leftIndent - 33){
+            return canPlaceShip = false;
+          }else {
+            return canPlaceShip = true;
+          }
         }
-      });}
+      }
       return {canPlaceShip,}
     });
-  }
+  }*/
   moveBattleShip = e => { ///добавить событие вглубь функции
-    const selectedChipPageX = e.nativeEvent.pageX;
-    const selectedChipPageY = e.nativeEvent.pageY;
+    const currentedChipPageX = e.nativeEvent.pageX;
+    const currentedChipPageY = e.nativeEvent.pageY;
     this.setState(state => {
       const battleShips = state.battleShips.map(item => {
         if(item.shipName === state.currentShip.name){
-          item.leftIndent = this.calcShipPosition(selectedChipPageX, state.currentShip.offsetX, item.shipWidth);
-          item.topIndent = this.calcShipPosition(selectedChipPageY, state.currentShip.offsetY, item.shipHeight);
+          item.leftIndent = this.calcShipPosition(currentedChipPageX, state.currentShip.offsetX, item.shipWidth);
+          item.topIndent = this.calcShipPosition(currentedChipPageY, state.currentShip.offsetY, item.shipHeight);
           return item;
         }else {
           return item;
@@ -291,6 +314,12 @@ export class Field extends React.Component {
     }
   }
 
+  // Dots methods
+
+  getDotCoordinates = e => {
+    this.setState({pageX: e.nativeEvent.pageX, pageY: e.nativeEvent.pageY});
+  }
+
   render() {
     return(
       <div className = "gameField">
@@ -301,7 +330,9 @@ export class Field extends React.Component {
             canPlaceShip       = {this.state.canPlaceShip}
             addShip            = {this.addShip}
             deleteSelectedShip = {this.deleteSelectedShip}
-            moveBattleShip     = {this.moveBattleShip}>
+            moveBattleShip     = {this.moveBattleShip}
+            getDotCoordinates  = {this.getDotCoordinates}>
+
               <BattleShips
                 battleShips         = {this.state.battleShips}
                 canPlaceShip        = {this.state.canPlaceShip}
@@ -309,19 +340,26 @@ export class Field extends React.Component {
                 rotateShip          = {this.rotateShip}
                 foundForbiddenCells = {this.foundForbiddenCells}
               />
+
+              <DotsCreator
+                pageX = {this.state.pageX}
+                pageY = {this.state.pageY}
+              />
+
           </BattleField>
           <BattleField
             battleShips = {[]}
           />
         </div>
+
         <CheckingShipsField>
-            <CheckingShips
-              checkingShips       = {this.state.checkingShips}
-              canPlaceShip        = {this.state.canPlaceShip}
-              createCurrentShip   = {this.createCurrentShip}
-              foundForbiddenCells = {this.foundForbiddenCells}
-            />
-          </CheckingShipsField>
+          <CheckingShips
+            checkingShips       = {this.state.checkingShips}
+            canPlaceShip        = {this.state.canPlaceShip}
+            createCurrentShip   = {this.createCurrentShip}
+            foundForbiddenCells = {this.foundForbiddenCells}
+          />
+        </CheckingShipsField>
         <div style = {{color: this.state.canPlaceShip ? 'black' : 'red'}}>{this.state.canPlaceShip ? 'cool' : 'BAD!!!'}</div>
       </div>
     )

@@ -16,7 +16,8 @@ export function BattleField(props) {
   return(
     <div className   = "battleField" 
          onDrop      = {e => placeShip(e)}
-         onDragOver  = {e => e.preventDefault()}>
+         onDragOver  = {e => e.preventDefault()}
+         onClick     = {e => props.getDotCoordinates(e)}>
           {props.children}
     </div>
   )
