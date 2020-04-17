@@ -1,29 +1,23 @@
 import React from 'react';
 
-export class BattleField extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {battleShips: [], canPlaceShip: true,};
+export function BattleField(props) {
+  function isBattleShip() {
+    return props.battleShips.find(item => item.shipName === props.currentShipName);
   }
 
-  // adding ships
-
-  isBattleShip = () => {
-    return this.state.battleShips.find(item => item.shipName === this.currentShipName);
-  }
-
-  placeShip = e => {
-    if(this.state.canPlaceShip === true) {
-      this.isBattleShip() ? this.moveBattleShip(e) : this.addShip(e);
-      this.deleteSelectedShip();
-    }else if(this.state.canPlaceShip === false) {
+  function placeShip(e) {
+    if(props.canPlaceShip === true) {
+      isBattleShip() ? props.moveBattleShip(e) : props.addShip(e);
+      props.deleteSelectedShip();
+    }else if(props.canPlaceShip === false) {
       return;
     }
   }
   return(
     <div className   = "battleField" 
          onDrop      = {e => placeShip(e)}
-         onDragOver  = {e => e.preventDefault()}>
+         onDragOver  = {e => e.preventDefault()}
+         onClick     = {e => props.getDotCoordinates(e)}>
           {props.children}
     </div>
   )

@@ -1,7 +1,7 @@
 export function calcShipWidth(shipName, isVertical) {
   if(isVertical === true) {
     return 33;
-  }else if(isVertical === false) {
+  }else if(isVertical === false || isVertical === undefined) {
     if(shipName.slice(0, -1) === 'fourdeck'){
       return 132;
     }else if(shipName.slice(0, -1) === 'threedeck'){
