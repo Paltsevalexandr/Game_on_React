@@ -76,7 +76,7 @@ export class ComputerGamerField extends React.Component {
   // check ship position methods
 
   checkShipPosition = ship => {
-    if(this.checkIsShipBeyondField(ship) === false || this.checkIsShipsTouch(ship) === false) {
+    if(/*this.checkIsShipBeyondField(ship) === false || */this.checkIsShipsTouch(ship) === false) {
       return this.createShip(ship.name, 595, 132);
     }else {
       this.fillMatrix(ship);
@@ -84,17 +84,14 @@ export class ComputerGamerField extends React.Component {
     }
   }
 
-  checkIsShipBeyondField = ship => {
+  /*checkIsShipBeyondField = ship => {
     if(ship.left + ship.width > 330 + 595
     || ship.top + ship.height > 330 + 132) {
-      //return this.createShip(ship.name, 595, 132);
       return false;
     }else {
-      //this.fillMatrix(ship);
-      //return ship;
       return true;
     }
-  }
+  }*/
 
   checkIsShipsTouch = ship => {
     if(ship.isVertical === false) {
