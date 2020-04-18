@@ -1,4 +1,4 @@
-export function calcShipWidth(shipName, isVertical) {
+export function calcShipWidth(shipName, isVertical = false) {
   if(isVertical === true) {
     return 33;
   }else if(isVertical === false || isVertical === undefined) {
