@@ -7,7 +7,7 @@ export class ComputerGamerField extends React.Component {
     super();
     this.state = {
       battleShips: [], 
-      shipMatrix: Array(10).fill(Array(10).fill(0)),
+      battleMatrix: Array(10).fill(Array(10).fill([])),
     };
 
     this.checkingShips = [
@@ -16,7 +16,7 @@ export class ComputerGamerField extends React.Component {
       'twodeck2', 'twodeck3', 'onedeck1',
       'onedeck2', 'onedeck3', 'onedeck4'
     ];
-    this.cellsMatrix = Array(10).fill(Array(10).fill(0));
+    this.cellsMatrix = Array(10).fill(Array(10).fill(0)); //tempMatrix
   }
 
   componentDidMount() {
@@ -75,11 +75,12 @@ export class ComputerGamerField extends React.Component {
 
   // check ship position methods
 
-  checkShipPosition = ship => {
+  checkShipPosition = ship => { // isShipCreate
     if(/*this.checkIsShipBeyondField(ship) === false || */this.checkIsShipsTouch(ship) === false) {
       return this.createShip(ship.name, 595, 132);
     }else {
       this.fillMatrix(ship);
+      this.fillBattleMatrix(ship);
       return ship;
     }
   }
@@ -93,7 +94,7 @@ export class ComputerGamerField extends React.Component {
     }
   }*/
 
-  checkIsShipsTouch = ship => {
+  checkIsShipsTouch = ship => { // checkShipPosition
     if(ship.isVertical === false) {
       return this.checkHorizontalShipTouching(ship)
     }else if(ship.isVertical === true) {
@@ -102,11 +103,11 @@ export class ComputerGamerField extends React.Component {
   }
 
   checkHorizontalShipTouching = ship => {
-    let rowNumber = this.positionInMatrixMass(ship.top);
+    let shipRowIndex = this.positionInMatrixMass(ship.top);
     let leftIndent = ship.left;
     let i = 0;
     while(i < ship.decksNum) {
-      for(let value of this.cellsMatrix[rowNumber]) {
+      for(let value of this.cellsMatrix[shipRowIndex]) {
         if(leftIndent >= 297 + 595 || value === leftIndent) {
           return false;
         }
@@ -118,16 +119,16 @@ export class ComputerGamerField extends React.Component {
   }
 
   checkVerticalShipTouching = ship => {
-    let rowNumber = this.positionInMatrixMass(ship.top);
-    let colNumber = this.positionInMatrixSubMass(ship.left);
+    let rowIndex = this.positionInMatrixMass(ship.top);
+    let colIndex = this.positionInMatrixSubMass(ship.left);
     let leftIndent = ship.left;
     let i = 0;
     while(i < ship.decksNum) {
-      if(rowNumber > 9 || this.cellsMatrix[rowNumber][colNumber] === leftIndent) {
+      if(rowIndex > 9 || this.cellsMatrix[rowIndex][colIndex] === leftIndent) {
         return false;
       }
       i++;
-      rowNumber++;
+      rowIndex++;
     }
     return true;
   }
@@ -138,15 +139,15 @@ export class ComputerGamerField extends React.Component {
 
   fillMatrix = ship => {
     if(ship.isVertical === false) {
-      this.setHorizontalShipPositionInMatrix(ship)
+      this.setHorizontalShipInMatrix(ship)
     }else if(ship.isVertical === true) {
-      this.setVerticalShipsPositionsInMatrix(ship);
+      this.setVerticalShipInMatrix(ship);
     }
   }
 
-  setHorizontalShipPositionInMatrix = ship => {
-    let rowIndex = this.positionInMatrixMass(ship.top - 33);
-    let leftIndent = this.fixLeftIndent(ship.left); // 33 - cells that make distance with other ships left side and right side
+  setHorizontalShipInMatrix = ship => {
+    let rowIndex = this.positionInMatrixMass(ship.top - 33);// 33 - cells that make distance with ships left and right side
+    let leftIndent = this.fixLeftIndent(ship.left);
     let shipZoneWidth = ship.decksNum + 2;
 
     if(ship.left === 595) {
@@ -173,10 +174,10 @@ export class ComputerGamerField extends React.Component {
     this.cellsMatrix = cellsMatrix;
   }
 
-  setVerticalShipsPositionsInMatrix = ship => {
+  setVerticalShipInMatrix = ship => {
     let leftIndent = this.fixLeftIndent(ship.left);
     let topIndent = ship.top - 33;
-    let colNumber = this.positionInMatrixSubMass(leftIndent);
+    let shipColIndex = this.positionInMatrixSubMass(leftIndent);
     let shipZoneHeight = ship.decksNum + 2;
     let shipZoneWidth;
     
@@ -195,7 +196,7 @@ export class ComputerGamerField extends React.Component {
     let cellsMatrix = this.cellsMatrix.map((row, indexRow) => {
       if(indexRow === this.positionInMatrixMass(topIndent) && i < shipZoneHeight) {
         row = row.map((item, indexColumn) => {
-          if(indexColumn >= colNumber && indexColumn <= colNumber + shipZoneWidth) {
+          if(indexColumn >= shipColIndex && indexColumn <= shipColIndex + shipZoneWidth) {
             item = leftIndent;
             leftIndent += 33;
             return item;
@@ -227,6 +228,64 @@ export class ComputerGamerField extends React.Component {
       correctLeftIndent = 595;
     }
     return correctLeftIndent
+  }
+
+  // battleMatrix methods
+
+  fillBattleMatrix = ship => {
+    if(ship.isVertical === false) {
+      this.setHorizontalShipInBattleMatrix(ship);
+    }else if(ship.isVertical === true) {
+      this.setVerticalShipInBattleMatrix(ship);
+    }
+  }
+
+  setHorizontalShipInBattleMatrix = ship => {
+    let rowIndex = this.positionInMatrixMass(ship.top);
+    let leftIndent = ship.left;
+
+    this.setState(state => {
+      let battleMatrix = state.battleMatrix.map((row, indexRow) => {
+        if(indexRow === rowIndex) {
+          let i = 0;
+          row = row.map((item, indexCol) => {
+            if(indexCol === this.positionInMatrixSubMass(leftIndent) && i < ship.decksNum) {
+              item = [leftIndent, ship.top];
+              leftIndent += 33;
+              i++;
+              return item;
+            }
+            return item;
+          });
+        }
+        return row;
+      });
+      return {battleMatrix,}
+    }, ()=>console.log(this.state.battleMatrix));
+  }
+
+  setVerticalShipInBattleMatrix = ship => {
+    let topIndent = ship.top;
+    let shipColIndex = this.positionInMatrixSubMass(ship.left);
+
+    this.setState(state => {
+      let i = 0;
+      let battleMatrix = state.battleMatrix.map((row, indexRow) => {
+        if(indexRow === this.positionInMatrixMass(topIndent) && i < ship.decksNum) {
+          row = row.map((item, indexColumn) => {
+            if(indexColumn === shipColIndex) {
+              item = [ship.left, topIndent];
+              return item;
+            }
+            return item;
+          });
+          i++;
+          topIndent += 33;
+        }
+        return row;
+      });
+      return {battleMatrix,};
+    }, ()=>console.log(this.state.battleMatrix));
   }
 
   render() {
