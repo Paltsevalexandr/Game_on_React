@@ -1,8 +1,27 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
 
-export function CheckingShips(props) {
-  /*let shipBorderColor = '';
+export const CheckingShips = ({checkingShips, createCurrentShip, getCurrentShip}) => {
+  let ships = checkingShips.map((item, index) => {
+    return(
+      <div 
+        className = {"ship " + item}
+        draggable = 'true' key = {index}
+
+        onMouseDown = {e => {
+            createCurrentShip(e, item);
+            getCurrentShip(item, e.nativeEvent.offsetX, e.nativeEvent.offsetY)
+        }}>
+      </div>
+    );
+  });
+  return(
+    <>{ships}</>
+  )
+}
+
+
+/*let shipBorderColor = '';
   function setShipBorder(e) {
     if(props.currentShip === props.shipName) {
       console.log(props.shipName);
@@ -17,18 +36,3 @@ export function CheckingShips(props) {
   function startDrag(e) {
     e.dataTransfer.setDragImage(i, 10, 10);
   }*/
-  let ships = props.checkingShips.map((item, index)=> {
-    return(
-      <div 
-        className = {"ship " + item}
-        draggable = 'true' key = {index}
-
-        onMouseDown = {e => props.createCurrentShip(e, item)}
-        onDrag      = {e => props.foundForbiddenCells(e)}>
-      </div>
-    );
-  });
-  return(
-    <>{ships}</>
-  )
-}

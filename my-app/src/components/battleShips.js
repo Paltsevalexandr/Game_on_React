@@ -7,16 +7,17 @@ export function BattleShips(props) {
     battleShips = props.battleShips.map((item, index) => {
       return(
         <div 
-          className = {"ship " + item.shipName + " battleShip " + 
-          (item.isVertical ? (item.shipName.slice(0, -1) + 'Vertical') : '')}
+          className = {"ship " + item.name + " battleShip " + 
+          (item.isVertical ? (item.name.slice(0, -1) + 'Vertical') : '')}
 
-          style = {{left: item.leftIndent + 'px', top: item.topIndent + 'px'}}
+          style = {{left: item.left + 'px', 
+                    top: item.top + 'px'}}
           draggable = 'true'
+          key = {index}
 
-          onMouseDown = {e => props.createCurrentShip(e, item.shipName)}
-          onMouseMove = {e => props.foundForbiddenCells(e)}
-          onDoubleClick = {() => props.rotateShip()}
-          key = {index}>
+          onMouseDown   = {e => props.createCurrentShip(e, item.name)}
+          onDragStart   = {() => props.deleteShipFromMatrix()}
+          onDoubleClick = {() => props.rotateShip()}>
         </div>
       );
     });
