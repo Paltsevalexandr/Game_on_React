@@ -1,8 +1,10 @@
 import positionInMatrix from '../accessory-functions/position-in-matrix';
 
-const setVerticalShipInMatrix = ({currentShip: ship, matrix}) => {
+const setVerticalShipInMatrix = (state, ship) => {
+  const { matrix } = state;
+  
   let topIndent = ship.top;
-  let shipColIndex = this.positionInMatrix(ship.left);
+  const shipColIndex = positionInMatrix(ship.left);
   
   let i = 0;
     let updateMatrix = matrix.map((row, indexRow) => {

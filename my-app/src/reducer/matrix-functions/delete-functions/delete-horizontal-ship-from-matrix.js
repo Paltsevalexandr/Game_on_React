@@ -8,9 +8,11 @@ const deleteHorizontalShipFromMatrix = (state, ship) => {
   const updateMatrix = matrix.map((row, index) => {
     if(index === rowNum) {
       let i = 0;
-      return row.map((item, colNum) => {
+      row = row.map((item, colNum) => {
 
-        if(colNum === positionInMatrix(leftIndent) && i < ship.decksNum) {
+        if(colNum === positionInMatrix(leftIndent)
+        && i < ship.decksNum) {
+          
           item = [];
           leftIndent += 33;
           i++;
@@ -19,6 +21,7 @@ const deleteHorizontalShipFromMatrix = (state, ship) => {
         return item;
       });
     }
+    return row;
   });
 
   return updateMatrix;

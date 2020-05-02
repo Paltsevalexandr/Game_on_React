@@ -5,7 +5,8 @@ import {
   currentShipIsVertical
 } from './calc-ship-props';
 
-import createBattleShip from './create-battleShip-functions/createBattleShip';
+import addBattleShipInFieldAndMatrix from './create-battleShip-functions/add-battleship-in-field-and-matrix';
+import deleteShipFromMatrix from './matrix-functions/delete-functions/delete-ship-from-matrix';
 
 const initialState = {
   checkingShips: ['fourdeck1',
@@ -44,11 +45,14 @@ const reducer = (state = initialState, action) => {
       };
     
     case 'CREATE_BATTLE_SHIP':
-      return createBattleShip(state, action);
-      
-    case 'FILL_MATRIX':
-      console.log('fill')
-      return state;
+      return addBattleShipInFieldAndMatrix(state, action);
+
+    case 'DELETE_SHIP_FROM_MATRIX':
+      return {
+        ...state,
+        matrix: deleteShipFromMatrix(state)
+      }
+    
     default:
       return state;
   }

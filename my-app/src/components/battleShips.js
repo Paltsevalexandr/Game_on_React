@@ -4,18 +4,18 @@ import React from 'react';
 export function BattleShips(props) {
   let battleShips;
   if(props.battleShips.length > 0) {
-    battleShips = props.battleShips.map((item, index) => {
+    battleShips = props.battleShips.map((ship, index) => {
       return(
         <div 
-          className = {"ship " + item.name + " battleShip " + 
-          (item.isVertical ? (item.name.slice(0, -1) + 'Vertical') : '')}
+          className = {"ship " + ship.name + " battleShip " + 
+          (ship.isVertical ? (ship.name.slice(0, -1) + 'Vertical') : '')}
 
-          style = {{left: item.left + 'px', 
-                    top: item.top + 'px'}}
+          style = {{left: ship.left + 'px', 
+                    top: ship.top + 'px'}}
           draggable = 'true'
           key = {index}
 
-          onMouseDown   = {e => props.createCurrentShip(e, item.name)}
+          onMouseDown   = {e => {props.createCurrentShip(e, ship.name);props.getCurrentShip(ship.name, e.nativeEvent.offsetX, e.nativeEvent.offsetY)}}
           onDragStart   = {() => props.deleteShipFromMatrix()}
           onDoubleClick = {() => props.rotateShip()}>
         </div>

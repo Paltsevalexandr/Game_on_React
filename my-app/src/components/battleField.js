@@ -10,7 +10,6 @@ export function BattleField({
   calcShipPosition,
   positionInMatrix,
   createBattleShip,
-  fillMatrix,
   children}) {
 
   function setShipPosition(e, ship) {
@@ -66,7 +65,6 @@ export function BattleField({
         break;
       }
     }
-    console.log(result);
     return result;
   }
   function shipZoneSize(coordinate, decksNum) {
@@ -81,7 +79,6 @@ export function BattleField({
          onDrop      = {e => {
            setShipPosition(e, currentShip);
            createBattleShip(e.pageX, e.pageY);
-           fillMatrix(currentShip)
           }}
          onDragOver  = {e => e.preventDefault()}>
           {children}

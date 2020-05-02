@@ -1,15 +1,14 @@
 import calcShipPosition from '../ship-position-functions/calc-ship-position';
 
-const moveBattleShip = (state, action) => {
-  const {pageX, pageY} = action;
-  const {battleShips, currentShip} = state;
-  // const selectedShip;
+const moveBattleShip = ({battleShips, currentShip}, {pageX, pageY}) => {
+  let updatedShip;
+
   const updatedBattleShips = battleShips.map(item => {
     if(item.name === currentShip.name){
       item.left = calcShipPosition(pageX, currentShip.offsetX, item.width);
       item.top = calcShipPosition(pageY, currentShip.offsetY, item.height);
 
-  // selectedShip = item;
+      updatedShip = item;
       return item;
     }else {
       return item;
@@ -17,9 +16,9 @@ const moveBattleShip = (state, action) => {
   });
 
   return {
-    ...state,
-    battleShips: updatedBattleShips
-  }
+    battleShips: updatedBattleShips,
+    updatedShip,
+  };
 }
 
 export default moveBattleShip;

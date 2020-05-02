@@ -1,14 +1,13 @@
-import setHorizontalShipInMatrix from './setHorizontalShipInMatrix';
-import setVerticalShipInMatrix from './setVerticalShipInMatrix';
+import setHorizontalShipInMatrix from './set-horizontal-ship-in-matrix';
+import setVerticalShipInMatrix from './set-vertical-ship-in-matrix';
 
-const setShipInMatrix = state => {
-  const {currentShip: ship} = state;
+const setShipInMatrix = (state, ship) => {
 
   if(ship.isVertical === false) {
-    setHorizontalShipInMatrix(state);
+    return setHorizontalShipInMatrix(state, ship);
 
   }else if(ship.isVertical === true) {
-    setVerticalShipInMatrix(state);
+    return setVerticalShipInMatrix(state, ship);
   }
 }
 

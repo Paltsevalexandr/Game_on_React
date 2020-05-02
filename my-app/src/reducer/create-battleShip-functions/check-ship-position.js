@@ -3,9 +3,10 @@ import shipZoneSize from '../matrix-functions/accessory-functions/calc-ship-zone
 import calcShipPosition from '../ship-position-functions/calc-ship-position';
 
 const checkShipPosition = (state, action) => {
-  const {pageX, pageY} = action;
   const {currentShip: ship, matrix} = state;
-  console.log(ship)
+  const {pageX, pageY} = action;
+
+  //console.log(state)
   let shipLeft = calcShipPosition(pageX, ship.offsetX, ship.width);
   let shipTop = calcShipPosition(pageY, ship.offsetY, ship.height);
 

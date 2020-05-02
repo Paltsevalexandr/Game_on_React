@@ -5,7 +5,7 @@ import {bindActionCreators} from 'redux';
 import {addShip, 
   getCurrentShip,
   createBattleShip,
-  fillMatrix
+  deleteShipFromMatrix
   } from '../actions/actions';
 
 import {ComputerGamerField} from './computer-gamer/compField.js'
@@ -145,7 +145,7 @@ class Field extends React.Component {
         return row;
       });
       return {matrix,}
-    }, ()=>console.log(this.state.matrix));
+    });
   }
 
   setVerticalShipInMatrix = ship => {
@@ -482,7 +482,7 @@ class Field extends React.Component {
       addShip,
       getCurrentShip,
       createBattleShip,
-      fillMatrix
+      deleteShipFromMatrix
     } = this.props;
 
     return(
@@ -494,7 +494,6 @@ class Field extends React.Component {
             matrix             = {this.state.matrix}
             addShip            = {this.addShip}
             createBattleShip = {createBattleShip}
-            fillMatrix       = {fillMatrix}
             deleteSelectedShip = {this.deleteSelectedShip}
             moveBattleShip     = {this.moveBattleShip}
             calcShipPosition   = {this.calcShipPosition}
@@ -504,7 +503,9 @@ class Field extends React.Component {
                 battleShips          = {this.state.battleShips}
                 createCurrentShip    = {this.createCurrentShip}
                 rotateShip           = {this.rotateShip}
-                deleteShipFromMatrix = {this.deleteShipFromMatrix}
+                deleteShipFromMatrixOld = {this.deleteShipFromMatrix}
+                deleteShipFromMatrix = {deleteShipFromMatrix}
+                getCurrentShip       = {getCurrentShip}
               />
 
               <DotsCreator
@@ -546,7 +547,7 @@ const mapDispatchToProps = dispatch => {
     addShip,
     getCurrentShip,
     createBattleShip,
-    fillMatrix
+    deleteShipFromMatrix
   }, dispatch)
 }
 

@@ -7,7 +7,8 @@ const deleteVerticalShipFromMatrix = (state, ship) => {
 
   let i = 0;
   let updateMatrix = matrix.map((row, indexRow) => {
-    if(indexRow === positionInMatrix(topIndent) && i < ship.decksNum) {
+    if(indexRow === positionInMatrix(topIndent)
+    && i < ship.decksNum) {
       row = row.map((item, indexColumn) => {
 
         if(indexColumn === shipColIndex) {

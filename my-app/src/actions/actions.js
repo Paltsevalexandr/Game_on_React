@@ -4,13 +4,13 @@ const addShip = () => {
   }
 }
 
-const getCurrentShip = (ship, offsetX, offsetY) => {
+const getCurrentShip = (shipName, offsetX, offsetY) => {
   return {
     type: 'GET_CURRENT_SHIP',
-    shipName: ship,
+    shipName,
     offsetX,
     offsetY,
-  }
+  };
 }
 
 const createBattleShip = (pageX, pageY) => {
@@ -18,19 +18,18 @@ const createBattleShip = (pageX, pageY) => {
     type: 'CREATE_BATTLE_SHIP',
     pageX,
     pageY
-  }
+  };
 }
 
-const fillMatrix = ship => {
+const deleteShipFromMatrix = ship => {
   return {
-    type: 'FILL_MATRIX',
+    type: 'DELETE_SHIP_FROM_MATRIX',
     ship
   }
 }
-
 export {
   addShip,
   getCurrentShip,
   createBattleShip,
-  fillMatrix
+  deleteShipFromMatrix
 };
