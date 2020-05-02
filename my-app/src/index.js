@@ -1,12 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Field} from './components/field.js'
+import {Provider} from 'react-redux';
+import {createStore} from 'redux';
+import Field from './components/field.js';
+
+import reducer from './reducer/reducer';
 import './index.css';
 import './styles/ship.css';
 
-function App() {
+const store = createStore(reducer);
+
+const App = () => {
   return (
-    <Field/>
+    <Provider store = {store}>
+      <Field/>
+    </Provider>
   );
 }
 ReactDOM.render(

@@ -1,13 +1,17 @@
 import React from 'react';
-import {calcShipWidth} from '../positionFunctions/calcShipWidth.js';
-import {calcShipHeight} from '../positionFunctions/calcShipHeight';
+import RenderComputerField from './renderCompField';
+//import {calcShipWidth} from '../positionFunctions/calcShipWidth.js';
+//import {calcShipHeight} from '../positionFunctions/calcShipHeight';
 
 export class ComputerGamerField extends React.Component {
   constructor() {
     super();
     this.state = {
       battleShips: [], 
-      battleMatrix: Array(10).fill(Array(10).fill([])),
+      battleMatrix: 
+        Array(10).fill(
+        Array(10).fill([])
+        ),
     };
 
     this.checkingShips = [
@@ -16,7 +20,7 @@ export class ComputerGamerField extends React.Component {
       'twodeck2', 'twodeck3', 'onedeck1',
       'onedeck2', 'onedeck3', 'onedeck4'
     ];
-    this.cellsMatrix = Array(10).fill(Array(10).fill(0)); //tempMatrix
+    this.cellsMatrix = Array(10).fill(Array(10).fill(0)); //checkMatrix
   }
 
   componentDidMount() {
@@ -40,8 +44,8 @@ export class ComputerGamerField extends React.Component {
       decksNum: this.calcShipDecksNumber(ship),
     }
 
-    battleShip.width = calcShipWidth(ship, battleShip.isVertical);
-    battleShip.height = calcShipHeight(ship, battleShip.isVertical);
+    // battleShip.width = calcShipWidth(ship, battleShip.isVertical);
+    // battleShip.height = calcShipHeight(ship, battleShip.isVertical);
 
     return this.checkShipPosition(battleShip);
   }
@@ -261,7 +265,7 @@ export class ComputerGamerField extends React.Component {
         return row;
       });
       return {battleMatrix,}
-    }, ()=>console.log(this.state.battleMatrix));
+    });
   }
 
   setVerticalShipInBattleMatrix = ship => {
@@ -285,26 +289,14 @@ export class ComputerGamerField extends React.Component {
         return row;
       });
       return {battleMatrix,};
-    }, ()=>console.log(this.state.battleMatrix));
+    });
   }
 
   render() {
-    let ships;
-    if(this.state.battleShips.length > 0) {
-      ships = this.state.battleShips.map((item, index) => {
-        return (
-          <div 
-          className = {'ship ' + item.name + ' battleShip ' + 
-          (item.isVertical ? (item.name.slice(0, -1) + 'Vertical') : '')}
-          key = {index} style = {{top: item.top + 'px', left: item.left + 'px'}}>
-          </div>
-        )
-      });
-    }
-    return(
-      <div className   = "battleField">
-        {ships}
-      </div>
+    return (
+      <RenderComputerField 
+        battleShips = {this.state.battleShips}
+      />
     );
   }
 }
