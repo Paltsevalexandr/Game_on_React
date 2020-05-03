@@ -1,21 +1,15 @@
-const isShipCanBePlaced = ({matrix}, shipZoneBorders, newMatrix) => {
-  
-  if(newMatrix) matrix = newMatrix;
-  const {
-    shipZoneTop, 
-    shipZoneBottom, 
-    shipZoneLeft, 
-    shipZoneRight} = shipZoneBorders;
+import isRotateShipBeyondField from "./is-ship-beyond-field";
+import isShipTouchRest from './is-ship-touch-rest';
 
-  for(let i = shipZoneTop; i <= shipZoneBottom; i++) {
-    for(let j = shipZoneLeft; j <= shipZoneRight; j++) {
+const isShipCanBePlaced = (state, action, shipZone, newMatrix) => {
+  let shipBeyondField = true;
+  if(newMatrix) shipBeyondField = isRotateShipBeyondField(state, action);
 
-      if(matrix[i][j].length > 0) {
-        return false;
-      }
-    }
+  if(isShipTouchRest(state, shipZone, newMatrix) && shipBeyondField) {
+    return true;
+    
   }
-  return true;
+  return false;
 }
-
 export default isShipCanBePlaced;
+ 

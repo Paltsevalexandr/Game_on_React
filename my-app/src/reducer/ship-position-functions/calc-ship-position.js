@@ -1,21 +1,26 @@
-const calcShipPosition = (shipPageXY, shipOffsetXY = 0, shipSize) => {
-  let shipCoordinates = shipPageXY - shipOffsetXY;
+const calcShipPosition = (pageXY, offsetXY = 0, shipSize) => {
+  let shipCoordinate = pageXY - offsetXY;
 
-  if(shipCoordinates > 165) {
-    let excess = (shipCoordinates - 132) % 33;
+  if(shipCoordinate > 165) {
+    let excess = (shipCoordinate - 132) % 33;
 
-    if(shipCoordinates >= (462 - shipSize)) {
-      return shipCoordinates = (462 - shipSize);
+    if(excess === 0 && offsetXY === 0) {
+      return shipCoordinate;
+
+    }else if(shipCoordinate >= (462 - shipSize)) {
+      return shipCoordinate = (462 - shipSize);
+
     }else if(excess > 0) {
-      return shipCoordinates -= excess;
+      return shipCoordinate -= excess;
     }
 
-  }else if(shipCoordinates >=155 && shipCoordinates <= 165) {
-    return shipCoordinates = 165;
-  }else if(shipCoordinates < 155) {
-    return shipCoordinates = 132;
+  }else if(shipCoordinate >=155 && shipCoordinate <= 165) {
+    return shipCoordinate = 165;
+    
+  }else if(shipCoordinate < 155) {
+    return shipCoordinate = 132;
   }
-  return shipCoordinates;
+  return shipCoordinate;
 }
 
 export default calcShipPosition;

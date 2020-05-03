@@ -4,13 +4,13 @@ import deleteShipFromMatrix from '../matrix-functions/delete-functions/delete-sh
 
 const rotateShip = (state, action) => {
   const matrixWithoutCurrentShip = deleteShipFromMatrix(state);
-  const {battleShips, currentShip} = state;
+  const {battleShips} = state;
   const rotatedShip = createRotatedShip(state);
 
-  if(checkShipPosition(state, action, rotatedShip, matrixWithoutCurrentShip)) {
-    
+  if(checkShipPosition(state, action, matrixWithoutCurrentShip, rotatedShip)) {
+
     return battleShips.map(ship => {
-      if(ship.name === currentShip.name) {
+      if(ship.name === rotatedShip.name) {
         ship = rotatedShip;
         return ship;
       }

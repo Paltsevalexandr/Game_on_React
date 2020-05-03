@@ -2,8 +2,8 @@ const calcShipHeight = (shipName, isVertical = false) => {
   
   if(isVertical === false) {
     return 33;
-  }else if(isVertical === true) {
 
+  }else if(isVertical === true) {
     if(shipName.slice(0, -1) === 'fourdeck'){
       return 132;
     }else if(shipName.slice(0, -1) === 'threedeck'){

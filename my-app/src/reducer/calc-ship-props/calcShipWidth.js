@@ -1,6 +1,7 @@
 const calcShipWidth = (shipName, isVertical = false) => {
   if(isVertical === true) {
     return 33;
+    
   }else if(isVertical === false) {
     if(shipName.slice(0, -1) === 'fourdeck'){
       return 132;

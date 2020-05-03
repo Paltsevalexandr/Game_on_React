@@ -17,8 +17,8 @@ const addBattleShipInFieldAndMatrix = (state, action) => {
         matrix: setShipInMatrix(state, updatedShip)
       };
     }
+
     const {newBattleShip, checkingShips} = moveCheckingShipToBattleField(state, action);
-      
     return {
       ...state,
       battleShips: [...battleShips, newBattleShip],

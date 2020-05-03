@@ -1,3 +1,7 @@
+// height and width of cells = 33px
+// battleField top = 132px
+// battleField left = 132px
+
 import {
   calcShipDecksNumber,
   calcShipHeight,
@@ -20,10 +24,6 @@ const initialState = {
   pageX: '',
   pageY: '',
 };
-
-// height and width of cells = 33px
-// battleField top = 132px
-// battleField left = 132px
 
 const reducer = (state = initialState, action) => {
   switch(action.type) {
@@ -50,7 +50,7 @@ const reducer = (state = initialState, action) => {
       };
     
     case 'CREATE_BATTLE_SHIP':
-      return addBattleShipInFieldAndMatrix(state, action);
+      return addBattleShipInFieldAndMatrix(state, action); 
 
     case 'DELETE_SHIP_FROM_MATRIX':
       return {

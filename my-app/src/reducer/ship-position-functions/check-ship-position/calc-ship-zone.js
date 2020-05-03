@@ -1,25 +1,31 @@
 import positionInMatrix from '../../matrix-functions/accessory-functions/calc-position-in-matrix';
 import shipZoneSize from '../../matrix-functions/accessory-functions/calc-ship-zone';
 import calcShipPosition from '../calc-ship-position';
-import fixShipZoneBorders from './fix-ship-zone-borders';
 
-const calcShipZone = ({currentShip: ship}, {pageX, pageY}, rotatedShip) => {
-  if(rotatedShip) ship = rotatedShip;
+const calcShipZone = (
+  { currentShip: ship }, 
+  { pageX, pageY },
+    rotateShip ) => {
+
+  const {offsetX, offsetY} = ship;
   
-  let shipLeft = calcShipPosition(pageX, ship.offsetX, ship.width);
-  let shipTop = calcShipPosition(pageY, ship.offsetY, ship.height);
+  if(rotateShip) ship = rotateShip;
+  const {decksNum, width, height, isVertical} = ship;
 
-  let shipZoneTop = positionInMatrix(shipTop) - 1;
-  let shipZoneLeft = positionInMatrix(shipLeft) - 1;
-  let shipZoneRight = shipZoneSize(shipZoneLeft, ship.decksNum);
+  const shipLeft = calcShipPosition(pageX, offsetX, width);
+  const shipTop = calcShipPosition(pageY, offsetY, height);
+
+  const shipZoneTop = positionInMatrix(shipTop) - 1;
+  const shipZoneLeft = positionInMatrix(shipLeft) - 1;
+  let shipZoneRight = shipZoneSize(shipZoneLeft, decksNum);
   let shipZoneBottom = shipZoneTop + 2;
   
-  if(ship.isVertical === true) {
-    shipZoneBottom = shipZoneSize(shipZoneTop, ship.decksNum);
+  if(isVertical === true) {
+    shipZoneBottom = shipZoneSize(shipZoneTop, decksNum);
     shipZoneRight = shipZoneLeft + 2;
   }
 
-  return fixShipZoneBorders({shipZoneRight, shipZoneBottom, shipZoneLeft, shipZoneTop});
+  return {shipZoneRight, shipZoneBottom, shipZoneLeft, shipZoneTop};
 }
 
 export default calcShipZone;
