@@ -1,4 +1,4 @@
-import positionInMatrix from '../accessory-functions/position-in-matrix';
+import positionInMatrix from '../accessory-functions/calc-position-in-matrix';
 
 const setHorizontalShipInMatrix = (state, ship) => {
   let {matrix} = state;
@@ -25,7 +25,6 @@ const setHorizontalShipInMatrix = (state, ship) => {
     }
     return row;
   });
-
   return matrix
 }
 

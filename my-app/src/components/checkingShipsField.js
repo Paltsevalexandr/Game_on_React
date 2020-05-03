@@ -1,9 +1,9 @@
 import React from 'react';
 
-export function CheckingShipsField(props) {
+export const CheckingShipsField = ({children}) => {
   return(
     <div className = "shipField">
-      {props.children}
+      {children}
     </div>
   );
 }

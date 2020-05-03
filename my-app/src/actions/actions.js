@@ -27,9 +27,18 @@ const deleteShipFromMatrix = ship => {
     ship
   }
 }
+
+const rotateShip = (pageX, pageY) => {
+  return {
+    type: 'ROTATE_SHIP',
+    pageX,
+    pageY
+  }
+}
 export {
   addShip,
   getCurrentShip,
   createBattleShip,
-  deleteShipFromMatrix
+  deleteShipFromMatrix,
+  rotateShip
 };

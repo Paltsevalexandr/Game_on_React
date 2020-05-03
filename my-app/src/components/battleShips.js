@@ -1,10 +1,13 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
 
-export function BattleShips(props) {
-  let battleShips;
-  if(props.battleShips.length > 0) {
-    battleShips = props.battleShips.map((ship, index) => {
+export const BattleShips = ({
+  battleShips, 
+  getCurrentShip, 
+  deleteShipFromMatrix,
+  rotateShip}) => {
+
+  if(battleShips.length > 0) {
+    battleShips = battleShips.map((ship, index) => {
       return(
         <div 
           className = {"ship " + ship.name + " battleShip " + 
@@ -12,12 +15,12 @@ export function BattleShips(props) {
 
           style = {{left: ship.left + 'px', 
                     top: ship.top + 'px'}}
-          draggable = 'true'
-          key = {index}
 
-          onMouseDown   = {e => {props.createCurrentShip(e, ship.name);props.getCurrentShip(ship.name, e.nativeEvent.offsetX, e.nativeEvent.offsetY)}}
-          onDragStart   = {() => props.deleteShipFromMatrix()}
-          onDoubleClick = {() => props.rotateShip()}>
+          onMouseDown   = {e => getCurrentShip(ship.name, e.nativeEvent.offsetX, e.nativeEvent.offsetY)}
+          onDragStart   = {() => deleteShipFromMatrix()}
+          onDoubleClick = {e => rotateShip(e.pageX, e.pageY)}
+          draggable = 'true'
+          key = {index}>
         </div>
       );
     });

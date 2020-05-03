@@ -1,4 +1,4 @@
-const calcShipPosition = (shipPageXY, shipOffsetXY, shipSize) => {
+const calcShipPosition = (shipPageXY, shipOffsetXY = 0, shipSize) => {
   let shipCoordinates = shipPageXY - shipOffsetXY;
 
   if(shipCoordinates > 165) {
@@ -15,6 +15,7 @@ const calcShipPosition = (shipPageXY, shipOffsetXY, shipSize) => {
   }else if(shipCoordinates < 155) {
     return shipCoordinates = 132;
   }
+  return shipCoordinates;
 }
 
 export default calcShipPosition;

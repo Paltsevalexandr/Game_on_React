@@ -1,17 +1,12 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
 
-export const CheckingShips = ({checkingShips, createCurrentShip, getCurrentShip}) => {
-  let ships = checkingShips.map((item, index) => {
+export const CheckingShips = ({checkingShips, getCurrentShip}) => {
+  let ships = checkingShips.map((ship, index) => {
     return(
       <div 
-        className = {"ship " + item}
+        className = {"ship " + ship}
         draggable = 'true' key = {index}
-
-        onMouseDown = {e => {
-            createCurrentShip(e, item);
-            getCurrentShip(item, e.nativeEvent.offsetX, e.nativeEvent.offsetY)
-        }}>
+        onMouseDown = {e => getCurrentShip(ship, e.nativeEvent.offsetX, e.nativeEvent.offsetY)}>
       </div>
     );
   });

@@ -7,6 +7,7 @@ import {
 
 import addBattleShipInFieldAndMatrix from './create-battleShip-functions/add-battleship-in-field-and-matrix';
 import deleteShipFromMatrix from './matrix-functions/delete-functions/delete-ship-from-matrix';
+import updateBattleShipsAndMatrix from './rotate-ship-func/update-battleShips-and-matrix';
 
 const initialState = {
   checkingShips: ['fourdeck1',
@@ -19,6 +20,10 @@ const initialState = {
   pageX: '',
   pageY: '',
 };
+
+// height and width of cells = 33px
+// battleField top = 132px
+// battleField left = 132px
 
 const reducer = (state = initialState, action) => {
   switch(action.type) {
@@ -51,6 +56,14 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         matrix: deleteShipFromMatrix(state)
+      }
+
+    case 'ROTATE_SHIP':
+      const {updateBattleShips, updateMatrix} = updateBattleShipsAndMatrix(state, action);
+      return {
+        ...state,
+        battleShips: updateBattleShips,
+        matrix: updateMatrix
       }
     
     default:

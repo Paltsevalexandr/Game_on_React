@@ -1,4 +1,4 @@
-import positionInMatrix from '../accessory-functions/position-in-matrix';
+import positionInMatrix from '../accessory-functions/calc-position-in-matrix';
 
 const setVerticalShipInMatrix = (state, ship) => {
   const { matrix } = state;
