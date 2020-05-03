@@ -1,13 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-
-import {addShip, 
-  getCurrentShip,
-  createBattleShip,
-  deleteShipFromMatrix,
-  rotateShip
-  } from '../actions/actions';
+import * as actions from '../actions/actions';
 
 import {ComputerGamerField} from './computer-gamer/compField.js'
 import {BattleField} from './battleField.js';
@@ -53,14 +46,4 @@ const mapStateToProps = ({checkingShips, battleShips}) => {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({
-    addShip,
-    getCurrentShip,
-    createBattleShip,
-    deleteShipFromMatrix,
-    rotateShip
-  }, dispatch)
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Field);
+export default connect(mapStateToProps, actions)(Field);
