@@ -12,12 +12,10 @@ import {CheckingShips} from './checkingShips.js';
 const Field = ({
   checkingShips, 
   battleShips, 
-  addShip,
   getCurrentShip,
   createBattleShip,
   deleteShipFromMatrix,
-  rotateShip
-}) =>{
+  rotateShip }) => {
   return(
     <div className = "gameField">
       <div className = "battleFieldWrap">
@@ -34,12 +32,11 @@ const Field = ({
         <CheckingShips checkingShips  = {checkingShips}
             getCurrentShip = {getCurrentShip}/>
       </CheckingShipsField>
-      <button onClick = {() => addShip()}>show matrix</button>
     </div>
   )
 }
 
-const mapStateToProps = ({checkingShips, battleShips}) => {
+const mapStateToProps = ({gamerState: {checkingShips, battleShips}}) => {
   return {
     checkingShips, 
     battleShips, 

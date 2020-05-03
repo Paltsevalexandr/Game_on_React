@@ -1,9 +1,3 @@
-const addShip = () => {
-  return {
-    type: 'ADD_SHIP'
-  }
-}
-
 const getCurrentShip = (shipName, offsetX, offsetY) => {
   return {
     type: 'GET_CURRENT_SHIP',
@@ -36,7 +30,6 @@ const rotateShip = (pageX, pageY) => {
   }
 }
 export {
-  addShip,
   getCurrentShip,
   createBattleShip,
   deleteShipFromMatrix,
