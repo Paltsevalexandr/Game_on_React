@@ -1,8 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import * as actions from '../actions/actions';
+import * as actions from '../actions';
 
-import {ComputerGamerField} from './computer-gamer/compField.js'
+import ComputerField from './computer-gamer/compField.js'
 import {BattleField} from './battleField.js';
 import {BattleShips} from './battleShips.js';
 import {DotsCreator} from './dotsCreator.js'
@@ -26,7 +26,7 @@ const Field = ({
             getCurrentShip       = {getCurrentShip}
             rotateShip           = {rotateShip}/>
         </BattleField>
-        <ComputerGamerField/>
+        <ComputerField/>
       </div>
       <CheckingShipsField>
         <CheckingShips checkingShips  = {checkingShips}

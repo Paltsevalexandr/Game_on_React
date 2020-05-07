@@ -1,16 +1,11 @@
 import {
-  calcShipDecksNumber,
-  calcShipHeight,
-  calcShipWidth,
-  currentShipIsVertical
-} from './calc-ship-props';
-
-import addBattleShipInFieldAndMatrix from './create-battleShip-functions/add-battleship-in-field-and-matrix';
-import deleteShipFromMatrix from './matrix-functions/delete-functions/delete-ship-from-matrix';
-import updateBattleShipsAndMatrix from './rotate-ship-func/update-battleShips-and-matrix';
+  addBattleShipInFieldAndMatrix, 
+  createCurrentShip
+} from './gamer-functions/create-ship-functions';
+import {deleteShipFromMatrix} from './common-functions/matrix-functions';
+import updateBattleShipsAndMatrix from './gamer-functions/rotate-ship-func/update-battleShips-and-matrix';
 
 const updateGamerState = (state, action) => {
-
   if(state === undefined) {
     return {
       checkingShips: ['fourdeck1', 'threedeck1', 
@@ -27,22 +22,7 @@ const updateGamerState = (state, action) => {
 
   switch(action.type) {
     case 'GET_CURRENT_SHIP':
-      const {shipName} = action;
-      const {battleShips} = gamerState;
-      const isVertical = currentShipIsVertical(shipName, battleShips);
-
-      return {
-        ...gamerState,
-        currentShip: {
-          name: shipName,
-          offsetX: action.offsetX,
-          offsetY: action.offsetY,
-          width: calcShipWidth(shipName, isVertical),
-          height: calcShipHeight(shipName, isVertical),
-          isVertical,
-          decksNum: calcShipDecksNumber(shipName),
-        }
-      };
+      return createCurrentShip(gamerState, action)
     
     case 'CREATE_BATTLE_SHIP':
       return addBattleShipInFieldAndMatrix(gamerState, action); 

@@ -1,17 +1,32 @@
-import calcRandomShipPosition from './calc-ship-props/random-ship-position';
+import {
+  calcRandomShipPosition, 
+  randomShipIsVertical,
+  calcShipDecksNumber,
+  calcShipWidth,
+  calcShipHeight
+} from '../calc-ship-props';
 
+import isRandomShipCanBePlaced from './is-random-ship-can-be-placed';
 
-const createShip = (ship, fieldLeftIndent, fieldTopIndent) => {
-  
-  let battleShip = {
-    name: ship,
+const createShip = (matrix, shipName, fieldLeftIndent, fieldTopIndent) => {
+
+  let newBattleShip = {
+
+    name: shipName,
     left: calcRandomShipPosition(fieldLeftIndent),
     top: calcRandomShipPosition(fieldTopIndent),
-    isVertical: isVertical(),
-    decksNum: calcShipDecksNumber(ship),
+    isVertical: randomShipIsVertical(),
+    decksNum: calcShipDecksNumber(shipName),
   }
+  newBattleShip.width = calcShipWidth(shipName, newBattleShip.isVertical);
+  newBattleShip.height = calcShipHeight(shipName, newBattleShip.isVertical);
 
-  return checkShipPosition(battleShip);
+  return isRandomShipCanBePlaced(
+    {
+      matrix, 
+      currentShip: newBattleShip
+    }
+  );
 }
 
 export default createShip;

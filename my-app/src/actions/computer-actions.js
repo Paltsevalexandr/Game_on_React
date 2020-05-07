@@ -1,9 +1,9 @@
-const createShips = () => {
+const createAllShips = () => {
   return {
     type: 'CREATE_ALL_SHIPS'
   }
 }
 
 export {
-  createShips,
+  createAllShips,
 }

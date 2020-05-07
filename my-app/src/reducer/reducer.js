@@ -4,7 +4,7 @@ import updateComputerState from './update-computer-state'
 const reducer = (state, action) => {
   return {
     gamerState: updateGamerState(state, action),
-    compState: updateComputerState(state, action)
+    computerState: updateComputerState(state, action)
   }
 }
 
