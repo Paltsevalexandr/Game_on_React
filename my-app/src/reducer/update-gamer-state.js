@@ -2,6 +2,7 @@ import {
   addBattleShipInFieldAndMatrix, 
   createCurrentShip
 } from './gamer-functions/create-ship-functions';
+
 import {deleteShipFromMatrix} from './common-functions/matrix-functions';
 import updateBattleShipsAndMatrix from './gamer-functions/rotate-ship-func/update-battleShips-and-matrix';
 
@@ -39,6 +40,12 @@ const updateGamerState = (state, action) => {
         ...gamerState,
         battleShips: updateBattleShips,
         matrix: updateMatrix
+      }
+
+    case 'RANDOM_SHIPS_PLACEMENT':
+      console.log('RANDOM_SHIP_PLACEMENT');
+      return{
+        ...gamerState
       }
     
     default:

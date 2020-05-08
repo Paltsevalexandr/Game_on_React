@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 import {createStore} from 'redux';
-import Field from './components/field.js';
+import GameField from './components/game-field';
 
 import reducer from './reducer/reducer';
 import './index.css';
@@ -13,7 +13,7 @@ const store = createStore(reducer);
 const App = () => {
   return (
     <Provider store = {store}>
-      <Field/>
+      <GameField/>
     </Provider>
   );
 }
