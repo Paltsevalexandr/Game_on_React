@@ -1,8 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import * as actions from '../actions/actions';
+import * as actions from '../actions';
 
-import {ComputerGamerField} from './computer-gamer/compField.js'
+import ComputerField from './computer-gamer/compField.js'
 import {BattleField} from './battleField.js';
 import {BattleShips} from './battleShips.js';
 import {DotsCreator} from './dotsCreator.js'
@@ -12,12 +12,10 @@ import {CheckingShips} from './checkingShips.js';
 const Field = ({
   checkingShips, 
   battleShips, 
-  addShip,
   getCurrentShip,
   createBattleShip,
   deleteShipFromMatrix,
-  rotateShip
-}) =>{
+  rotateShip }) => {
   return(
     <div className = "gameField">
       <div className = "battleFieldWrap">
@@ -28,18 +26,17 @@ const Field = ({
             getCurrentShip       = {getCurrentShip}
             rotateShip           = {rotateShip}/>
         </BattleField>
-        <ComputerGamerField/>
+        <ComputerField/>
       </div>
       <CheckingShipsField>
         <CheckingShips checkingShips  = {checkingShips}
             getCurrentShip = {getCurrentShip}/>
       </CheckingShipsField>
-      <button onClick = {() => addShip()}>show matrix</button>
     </div>
   )
 }
 
-const mapStateToProps = ({checkingShips, battleShips}) => {
+const mapStateToProps = ({gamerState: {checkingShips, battleShips}}) => {
   return {
     checkingShips, 
     battleShips, 
