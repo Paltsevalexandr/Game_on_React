@@ -2,7 +2,7 @@ import moveCheckingShipToBattleField from './move-checking-ship-to-battlefield';
 import isBattleShip from './is-battle-ship';
 import moveBattleShip from './move-battle-ship';
 import {setShipInMatrix} from '../../common-functions/matrix-functions';
-import checkShipPosition from '../../common-functions/check-ship-position/check-ship-position';
+import {checkShipPosition} from '../../common-functions/check-ship-position';
 
 const addBattleShipInFieldAndMatrix = (state, action) => {
   const {battleShips} = state;

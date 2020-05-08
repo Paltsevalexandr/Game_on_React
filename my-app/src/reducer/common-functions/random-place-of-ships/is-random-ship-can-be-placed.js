@@ -1,6 +1,5 @@
 import createShip from './create-ship';
-import checkShipPosition from '../check-ship-position/check-ship-position';
-import isRandomShipBeyondField from '../check-ship-position/is-random-ship-beyond-field';
+import {checkShipPosition, isRandomShipBeyondField} from '../check-ship-position';
 import {setShipInMatrix} from '../matrix-functions';
 
 const isRandomShipCanBePlaced = ({currentShip, matrix}) => {

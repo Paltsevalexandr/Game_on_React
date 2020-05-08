@@ -1,5 +1,5 @@
 const isShipTouchRest = (
-    matrix,
+  { matrix },
   { shipZoneTop, 
     shipZoneLeft,
     shipZoneBottom, 

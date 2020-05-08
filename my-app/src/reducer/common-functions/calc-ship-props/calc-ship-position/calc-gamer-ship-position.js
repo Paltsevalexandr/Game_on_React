@@ -1,21 +1,17 @@
 const calcGamerShipPosition = (shipCoordinate, shipSize) => {
 
-  if(shipCoordinate > 165) {
-  let excess = (shipCoordinate - 132) % 33;
-
-  if(shipCoordinate >= (462 - shipSize)) {
-    return 462 - shipSize;
-
-  }else if(excess > 0) {
-    return shipCoordinate -= excess;
-  }
-
-  }else if(shipCoordinate >= 155 && shipCoordinate <= 165) {
-    return shipCoordinate = 165;
-    
-  }else if(shipCoordinate < 155) {
+  if(shipCoordinate <= 155) {
     return shipCoordinate = 132;
+
+  }else if(shipCoordinate >= (132 + 330 - shipSize)) {
+    return shipCoordinate = (462 - shipSize);
+
+  }else {
+    let excess = shipCoordinate % 33;
+    if(excess > 20) return shipCoordinate + (33 - excess);
+    if(excess <= 20) return shipCoordinate - excess;
   }
+
   return shipCoordinate;
 }
 
