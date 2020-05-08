@@ -12,7 +12,7 @@ class ComputerField extends React.Component {
   }
 
   render() {
-    const {battleShips, matrix}  = this.props;
+    const {battleShips}  = this.props;
    
     return (
       <RenderComputerField 
@@ -22,10 +22,9 @@ class ComputerField extends React.Component {
   }
 }
 
-const mapStateToProps = ({computerState: {battleShips, matrix}}) => {
+const mapStateToProps = ({computerState: {battleShips}}) => {
   return {
-    battleShips,
-    matrix
+    battleShips
   }
 }
 

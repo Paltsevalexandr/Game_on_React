@@ -2,7 +2,8 @@ import {
   getCurrentShip,
   createBattleShip,
   deleteShipFromMatrix,
-  rotateShip
+  rotateShip,
+  randomShipsPlacement
 } from './gamer-actions';
 
 import {
@@ -14,5 +15,6 @@ export {
   createBattleShip,
   deleteShipFromMatrix,
   rotateShip,
+  randomShipsPlacement,
   createAllShips,
 }

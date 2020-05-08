@@ -2,28 +2,91 @@
   margin: 0;
   padding: 0;
 }
-.gameField{
+@font-face {
+	font-family: 'SegoePrint';
+	src: url(fonts/SegoePrint.eot) format('embedded-opentype'),
+		url(fonts/SegoePrint.woff) format('woff'),
+		url(fonts/SegoePrint.ttf)  format('truetype'),
+		url(fonts/SegoePrint.svg) format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+body, button{
+  font-family: 'SegoePrint';
+  color: blue;
+}
+.header{
+  height: 44px;
+}
+h1{
+  margin-left: 50px;
+  font-size: 25px;
+  font-weight: 400;
+}
+button{
+  border: none;
+  outline: none;
+  color: blue;
+  &:hover{
+    cursor: pointer;
+  }
+}
+.gameContainer{
   height: 600px;
   display: flex;
   flex-direction: column;
-  margin: 0;
-  padding: 105px 0 0 105px;
-  background: url('./images/grid.png');
+  padding: 0;
+  background: url(images/grid.png);
 }
-.battleFieldWrap{
+.gameField{
   display: flex;
+  margin: 0;
+  padding: 61px 0 0 105px;
 }
 .battleField{
   width: 340px;
   height: 340px;
   padding: 28px 0 0 28px;
-  background: url('./images/bg_play_field.png') no-repeat;
+  background: url(images/bg_play_field.png) no-repeat;
   &:last-child{
-    margin-left: 95px;
+    margin-left: 94px;
   }
 }
-.shipField {
+.checkingShipsField {
   display: flex;
   flex-wrap: wrap;
-  width: 40%;
+  width: 340px;
+}
+.startGameField {
+  display: flex;
+  flex-direction: column;
+  margin-left: 70px;
+}
+.start-game-btn {
+  margin: 82px auto 10px;
+  width: 145px;
+  height: 46px;
+  background: url(images/sprite.png) no-repeat;
+  background-position-y: -150px;
+  font-size: 20px;
+  font-family: SegoePrint;
+  color: blue;
+}
+.message{
+  display: flex;
+  align-self: flex-start;
+  margin: 5px 0 5px 50px;
+  font-size: 22px;
+  color: red;
+}
+.placeShipBtn{
+  width: 250px;
+  padding-bottom: 2px;
+  text-align: left;
+  font-size: 20px;
+  border-bottom: dashed 2px blue;
+  background: none;
+  &:first-child{
+    margin-bottom: 27px;
+  }
 }

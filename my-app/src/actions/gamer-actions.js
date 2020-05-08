@@ -29,9 +29,17 @@ const rotateShip = (pageX, pageY) => {
     pageY
   }
 }
+
+const randomShipsPlacement = () => {
+  return {
+    type: 'RANDOM_SHIPS_PLACEMENT'
+  }
+}
+
 export {
   getCurrentShip,
   createBattleShip,
   deleteShipFromMatrix,
-  rotateShip
+  rotateShip,
+  randomShipsPlacement
 };
