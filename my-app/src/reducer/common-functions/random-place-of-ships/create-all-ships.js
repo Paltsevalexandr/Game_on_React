@@ -1,12 +1,12 @@
 import createShip from './create-ship';
 
-const createAllShips = state => {
+const createAllShips = (state, fieldLeft, fieldTop) => {
   let battleShips = [];
   let {checkingShips, matrix} = state;
   
   for(let ship of checkingShips) {
-    
-    const {newMatrix, currentShip} = createShip(matrix, ship, 595, 132);
+    console.log(fieldLeft)
+    const {newMatrix, currentShip} = createShip(matrix, ship, fieldLeft, fieldTop);
     
     battleShips.push(currentShip);
     matrix = newMatrix;
