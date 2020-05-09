@@ -18,9 +18,9 @@ const updateComputerState = (state, action) => {
 
   switch(action.type) {
     case 'CREATE_ALL_SHIPS':
-      const {battleShips, matrix} = createAllShips(computerState);
+      const {battleShips, matrix} = createAllShips(computerState, 595, 132);
       return {
-        ...state,
+        ...computerState,
         battleShips,
         matrix 
       };

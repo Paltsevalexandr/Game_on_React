@@ -2,7 +2,7 @@ import React from 'react';
 import CheckingShipsField from './checkingShipsField';
 import StartButton from './start-game-button';
 
-const StartGame = ({
+const MenuContainer = ({
   checkingShips,
   startPlay,
   showCheckingShips, 
@@ -26,4 +26,4 @@ const StartGame = ({
   )
 }
 
-export default StartGame;
+export default MenuContainer;

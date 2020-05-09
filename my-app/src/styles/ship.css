@@ -1,6 +1,6 @@
 .ship {
   height: 35px;
-  margin-top: 25px;
+  margin: 0 30px 31px 0;
 }
 .ship::after {
   content: '';
@@ -10,13 +10,10 @@
 }
 .fourdeck1 {
   width: 135px;
-  margin-left: 30px;
-  margin-bottom: 5px;
 }
 .threedeck1,
 .threedeck2 {
   width: 101px;
-  margin-left: 28px;
 }
 .threedeck1::after,
 .threedeck2::after {
@@ -26,23 +23,17 @@
 .twodeck2,
 .twodeck3 {
   width: 70px;
-  margin-left: 30px;
-  margin-bottom: 5px;
 }
 .twodeck1::after,
 .twodeck2::after,
 .twodeck3::after {
   background-position-x: -270px;
 }
-.twodeck3 {
-  margin-left: 28px;
-}
 .onedeck1,
 .onedeck2,
 .onedeck3,
 .onedeck4 {
   width: 35px;
-  margin-left: 30px;
 }
 .onedeck1::after,
 .onedeck2::after,

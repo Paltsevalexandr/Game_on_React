@@ -3,24 +3,20 @@
   padding: 0;
 }
 @font-face {
-	font-family: 'SegoePrint';
-	src: url(fonts/SegoePrint.eot) format('embedded-opentype'),
-		url(fonts/SegoePrint.woff) format('woff'),
-		url(fonts/SegoePrint.ttf)  format('truetype'),
-		url(fonts/SegoePrint.svg) format('svg');
+	font-family: 'EuroScript';
+	src: url(fonts/EuroScript.ttf)  format('truetype');
 	font-weight: normal;
 	font-style: normal;
 }
 body, button{
-  font-family: 'SegoePrint';
+  font-family: EuroScript;
   color: blue;
 }
 .header{
-  height: 44px;
+  height: 51px;
 }
 h1{
-  margin-left: 50px;
-  font-size: 25px;
+  font-size: 30px;
   font-weight: 400;
 }
 button{
@@ -31,21 +27,17 @@ button{
     cursor: pointer;
   }
 }
-.gameContainer{
-  height: 600px;
-  display: flex;
-  flex-direction: column;
-  padding: 0;
-  background: url(images/grid.png);
-}
 .gameField{
   display: flex;
+  height: 600px;
   margin: 0;
-  padding: 61px 0 0 105px;
+  padding: 60px 0 0 105px;
+  background: url(images/grid.png);
 }
 .battleField{
   width: 340px;
   height: 340px;
+  margin-top: 45px;
   padding: 28px 0 0 28px;
   background: url(images/bg_play_field.png) no-repeat;
   &:last-child{
@@ -56,11 +48,16 @@ button{
   display: flex;
   flex-wrap: wrap;
   width: 340px;
+  margin: 51px 0 0 ;
 }
 .startGameField {
   display: flex;
   flex-direction: column;
-  margin-left: 70px;
+  margin-left: 55px;
+}
+.menu {
+  width: 350px;
+  padding-left: 15px;
 }
 .start-game-btn {
   margin: 82px auto 10px;
@@ -69,7 +66,6 @@ button{
   background: url(images/sprite.png) no-repeat;
   background-position-y: -150px;
   font-size: 20px;
-  font-family: SegoePrint;
   color: blue;
 }
 .message{
@@ -81,12 +77,10 @@ button{
 }
 .placeShipBtn{
   width: 250px;
-  padding-bottom: 2px;
+  padding-bottom: 1px;
   text-align: left;
-  font-size: 20px;
+  font-size: 23px;
   border-bottom: dashed 2px blue;
   background: none;
-  &:first-child{
-    margin-bottom: 27px;
-  }
+  margin-top: 25px;
 }

@@ -1,9 +1,9 @@
 import React from 'react';
 
-export function Dots(props) {
-  let dots;
-  if(props.dots.length > 0) {
-    dots = props.dots.map((item, index) => {
+export function Dots({dots}) {
+  
+  if(dots.length > 0) {
+    const renderDots = dots.map((item, index) => {
       return(
       <div key = {index} className = "dot"
            style = {{left: item.leftIndent + 'px', top: item.topIndent + 'px'}}>
@@ -11,5 +11,5 @@ export function Dots(props) {
       );
     });
   }
-  return <>{dots}</>
+  return <>{renderDots}</>
 }

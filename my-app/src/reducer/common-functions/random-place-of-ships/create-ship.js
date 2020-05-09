@@ -8,13 +8,13 @@ import {
 
 import isRandomShipCanBePlaced from './is-random-ship-can-be-placed';
 
-const createShip = (matrix, shipName, fieldLeftIndent, fieldTopIndent) => {
-
+const createShip = (matrix, shipName, fieldLeft = 132, fieldTop = 132) => {
+  
   let newBattleShip = {
 
     name: shipName,
-    left: calcRandomShipPosition(fieldLeftIndent),
-    top: calcRandomShipPosition(fieldTopIndent),
+    left: calcRandomShipPosition(fieldLeft),
+    top: calcRandomShipPosition(fieldTop),
     isVertical: randomShipIsVertical(),
     decksNum: calcShipDecksNumber(shipName),
   }
@@ -22,10 +22,10 @@ const createShip = (matrix, shipName, fieldLeftIndent, fieldTopIndent) => {
   newBattleShip.height = calcShipHeight(shipName, newBattleShip.isVertical);
 
   return isRandomShipCanBePlaced(
-    {
-      matrix, 
-      currentShip: newBattleShip
-    }
+    { matrix, 
+      currentShip: newBattleShip },
+      fieldLeft,
+      fieldTop
   );
 }
 
