@@ -4,27 +4,16 @@ import ComputerField from './computer-field';
 import Dots from '../labels/labels';
 import * as actions from '../../actions';
 
-class ComputerFieldContainer extends React.Component {
-  constructor(props) {
-    super(props);
-    const {createAllShips} = props;
-
-    createAllShips();
-  }
-
-  render() {
-    const {battleShips, createDot, labels}  = this.props;
+const ComputerFieldContainer = ({battleShips, createLabel, labels}) => {
    
-    return (
-      <ComputerField 
-        battleShips = {battleShips}
-        createDot = {createDot}>
+  return (
+    <ComputerField 
+      battleShips = {battleShips}
+      createLabel = {createLabel}>
 
-        <Dots labels = {labels} />
-
-      </ComputerField>
-    );
-  }
+      <Dots labels = {labels} />
+    </ComputerField>
+  );
 }
 
 const mapStateToProps = ({computerState: {battleShips, labels}}) => {

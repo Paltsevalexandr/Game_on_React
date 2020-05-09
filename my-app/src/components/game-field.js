@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {randomShipsPlacement} from '../actions'
+import * as actions from '../actions'
 import ComputerFieldContainer from './computer-components/computer-field-container';
 import GamerField from './gamer-components/gamer-field';
 import Menu from './start-game-components/menu';
@@ -22,7 +22,7 @@ class GameField extends React.Component {
   }
 
   render() {
-    const {checkingShips, randomShipsPlacement} = this.props;
+    const {checkingShips, randomShipsPlacement, createAllShips} = this.props;
 
     return (
       <div className = 'gameField'>
@@ -31,9 +31,10 @@ class GameField extends React.Component {
             this.state.gameStart 
             ? <ComputerFieldContainer/>
             : <MenuContainer 
-                checkingShips = {checkingShips}
-                startPlay = {this.startPlay}
-                showCheckingShips = {this.state.showCheckingShips}>
+                checkingShips     = {checkingShips}
+                startPlay         = {this.startPlay}
+                showCheckingShips = {this.state.showCheckingShips}
+                createAllShips    = {createAllShips}>
 
                 <Menu
                   gameStart            = {this.state.gameStart} 
@@ -53,4 +54,4 @@ const mapStateToProps = ({gamerState: {checkingShips}}) => {
   }
 }
 
-export default connect(mapStateToProps, {randomShipsPlacement})(GameField);
+export default connect(mapStateToProps, actions)(GameField);

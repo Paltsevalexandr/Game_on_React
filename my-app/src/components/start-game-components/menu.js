@@ -4,7 +4,8 @@ import ControlButtons from './control-buttons';
 const Menu = ({
   gameStart, 
   startPlay, 
-  showCheckingShips, 
+  showCheckingShips,
+  createAllShips,
   randomShipsPlacement}) => {
 
   return (
@@ -17,6 +18,7 @@ const Menu = ({
       <ControlButtons 
         startPlay = {startPlay}
         showCheckingShips = {showCheckingShips}
+        createAllShips = {createAllShips}
         randomShipsPlacement = {randomShipsPlacement} />
     </div>
   );

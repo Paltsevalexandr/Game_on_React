@@ -1,9 +1,12 @@
 import React from 'react';
 
-const StartButton = ({startPlay}) => {
+const StartButton = ({startPlay, createAllShips}) => {
   return (
     <button 
-      onClick = {() => startPlay()}
+      onClick = {() => {
+        startPlay();
+        createAllShips();
+      }}
       className = 'start-game-btn'>
         Start Game
     </button>

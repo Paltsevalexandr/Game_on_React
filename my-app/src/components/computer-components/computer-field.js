@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ComputerField = ({battleShips, createDot, children}) => {
+const ComputerField = ({battleShips, createLabel, children}) => {
   let ships;
 
   if(battleShips.length > 0) {
@@ -17,7 +17,7 @@ const ComputerField = ({battleShips, createDot, children}) => {
 
   return(
     <div className   = "battleField"
-      onClick = {e => createDot(e.pageX, e.pageY)}>
+      onClick = {e => createLabel(e.pageX, e.pageY)}>
       {ships}
       {children}
     </div>

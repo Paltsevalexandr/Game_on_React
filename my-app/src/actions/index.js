@@ -8,7 +8,7 @@ import {
 
 import {
   createAllShips,
-  createDot,
+  createLabel,
   show
 } from './computer-actions';
 
@@ -19,6 +19,6 @@ export {
   rotateShip,
   randomShipsPlacement,
   createAllShips,
-  createDot,
+  createLabel,
   show
 }

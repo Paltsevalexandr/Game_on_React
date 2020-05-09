@@ -4,13 +4,15 @@ const createAllShips = () => {
   }
 }
 
-const createDot = (pageX, pageY) => {
+const createLabel = (pageX, pageY) => {
   return {
-    type: 'CREATE_DOT',
+    type: 'CREATE_LABEL',
     left: pageX,
     top: pageY
   }
 }
+
+
 
 const show = () => {
   return {
@@ -20,6 +22,6 @@ const show = () => {
 
 export {
   createAllShips,
-  createDot,
+  createLabel,
   show
 }

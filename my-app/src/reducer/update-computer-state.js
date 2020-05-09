@@ -28,7 +28,7 @@ const updateComputerState = (state, action) => {
         matrix
       };
     
-    case 'CREATE_DOT':
+    case 'CREATE_LABEL':
       const {matrix: updatedMatrix, labels} = addDot(computerState, action);
       return {
         ...computerState,
