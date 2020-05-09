@@ -44,12 +44,12 @@ const updateGamerState = (state, action) => {
       }
 
     case 'RANDOM_SHIPS_PLACEMENT':
-      const {battleShips, matrix} = createAllShips(gamerState)
-      return{
+      const {battleShips, matrix} = createAllShips(gamerState);
+      return {
         ...gamerState,
         battleShips,
-        matrix
-      }
+        matrix 
+      };
     
     default:
       return gamerState;

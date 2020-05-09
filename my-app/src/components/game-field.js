@@ -3,8 +3,8 @@ import React from 'react';
 import {randomShipsPlacement} from '../actions'
 import ComputerFieldContainer from './computer-components/computer-field-container';
 import GamerField from './gamer-components/gamer-field';
-import StartGame from './start-game-components/start-game-field';
-import ControlButtons from './start-game-components/control-buttons';
+import Menu from './start-game-components/menu';
+import MenuContainer from './start-game-components/menu-container';
 import {connect} from 'react-redux';
 
 class GameField extends React.Component {
@@ -25,29 +25,23 @@ class GameField extends React.Component {
     const {checkingShips, randomShipsPlacement} = this.props;
 
     return (
-      <div className = 'gameContainer'>
-        {
-          this.state.gameStart
-          ? <div className = 'header'></div>
-          : <h1>Расстановка кораблей</h1>
-        }
-        <div className = 'gameField'>
+      <div className = 'gameField'>
           <GamerField/>  
           {
             this.state.gameStart 
             ? <ComputerFieldContainer/>
-            : <StartGame 
+            : <MenuContainer 
                 checkingShips = {checkingShips}
                 startPlay = {this.startPlay}
                 showCheckingShips = {this.state.showCheckingShips}>
 
-                <ControlButtons 
-                  startPlay = {this.startPlay}
-                  showCheckingShips = {this.showCheckingShips}
-                  randomShipsPlacement = {randomShipsPlacement} />
-              </StartGame>
+                <Menu
+                  gameStart            = {this.state.gameStart} 
+                  startPlay            = {this.startPlay} 
+                  showCheckingShips    = {this.showCheckingShips} 
+                  randomShipsPlacement = {randomShipsPlacement}/>
+              </MenuContainer>
           }
-        </div>
       </div>
     )
   }
