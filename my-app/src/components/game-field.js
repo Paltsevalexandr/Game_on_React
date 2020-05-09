@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {randomShipsPlacement} from '../actions'
-import ComputerField from './computer-components/computer-field';
+import ComputerFieldContainer from './computer-components/computer-field-container';
 import GamerField from './gamer-components/gamer-field';
 import StartGame from './start-game-components/start-game-field';
 import ControlButtons from './start-game-components/control-buttons';
@@ -35,7 +35,7 @@ class GameField extends React.Component {
           <GamerField/>  
           {
             this.state.gameStart 
-            ? <ComputerField/>
+            ? <ComputerFieldContainer/>
             : <StartGame 
                 checkingShips = {checkingShips}
                 startPlay = {this.startPlay}

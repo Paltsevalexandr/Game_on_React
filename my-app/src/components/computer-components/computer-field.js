@@ -1,31 +1,27 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import RenderComputerField from './renderCompField';
-import * as actions from '../../actions';
 
-class ComputerField extends React.Component {
-  constructor(props) {
-    super(props);
-    const {createAllShips} = props;
+const ComputerField = ({battleShips, createDot, children}) => {
+  let ships;
 
-    createAllShips();
+  if(battleShips.length > 0) {
+    ships = battleShips.map((item, index) => {
+      return (
+        <div 
+        className = {'ship ' + item.name + ' battleShip ' + 
+        (item.isVertical ? (item.name.slice(0, -1) + 'Vertical') : '')}
+        key = {index} style = {{top: item.top + 'px', left: item.left + 'px'}}>
+        </div>
+      )
+    });
   }
 
-  render() {
-    const {battleShips}  = this.props;
-   
-    return (
-      <RenderComputerField 
-        battleShips = {battleShips}
-      />
-    );
-  }
+  return(
+    <div className   = "battleField"
+      onClick = {e => createDot(e.pageX, e.pageY)}>
+      {ships}
+      {children}
+    </div>
+  );
 }
 
-const mapStateToProps = ({computerState: {battleShips}}) => {
-  return {
-    battleShips
-  }
-}
-
-export default connect(mapStateToProps, actions)(ComputerField);
+export default ComputerField;

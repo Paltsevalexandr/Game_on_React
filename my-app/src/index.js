@@ -7,6 +7,7 @@ import GameField from './components/game-field';
 import reducer from './reducer/reducer';
 import './index.css';
 import './styles/ship.css';
+import './styles/dots.css';
 
 const store = createStore(reducer);
 

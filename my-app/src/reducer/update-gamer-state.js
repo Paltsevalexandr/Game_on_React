@@ -5,6 +5,7 @@ import {
 
 import {deleteShipFromMatrix} from './common-functions/matrix-functions';
 import updateBattleShipsAndMatrix from './gamer-functions/rotate-ship-func/update-battleShips-and-matrix';
+import createAllShips from './common-functions/random-place-of-ships/create-all-ships';
 
 const updateGamerState = (state, action) => {
   if(state === undefined) {
@@ -43,9 +44,11 @@ const updateGamerState = (state, action) => {
       }
 
     case 'RANDOM_SHIPS_PLACEMENT':
-      console.log('RANDOM_SHIP_PLACEMENT');
+      const {battleShips, matrix} = createAllShips(gamerState)
       return{
-        ...gamerState
+        ...gamerState,
+        battleShips,
+        matrix
       }
     
     default:

@@ -10,17 +10,18 @@ const GamerField = ({
   getCurrentShip,
   createBattleShip,
   deleteShipFromMatrix,
-  rotateShip }) => {
+  rotateShip,
+show }) => {
 
   return(
     <BattleField createBattleShip = {createBattleShip}>
-
+      
       <BattleShips
           battleShips          = {battleShips}
           deleteShipFromMatrix = {deleteShipFromMatrix}
           getCurrentShip       = {getCurrentShip}
           rotateShip           = {rotateShip}/>
-          
+          <button onClick = {() => show()}>show</button>
     </BattleField>
   )
 }

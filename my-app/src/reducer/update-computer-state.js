@@ -1,4 +1,5 @@
 import createAllShips from './common-functions/random-place-of-ships/create-all-ships';
+import addDot from './common-functions/dots/add-label';
 
 const updateComputerState = (state, action) => {
 
@@ -10,7 +11,8 @@ const updateComputerState = (state, action) => {
         'onedeck2', 'onedeck3', 'onedeck4'
       ], 
       battleShips: [],
-      matrix: Array(10).fill(Array(10).fill([]))
+      labels: [],
+      matrix: Array(10).fill(Array(10).fill(0))
     }
   }
   
@@ -18,12 +20,25 @@ const updateComputerState = (state, action) => {
 
   switch(action.type) {
     case 'CREATE_ALL_SHIPS':
-      const {battleShips, matrix} = createAllShips(computerState);
+      const {battleShips, matrix} = createAllShips(computerState, 595);
+
       return {
-        ...state,
+        ...computerState,
         battleShips,
-        matrix 
+        matrix
       };
+    
+    case 'CREATE_DOT':
+      const {matrix: updatedMatrix, labels} = addDot(computerState, action);
+      return {
+        ...computerState,
+        labels,
+        matrix: updatedMatrix,
+      }
+
+    case 'showState':
+      console.log(computerState);
+      return computerState;
 
     default:
       return computerState;
