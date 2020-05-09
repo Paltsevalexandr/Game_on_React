@@ -1,5 +1,6 @@
 import createAllShips from './common-functions/random-place-of-ships/create-all-ships';
-import addDot from './common-functions/dots/add-label';
+import addDot from './common-functions/labels/add-label';
+import makeHatching from './common-functions/labels/make-hatching';
 
 const updateComputerState = (state, action) => {
 
@@ -35,6 +36,9 @@ const updateComputerState = (state, action) => {
         labels,
         matrix: updatedMatrix,
       }
+    
+    case 'MAKE_HATCHING':
+      return makeHatching(computerState, action)
 
     case 'showState':
       console.log(computerState);

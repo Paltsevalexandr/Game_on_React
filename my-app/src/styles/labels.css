@@ -13,3 +13,11 @@
   background-position-x: -408px;
   background-position-y: -50px;
 }
+.hatching {
+  width: 31px;
+  height: 33px;
+  position: absolute;
+  background: url(../images/sprite.png);
+  background-position-x: -408px;
+  background-position-y: -99px;
+}

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ComputerField = ({battleShips, createLabel, children}) => {
+const ComputerField = ({battleShips, createLabel, makeHatching, children}) => {
   let ships;
 
   if(battleShips.length > 0) {
@@ -17,7 +17,8 @@ const ComputerField = ({battleShips, createLabel, children}) => {
 
   return(
     <div className   = "battleField"
-      onClick = {e => createLabel(e.pageX, e.pageY)}>
+      onClick = {e => createLabel(e.pageX, e.pageY)}
+      onContextMenu = {e => {makeHatching(e.pageX, e.pageY); e.preventDefault()}}>
       {ships}
       {children}
     </div>

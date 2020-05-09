@@ -12,7 +12,14 @@ const createLabel = (pageX, pageY) => {
   }
 }
 
-
+const makeHatching = (pageX, pageY) => {
+  console.log('hatching')
+  return {
+    type: 'MAKE_HATCHING',
+    left: pageX,
+    top: pageY
+  }
+}
 
 const show = () => {
   return {
@@ -23,5 +30,6 @@ const show = () => {
 export {
   createAllShips,
   createLabel,
+  makeHatching,
   show
 }

@@ -4,12 +4,17 @@ import ComputerField from './computer-field';
 import Dots from '../labels/labels';
 import * as actions from '../../actions';
 
-const ComputerFieldContainer = ({battleShips, createLabel, labels}) => {
+const ComputerFieldContainer = ({
+  battleShips, 
+  labels, 
+  createLabel, 
+  makeHatching }) => {
    
   return (
     <ComputerField 
-      battleShips = {battleShips}
-      createLabel = {createLabel}>
+      battleShips  = {battleShips}
+      createLabel  = {createLabel}
+      makeHatching = {makeHatching}>
 
       <Dots labels = {labels} />
     </ComputerField>

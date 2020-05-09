@@ -9,6 +9,7 @@ import {
 import {
   createAllShips,
   createLabel,
+  makeHatching,
   show
 } from './computer-actions';
 
@@ -20,5 +21,6 @@ export {
   randomShipsPlacement,
   createAllShips,
   createLabel,
+  makeHatching,
   show
 }

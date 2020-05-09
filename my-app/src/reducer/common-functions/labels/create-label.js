@@ -1,6 +1,7 @@
 import calcLabelPosition from "./calc-label-position";
 
 const createLabel = ({left, top}) => {
+  
   const label = {
     left: calcLabelPosition(left),
     top: calcLabelPosition(top)

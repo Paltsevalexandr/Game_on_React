@@ -1,5 +1,4 @@
 import React from 'react';
-
 import * as actions from '../actions'
 import ComputerFieldContainer from './computer-components/computer-field-container';
 import GamerField from './gamer-components/gamer-field';
@@ -10,7 +9,7 @@ import {connect} from 'react-redux';
 class GameField extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {gameStart: false, message: '', showCheckingShips: false};
+    this.state = {gameStart: false, showCheckingShips: false};
   }
 
   startPlay = () => {
@@ -20,7 +19,7 @@ class GameField extends React.Component {
   showCheckingShips = () => {
     this.setState({showCheckingShips: true});
   }
-
+  
   render() {
     const {checkingShips, randomShipsPlacement, createAllShips} = this.props;
 
@@ -40,7 +39,8 @@ class GameField extends React.Component {
                   gameStart            = {this.state.gameStart} 
                   startPlay            = {this.startPlay} 
                   showCheckingShips    = {this.showCheckingShips} 
-                  randomShipsPlacement = {randomShipsPlacement}/>
+                  randomShipsPlacement = {randomShipsPlacement}
+                  createAllShips    = {createAllShips}/>
               </MenuContainer>
           }
       </div>
