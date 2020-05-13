@@ -13,7 +13,7 @@ const isShipTouchRest = (
       
       if(i > 9 || j > 9) return false; // check need it or not
 
-      if(matrix[i][j].length > 0) {
+      if(matrix[i][j].type === 'deck') {
         return false;
       }
     }

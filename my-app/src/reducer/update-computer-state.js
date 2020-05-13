@@ -1,6 +1,7 @@
 import createAllShips from './common-functions/random-place-of-ships/create-all-ships';
-import addDot from './common-functions/labels/add-label';
-import makeHatching from './common-functions/labels/make-hatching';
+import addLabel from './common-functions/labels/add-label';
+import addHatching from './common-functions/labels/hatchings/add-hatching';
+import gamerFire from './gameplay/fire-functions/gamer-fire/gamer-fire';
 
 const updateComputerState = (state, action) => {
 
@@ -13,7 +14,11 @@ const updateComputerState = (state, action) => {
       ], 
       battleShips: [],
       labels: [],
-      matrix: Array(10).fill(Array(10).fill(0))
+      matrix: 
+        Array(10)
+        .fill(Array(10)
+        .fill({type: null, isHurt: false})),
+      shotCounter: 0
     }
   }
   
@@ -30,7 +35,7 @@ const updateComputerState = (state, action) => {
       };
     
     case 'CREATE_LABEL':
-      const {matrix: updatedMatrix, labels} = addDot(computerState, action);
+      const {matrix: updatedMatrix, labels} = addLabel(computerState, action);
       return {
         ...computerState,
         labels,
@@ -38,11 +43,12 @@ const updateComputerState = (state, action) => {
       }
     
     case 'MAKE_HATCHING':
-      return makeHatching(computerState, action)
+      return addHatching(computerState, action);
 
-    case 'showState':
-      console.log(computerState);
-      return computerState;
+    case 'GET_GAMER_FIRE':
+      const fieldIndents = {fieldTop: 132, fieldLeft: 594};
+      return gamerFire(computerState, action, fieldIndents);
+    
 
     default:
       return computerState;

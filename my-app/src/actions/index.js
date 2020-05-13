@@ -3,15 +3,22 @@ import {
   createBattleShip,
   deleteShipFromMatrix,
   rotateShip,
-  randomShipsPlacement
+  randomShipsPlacement,
+  getComputerFire,
 } from './gamer-actions';
 
 import {
   createAllShips,
   createLabel,
   makeHatching,
+  getGamerFire,
   show
 } from './computer-actions';
+
+import {
+  selectGamer,
+  incShotCounter
+} from './gameplay-actions';
 
 export {
   getCurrentShip,
@@ -22,5 +29,9 @@ export {
   createAllShips,
   createLabel,
   makeHatching,
-  show
+  selectGamer,
+  getComputerFire,
+  getGamerFire,
+  show,
+  incShotCounter
 }

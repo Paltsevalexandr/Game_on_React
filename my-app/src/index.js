@@ -8,6 +8,7 @@ import reducer from './reducer/reducer';
 import './index.css';
 import './styles/ship.css';
 import './styles/labels.css';
+import './styles/game-start-field.css';
 
 const store = createStore(reducer);
 

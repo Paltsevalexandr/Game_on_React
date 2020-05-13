@@ -8,7 +8,9 @@ const createLabel = ({left, top}) => {
   }
 
   if(label.left === null
-  || label.top === null) return null;
+  || label.top === null) {
+    return null;
+  }
   
   return label;
 }

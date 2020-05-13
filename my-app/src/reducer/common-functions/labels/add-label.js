@@ -1,4 +1,4 @@
-import addDotOrCross from './add-dot-or-cross';
+import addDotOrCross from './dots-and-crosses/add-dot-or-cross';
 import createLabel from './create-label';
 
 const addLabel = (state, action) => {
@@ -9,10 +9,7 @@ const addLabel = (state, action) => {
     return addDotOrCross(state, newLabel);
   }
 
-  return {
-    labels: state.labels, 
-    matrix: state.matrix
-  };
+  return state;
 }
 
 export default addLabel;

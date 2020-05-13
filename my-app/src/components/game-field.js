@@ -25,7 +25,7 @@ class GameField extends React.Component {
 
     return (
       <div className = 'gameField'>
-          <GamerField/>  
+          <GamerField gameStart = {this.state.gameStart} />  
           {
             this.state.gameStart 
             ? <ComputerFieldContainer/>

@@ -6,10 +6,15 @@ const deleteShipFromMatrix = state => {
 
   for(let ship of battleShips) {
 
-    if(ship.name === currentShip.name && ship.isVertical === false) {
+    if(ship.name === currentShip.name &&
+       ship.isVertical === false) {
+         
       return deleteHorizontalShipFromMatrix(state, ship);
 
-    }else if(ship.name === currentShip.name && ship.isVertical === true) {
+    }else if(
+      ship.name === currentShip.name && 
+      ship.isVertical === true) {
+
       return deleteVerticalShipFromMatrix(state, ship);
     }
   }

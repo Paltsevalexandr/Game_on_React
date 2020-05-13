@@ -1,20 +1,19 @@
 import {positionInMatrix} from '../accessory-functions';
 
-const deleteHorizontalShipFromMatrix = (state, ship) => {
-  const {matrix} = state;
-  let rowNum = positionInMatrix(ship.top);
-  let leftIndent = ship.left;
+const deleteHorizontalShipFromMatrix = ({matrix}, {top, left, decksNum}) => {
+  const rowNum = positionInMatrix(top);
 
-  const updateMatrix = matrix.map((row, index) => {
+  return matrix.map((row, index) => {
     if(index === rowNum) {
-      let i = 0;
-      row = row.map((item, colNum) => {
 
-        if(colNum === positionInMatrix(leftIndent)
-        && i < ship.decksNum) {
+      let i = 0;
+      row = row.map((item, idx) => {
+
+        if(idx === positionInMatrix(left)
+        && i < decksNum) {
           
-          item = [];
-          leftIndent += 33;
+          item = {type: null, isHurt: false};
+          left += 33;
           i++;
           return item;
         }
@@ -23,8 +22,6 @@ const deleteHorizontalShipFromMatrix = (state, ship) => {
     }
     return row;
   });
-
-  return updateMatrix;
 }
 
 export default deleteHorizontalShipFromMatrix;

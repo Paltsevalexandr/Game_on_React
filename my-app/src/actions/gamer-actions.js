@@ -36,10 +36,17 @@ const randomShipsPlacement = () => {
   }
 }
 
+const getComputerFire = () => {
+  return {
+    type: 'GET_COMPUTER_FIRE',
+  }
+}
+
 export {
   getCurrentShip,
   createBattleShip,
   deleteShipFromMatrix,
   rotateShip,
-  randomShipsPlacement
+  randomShipsPlacement,
+  getComputerFire
 };

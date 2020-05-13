@@ -1,23 +1,24 @@
 import {positionInMatrix} from '../accessory-functions';
 
-const setVerticalShipInMatrix = ({matrix}, ship) => {
+const setVerticalShipInMatrix = ({matrix}, {top, left, decksNum}) => {
     
-  let topIndent = ship.top;
-  const shipColIndex = positionInMatrix(ship.left);
-  
+  const colIndex = positionInMatrix(left);
   let i = 0;
   
-  return matrix.map((row, indexRow) => {
-    if(indexRow === positionInMatrix(topIndent) && i < ship.decksNum) {
-      row = row.map((item, indexColumn) => {
-        if(indexColumn === shipColIndex) {
-          item = [ship.left, topIndent, {isHurt: false}];
-          return item;
+  return matrix.map((row, index) => {
+    if(index === positionInMatrix(top) && i < decksNum) {
+
+      row = row.map((item, idx) => {
+
+        if(idx === colIndex) {
+
+          item = {type: 'deck', isHurt: false    };
         }
         return item;
       });
+      
       i++;
-      topIndent += 33;
+      top += 33;
     }
     return row;
   });  

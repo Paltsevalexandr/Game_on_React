@@ -6,8 +6,10 @@ import {
 import {deleteShipFromMatrix} from './common-functions/matrix-functions';
 import updateBattleShipsAndMatrix from './gamer-functions/rotate-ship-func/update-battleShips-and-matrix';
 import createAllShips from './common-functions/random-place-of-ships/create-all-ships';
+import computerFire from './gameplay/fire-functions/computer-fire/computer-fire';
 
 const updateGamerState = (state, action) => {
+
   if(state === undefined) {
     return {
       checkingShips: ['fourdeck1', 'threedeck1', 
@@ -16,7 +18,11 @@ const updateGamerState = (state, action) => {
         'onedeck2', 'onedeck3', 'onedeck4'], 
       battleShips: [],
       currentShip: {},
-      matrix: Array(10).fill(Array(10).fill([]))
+      labels: [],
+      matrix: 
+        Array(10)
+        .fill(Array(10)
+        .fill({type: null, isHurt: false}))
     }
   }
   
@@ -51,6 +57,15 @@ const updateGamerState = (state, action) => {
         matrix 
       };
     
+    case 'GET_COMPUTER_FIRE':
+      const fieldIndents = {fieldTop: 132, fieldLeft: 132};
+      return computerFire(gamerState, fieldIndents);
+     
+  
+    case 'showState':
+       console.log(gamerState);   
+       return gamerState;   
+      
     default:
       return gamerState;
   }
