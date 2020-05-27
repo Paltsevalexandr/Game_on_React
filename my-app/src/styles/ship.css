@@ -1,6 +1,7 @@
 .ship {
+  display: inline-block;
   height: 35px;
-  margin: 0 30px 31px 0;
+  margin: 0 30px 22px 0;
 }
 .ship::after {
   content: '';

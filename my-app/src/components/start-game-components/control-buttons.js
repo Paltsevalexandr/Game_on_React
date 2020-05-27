@@ -1,8 +1,7 @@
 import React from 'react';
 
 const ControlButtons = ({
-  startPlay, 
-  showCheckingShips,
+  setGameMode, 
   randomShipsPlacement,
   createAllShips }) => {
 
@@ -10,14 +9,17 @@ const ControlButtons = ({
     <>
       <button className = 'placeShipBtn'
         onClick = {() => {
-          startPlay();
           randomShipsPlacement();
+          setGameMode('randomPlaycement');
           createAllShips()}}>
           1. Случайным образом
       </button>
 
       <button className = 'placeShipBtn'
-        onClick = {() => showCheckingShips()}>
+        onClick = {() => {
+          createAllShips();
+          setGameMode('playerPlaycement');
+        }}>
           2. Самостоятельно
       </button>
     </>

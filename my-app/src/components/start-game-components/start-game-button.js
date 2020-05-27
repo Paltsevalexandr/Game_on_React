@@ -1,12 +1,9 @@
 import React from 'react';
 
-const StartButton = ({startPlay, createAllShips}) => {
+const StartButton = ({setGameMode}) => {
   return (
     <button 
-      onClick = {() => {
-        startPlay();
-        createAllShips();
-      }}
+      onClick = {() => setGameMode('start')}
       className = 'start-game-btn'>
         Start Game
     </button>

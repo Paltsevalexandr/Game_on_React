@@ -5,12 +5,17 @@ import Labels from '../labels/labels';
 import * as actions from '../../actions';
 
 class ComputerFieldContainer extends React.Component {
-  
-  componentDidUpdate({gamerLabels: prevGamerLabels}) {
-    const {gamerLabels, selectGamer, getComputerFire, gamer} = this.props;
 
-    const prevDots = this.dotsCount(prevGamerLabels);
-    const dots = this.dotsCount(gamerLabels);
+  componentDidUpdate({gamerLabels: prevGamerLabels}) {
+
+    const {
+      gamerLabels, 
+      selectGamer, 
+      getComputerFire, 
+      gamer} = this.props;
+
+    const prevDots = this.dotsCounter(prevGamerLabels);
+    const dots = this.dotsCounter(gamerLabels);
     
     if(prevDots < dots) {
       selectGamer(1);
@@ -20,7 +25,7 @@ class ComputerFieldContainer extends React.Component {
     }
   }
 
-  dotsCount = labels => {
+  dotsCounter = labels => {
     let count = 0;
 
     if(labels.length > 0) {  
@@ -37,7 +42,6 @@ class ComputerFieldContainer extends React.Component {
     const {
         battleShips, 
         labels,
-        shotCounter,
         makeHatching,
         getGamerFire,
         selectGamer } = this.props;
@@ -47,7 +51,9 @@ class ComputerFieldContainer extends React.Component {
         battleShips  = {battleShips}
         makeHatching = {makeHatching}
         selectGamer  = {selectGamer}
-        getGamerFire = {getGamerFire}>
+        getGamerFire = {getGamerFire}
+        dotsCounter = {this.dotsCounter}
+        labels = {labels}>
 
         <Labels labels = {labels} />
       </ComputerField>
@@ -57,17 +63,15 @@ class ComputerFieldContainer extends React.Component {
 
 const mapStateToProps = ({
   computerState: {battleShips, labels},
-  gameplayState: {shotCounter, gamer},
-  gamerState: {labels: gamerLabels}
-}) => {
+  gameplayState: {gamer},
+  gamerState: {labels: gamerLabels} }) => {
 
-  return {
-    battleShips,
-    labels,
-    shotCounter,
-    gamer,
-    gamerLabels
-  }
+    return {
+      battleShips,
+      labels,
+      gamer,
+      gamerLabels
+    }
 }
 
 export default connect(mapStateToProps, actions)(ComputerFieldContainer);

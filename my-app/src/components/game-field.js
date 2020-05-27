@@ -1,57 +1,54 @@
 import React from 'react';
-import * as actions from '../actions'
-import ComputerFieldContainer from './computer-components/computer-field-container';
-import GamerField from './gamer-components/gamer-field';
 import Menu from './start-game-components/menu';
-import MenuContainer from './start-game-components/menu-container';
+import FieldsContainer from './start-game-components/fields-container';
+import StartButton from './start-game-components/start-game-button';
+import ControlButtons from './start-game-components/control-buttons';
 import {connect} from 'react-redux';
+import {createAllShips, randomShipsPlacement} from '../actions'
 
 class GameField extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {gameStart: false, showCheckingShips: false};
+    this.state = {gameMode: null};
   }
 
-  startPlay = () => {
-    this.setState({gameStart: true});
-  }
-
-  showCheckingShips = () => {
-    this.setState({showCheckingShips: true});
+  setGameMode = mode => {
+    this.setState({gameMode: mode});
   }
   
   render() {
-    const {checkingShips, randomShipsPlacement, createAllShips} = this.props;
+    const {
+      battleShips, 
+      createAllShips,
+      randomShipsPlacement } = this.props;
 
     return (
       <div className = 'gameField'>
-          <GamerField gameStart = {this.state.gameStart} />  
-          {
-            this.state.gameStart 
-            ? <ComputerFieldContainer/>
-            : <MenuContainer 
-                checkingShips     = {checkingShips}
-                startPlay         = {this.startPlay}
-                showCheckingShips = {this.state.showCheckingShips}
-                createAllShips    = {createAllShips}>
-
-                <Menu
-                  gameStart            = {this.state.gameStart} 
-                  startPlay            = {this.startPlay} 
-                  showCheckingShips    = {this.showCheckingShips} 
-                  randomShipsPlacement = {randomShipsPlacement}
-                  createAllShips    = {createAllShips}/>
-              </MenuContainer>
-          }
+        {
+          this.state.gameMode
+          ? <FieldsContainer gameMode = {this.state.gameMode} />
+          : <Menu>
+              <ControlButtons 
+                setGameMode = {this.setGameMode}
+                createAllShips = {createAllShips}
+                randomShipsPlacement = {randomShipsPlacement} />
+            </Menu>
+        }
+        {
+          battleShips.length === 10 && this.state.gameMode !== 'start'
+          ? <StartButton setGameMode = {this.setGameMode} />
+          : null
+        }
       </div>
     )
   }
 }
 
-const mapStateToProps = ({gamerState: {checkingShips}}) => {
-  return {
-    checkingShips
-  }
+const mapStateToProps = ({gamerState: {battleShips}}) => {
+  return {battleShips}
 }
 
-export default connect(mapStateToProps, actions)(GameField);
+export default connect(
+  mapStateToProps, 
+  { createAllShips,
+    randomShipsPlacement })(GameField);

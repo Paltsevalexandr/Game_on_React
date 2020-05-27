@@ -1,10 +1,9 @@
 import React from 'react';
 
-const BattleField = ({createBattleShip, children, selectGamer, getComputerFire}) => {
+const BattleField = ({createBattleShip, children}) => {
 
   return(
     <div className   = "battleField" 
-        onClick = {e => getComputerFire(e.pageY, e.pageX)}
         onDrop      = {e => createBattleShip(e.pageX, e.pageY)}
         onDragOver  = {e => e.preventDefault()}>
           {children}

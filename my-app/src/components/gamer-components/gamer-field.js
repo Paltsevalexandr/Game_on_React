@@ -8,7 +8,7 @@ import StaticBattleShips from './static-battle-ships';
 import Labels from '../labels/labels';
 
 const GamerField = ({ 
-  gameStart,
+  gameMode,
   battleShips, 
   labels,
   getCurrentShip,
@@ -23,13 +23,14 @@ show }) => {
     <BattleField createBattleShip = {createBattleShip}
     getComputerFire = {getComputerFire} /*selectGamer = {selectGamer}*/>
       
-      {gameStart
-      ? <StaticBattleShips battleShips = {battleShips}/>
-      : <BattleShips
-        battleShips          = {battleShips}
-        deleteShipFromMatrix = {deleteShipFromMatrix}
-        getCurrentShip       = {getCurrentShip}
-        rotateShip           = {rotateShip}/>
+      {
+        gameMode === 'start'
+        ? <StaticBattleShips battleShips = {battleShips}/>
+        : <BattleShips
+          battleShips          = {battleShips}
+          deleteShipFromMatrix = {deleteShipFromMatrix}
+          getCurrentShip       = {getCurrentShip}
+          rotateShip           = {rotateShip}/>
       }
       <Labels labels = {labels} />
           <button onClick = {() => show()}>show</button>
