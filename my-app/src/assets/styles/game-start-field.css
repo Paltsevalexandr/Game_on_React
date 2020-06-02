@@ -34,3 +34,12 @@
 .instructions p {
   line-height: 33px;
 }
+.priority {
+  height: 45px;
+  font-size: 25px;
+  color: red;
+}
+.priority p {
+  margin-left: 25%;
+  width: 50%;
+}

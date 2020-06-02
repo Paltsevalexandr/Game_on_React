@@ -11,7 +11,6 @@ const addShotToMatrix = (matrix, {type}, {rowNum, colNum}) => {
           
           item = {
             type: setType(type), 
-            isHurt: true
           };
         }
         return item;

@@ -10,18 +10,18 @@ const gamerFire = ({matrix, labels, ...args}, action, fieldIndents) => {
   const shot = createShot(shotCoordinates, fieldIndents);
   const target = findTarget(matrix, shot);
 
-  if(target.isHurt) {
-    return {matrix, labels, ...args}
+  if(target.type === null || target.type === 'deck') {
+    return {
+      ...args, 
+      labels: [
+        ...labels,
+        createLabel(target, shot, fieldIndents)
+      ],
+      matrix: addShotToMatrix(matrix, target, shot)
+    };
   }
 
-  return {
-    ...args, 
-    labels: [
-      ...labels,
-      createLabel(target, shot, fieldIndents)
-    ],
-    matrix: addShotToMatrix(matrix, target, shot)
-  };
+  return {matrix, labels, ...args}
 }
 
 export default gamerFire;

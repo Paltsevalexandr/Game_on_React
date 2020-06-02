@@ -10,14 +10,13 @@ import {
 import {
   createAllShips,
   createLabel,
-  makeHatching,
+  addHatching,
   getGamerFire,
   show
 } from './computer-actions';
 
 import {
   selectGamer,
-  incShotCounter
 } from './gameplay-actions';
 
 export {
@@ -28,10 +27,9 @@ export {
   randomShipsPlacement,
   createAllShips,
   createLabel,
-  makeHatching,
+  addHatching,
   selectGamer,
   getComputerFire,
   getGamerFire,
   show,
-  incShotCounter
 }

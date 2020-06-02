@@ -4,7 +4,7 @@
 }
 @font-face {
   font-family: 'EuroScript';
-  src: url(fonts/EuroScript.ttf) format('truetype');
+  src: url(assets/fonts/EuroScript.ttf) format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -34,7 +34,7 @@ button:hover {
   height: 600px;
   margin: 0;
   padding: 60px 0 0 105px;
-  background: url(images/grid.png);
+  background: url(assets/images/grid.png);
 }
 .fieldsContainer {
   display: flex;
@@ -42,9 +42,8 @@ button:hover {
 .battleField {
   width: 340px;
   height: 340px;
-  margin-top: 45px;
   padding: 28px 0 0 28px;
-  background: url(images/bg_play_field.png) no-repeat;
+  background: url(assets/images/bg_play_field.png) no-repeat;
 }
 .battleField:last-child {
   margin-left: 94px;

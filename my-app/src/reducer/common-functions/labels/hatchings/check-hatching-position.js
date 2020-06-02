@@ -7,16 +7,16 @@ const checkHatchingPosition = (state, hatching) => {
   const rowNum = (hatching.top - 132) / 33;
   const colNum = (hatching.left - 594) / 33;
 
-  switch(typeof matrix[rowNum][colNum]) {
+  switch(matrix[rowNum][colNum].type) {
 
-    case 'number':
-    case 'object':
+    case 'deck':
+    case null:
       return {
         ...state,
         matrix: addLabelToMatrix(matrix, hatching),
         labels: [...labels, hatching]
       }
-
+    
     default:
       return state;
   }

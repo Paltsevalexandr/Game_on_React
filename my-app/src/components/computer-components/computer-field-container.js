@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import ComputerField from './computer-field';
 import Labels from '../labels/labels';
-import * as actions from '../../actions';
+import {addHatching, getGamerFire, selectGamer, getComputerFire} from '../../store/actions';
 
 class ComputerFieldContainer extends React.Component {
 
@@ -16,12 +16,12 @@ class ComputerFieldContainer extends React.Component {
 
     const prevDots = this.dotsCounter(prevGamerLabels);
     const dots = this.dotsCounter(gamerLabels);
-    
+
     if(prevDots < dots) {
       selectGamer(1);
 
     }else if(prevDots === dots && gamer === 2){
-      setTimeout(getComputerFire, 600);
+      setTimeout(getComputerFire, 200);
     }
   }
 
@@ -42,18 +42,20 @@ class ComputerFieldContainer extends React.Component {
     const {
         battleShips, 
         labels,
-        makeHatching,
+        addHatching,
         getGamerFire,
-        selectGamer } = this.props;
-
+        selectGamer,
+        gamer } = this.props;
+  
     return (
       <ComputerField 
         battleShips  = {battleShips}
-        makeHatching = {makeHatching}
+        addHatching  = {addHatching}
         selectGamer  = {selectGamer}
         getGamerFire = {getGamerFire}
-        dotsCounter = {this.dotsCounter}
-        labels = {labels}>
+        dotsCounter  = {this.dotsCounter}
+        labels = {labels}
+        gamer  = {gamer}>
 
         <Labels labels = {labels} />
       </ComputerField>
@@ -74,4 +76,7 @@ const mapStateToProps = ({
     }
 }
 
-export default connect(mapStateToProps, actions)(ComputerFieldContainer);
+export default connect(
+  mapStateToProps, 
+  {addHatching, getGamerFire, selectGamer, getComputerFire}
+)(ComputerFieldContainer);

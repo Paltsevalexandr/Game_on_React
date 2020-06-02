@@ -5,13 +5,6 @@ const selectGamer = gamer => {
   }
 }
 
-const incShotCounter = () => {
-  return {
-    type: 'INC_SHOT_COUNTER'
-  }
-}
-
 export {
   selectGamer,
-  incShotCounter
 };

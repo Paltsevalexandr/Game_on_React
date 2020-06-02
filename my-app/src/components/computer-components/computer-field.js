@@ -4,21 +4,20 @@ class ComputerField extends React.Component {
   componentDidUpdate({labels: prevLabels}) {
     
     const {labels, dotsCounter,selectGamer} = this.props;
-
     const prevDots = dotsCounter(prevLabels);
     const dots = dotsCounter(labels);
-    
+
     if(prevDots < dots) {
       selectGamer(2);
     }
   }
   render() {
     const {
+      gamer,
       battleShips,
-      makeHatching, 
+      addHatching, 
       getGamerFire,
       children } = this.props;
-
     let ships;
 
     if(battleShips.length > 0) {
@@ -35,8 +34,15 @@ class ComputerField extends React.Component {
 
     return(
       <div className   = "battleField"
-        onClick = {e => getGamerFire(e.pageX, e.pageY)}
-        onContextMenu = {e => {makeHatching(e.pageX, e.pageY); e.preventDefault()}}>
+        onClick = {e => {
+          if(gamer === 1) {
+            getGamerFire(e.pageX, e.pageY);
+          }
+        }}
+        onContextMenu = {e => {
+          addHatching(e.pageX, e.pageY); 
+          e.preventDefault();
+        }}>
         {ships}
         {children}
       </div>

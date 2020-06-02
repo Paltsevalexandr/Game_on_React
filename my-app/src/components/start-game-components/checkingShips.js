@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import * as actions from '../../actions';
+import {getCurrentShip} from '../../store/actions';
 
 const CheckingShips = ({checkingShips, getCurrentShip}) => {
 
@@ -24,7 +24,7 @@ const mapStateToProps = ({gamerState: {checkingShips}}) => {
   }
 }
 
-export default connect(mapStateToProps, actions)(CheckingShips);
+export default connect(mapStateToProps, {getCurrentShip})(CheckingShips);
 
 
 /*let shipBorderColor = '';

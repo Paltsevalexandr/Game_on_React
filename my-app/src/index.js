@@ -1,16 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
-import {createStore} from 'redux';
+import store from './store';
+
 import GameField from './components/game-field';
 
-import reducer from './reducer/reducer';
 import './index.css';
-import './styles/ship.css';
-import './styles/labels.css';
-import './styles/game-start-field.css';
-
-const store = createStore(reducer);
+import './assets/styles/ship.css';
+import './assets/styles/labels.css';
+import './assets/styles/game-start-field.css';
 
 const App = () => {
   return (

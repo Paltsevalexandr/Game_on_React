@@ -1,10 +1,12 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import {createAllShips, randomShipsPlacement} from '../store/actions'
+
 import Menu from './start-game-components/menu';
 import FieldsContainer from './start-game-components/fields-container';
 import StartButton from './start-game-components/start-game-button';
 import ControlButtons from './start-game-components/control-buttons';
-import {connect} from 'react-redux';
-import {createAllShips, randomShipsPlacement} from '../actions'
+import Priority from './start-game-components/priority';
 
 class GameField extends React.Component {
   constructor(props) {
@@ -24,6 +26,11 @@ class GameField extends React.Component {
 
     return (
       <div className = 'gameField'>
+        { 
+          this.state.gameMode === 'start' 
+        ? <Priority/> 
+        : <div className = 'priority'></div>
+        }
         {
           this.state.gameMode
           ? <FieldsContainer gameMode = {this.state.gameMode} />

@@ -1,19 +1,24 @@
-import createShot from './create-shot';
-import findTarget from '../find-target';
+import chooseFireMode from './choose-fire-mode';
 import createLabel from '../labels/create-label';
 import addShotToMatrix from '../add-to-matrix/add-shot-to-matrix';
 
-const computerFire = ({matrix, labels, ...args}, fieldIndents) => {
-
-  const shot = createShot();
-  const target = findTarget(matrix, shot);
-
-  if(target.isHurt) {
-    return computerFire({matrix, labels, ...args}, fieldIndents)
-  }
-
+const computerFire = (
+  {
+    matrix, 
+    labels, 
+    defeatedShips: {currentTarget, destroyedShips},
+    ...args
+  },
+  fieldIndents) => {
+  
+  let {shot, target, decks, borders} = chooseFireMode(matrix, currentTarget);
+  
   return {
-    ...args, 
+    ...args,
+    defeatedShips: {
+      currentTarget: {...currentTarget, decks, borders}, 
+      destroyedShips
+    },
     labels: [
       ...labels,
       createLabel(target, shot, fieldIndents)

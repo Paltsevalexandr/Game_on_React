@@ -1,12 +1,10 @@
 const chooseType = type => {
   
-  switch(type) {
-    case 'deck':
-      return 'cross';
-    
-    default:
-      return 'dot';
+  if(type === 'deck') {
+    return 'cross';
   }
+  
+  return 'dot';
 }
 
 export default chooseType;

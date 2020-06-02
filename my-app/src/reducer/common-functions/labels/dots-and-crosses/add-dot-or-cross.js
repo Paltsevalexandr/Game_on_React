@@ -1,16 +1,16 @@
 const addDotOrCross = (state, newLabel) => {
   const {matrix, labels} = state;
-
+console.log('cool')
   const rowNum = (newLabel.top - 132) / 33;
   const colNum = (newLabel.left - 594) / 33;
-
-  switch(typeof matrix[rowNum][colNum]) {
-
-    case 'number':
+  
+  switch(matrix[rowNum][colNum].type) {
+  
+    case null:
       newLabel.type = 'dot';
       break;
 
-    case 'object':
+    case 'deck':
       newLabel.type = 'cross';
       break;
 

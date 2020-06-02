@@ -1,6 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import * as actions from '../../actions';
+import {
+  getCurrentShip,
+  createBattleShip,
+  deleteShipFromMatrix,
+  rotateShip,
+  getComputerFire, show } from '../../store/actions';
 
 import BattleField from './battle-field';
 import BattleShips from './battle-ships';
@@ -45,4 +50,11 @@ const mapStateToProps = ({gamerState: {battleShips, labels}}) => {
   }
 }
 
-export default connect(mapStateToProps, actions)(GamerField);
+export default connect(mapStateToProps, {
+    getCurrentShip,
+    createBattleShip,
+    deleteShipFromMatrix,
+    rotateShip,
+    getComputerFire,
+    show
+  })(GamerField);

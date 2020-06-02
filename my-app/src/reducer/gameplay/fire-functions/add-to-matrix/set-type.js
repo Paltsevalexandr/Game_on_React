@@ -1,7 +1,7 @@
 const setType = (type) => {
 
-  if(type === 'deck') return 'deck';
-  
+  if(type === 'deck') return 'cross';
+
   return 'dot';
 }
 
