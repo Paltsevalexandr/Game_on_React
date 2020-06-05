@@ -6,7 +6,7 @@ class ComputerField extends React.Component {
     const {labels, dotsCounter,selectGamer} = this.props;
     const prevDots = dotsCounter(prevLabels);
     const dots = dotsCounter(labels);
-
+    
     if(prevDots < dots) {
       selectGamer(2);
     }

@@ -21,7 +21,7 @@ class ComputerFieldContainer extends React.Component {
       selectGamer(1);
 
     }else if(prevDots === dots && gamer === 2){
-      setTimeout(getComputerFire, 200);
+      setTimeout(getComputerFire, 350);
     }
   }
 

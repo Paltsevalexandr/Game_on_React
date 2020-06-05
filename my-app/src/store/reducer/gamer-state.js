@@ -1,12 +1,12 @@
 import {
   addBattleShipInFieldAndMatrix, 
   createCurrentShip
-} from '../../reducer/gamer-functions/create-ship-functions';
+} from '../../helpers/gamer-functions/create-ship-functions';
 
-import {deleteShipFromMatrix} from '../../reducer/common-functions/matrix-functions';
-import updateBattleShipsAndMatrix from '../../reducer/gamer-functions/rotate-ship-func/update-battleShips-and-matrix';
-import createAllShips from '../../reducer/common-functions/random-place-of-ships/create-all-ships';
-import computerFire from '../../reducer/gameplay/fire-functions/computer-fire';
+import {deleteShipFromMatrix} from '../../helpers/common-functions/matrix-functions';
+import updateBattleShipsAndMatrix from '../../helpers/gamer-functions/rotate-ship-func/update-battleShips-and-matrix';
+import createAllShips from '../../helpers/common-functions/random-place-of-ships/create-all-ships';
+import computerFire from '../../helpers/gameplay/fire-functions/computer-fire';
 
 const initialState = {
   checkingShips: ['fourdeck1', 'threedeck1', 
@@ -21,7 +21,7 @@ const initialState = {
       .fill(Array(10)
         .fill({type: null})),
   defeatedShips: {
-    currentTarget: {name: 'currentTarget', decks: [], borders: []},
+    currentTarget: {name: undefined, decks: [], borders: []},
     destroyedShips: []
   }
 }

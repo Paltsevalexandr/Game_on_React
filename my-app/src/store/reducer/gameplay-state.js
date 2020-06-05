@@ -1,4 +1,4 @@
-import chooseNextGamer from '../../reducer/gameplay/choose-next-gamer';
+import chooseNextGamer from '../../helpers/gameplay/choose-next-gamer';
 
 const initialState = {
   gamer: 1,
