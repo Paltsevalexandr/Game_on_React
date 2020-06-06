@@ -9,7 +9,7 @@ const continueShooting = (matrix, defeatedShips) => {
    if(isVertical === undefined) {
       isVertical = determineShipIsVertical(matrix, defeatedShips);
    }
-   console.log('continue', isVertical)
+   
    if(isVertical) {
       
       return shotAtVerticalShip(matrix, defeatedShips, isVertical);

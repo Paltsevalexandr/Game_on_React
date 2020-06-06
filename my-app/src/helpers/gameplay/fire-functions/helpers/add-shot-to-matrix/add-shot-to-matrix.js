@@ -9,7 +9,7 @@ const addShotToMatrix = (matrix, {type, rowNum, colNum}) => {
 
         if(idx === colNum) {
           
-          item = {type: setType(type), wounded: true};
+          item = {type: setType(type), marked: true};
         }
         return item;
       });

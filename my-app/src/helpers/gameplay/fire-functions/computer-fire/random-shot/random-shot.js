@@ -29,6 +29,7 @@ const randomShot = (matrix, {currentTarget, destroyedShips}) => {
       currentTarget: {
         decks, 
         borders,
+        isVertical: undefined
       },
       destroyedShips
     }

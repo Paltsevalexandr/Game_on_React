@@ -4,9 +4,8 @@ const randomShipIsVertical = () => {
   if(random >= 5) {
     return true;
     
-  }else if(random < 5) {
-    return false;
   }
+  return false;
 }
 
 export default randomShipIsVertical;

@@ -14,7 +14,7 @@ const addLastShot = (matrix, {decks, borders}, shot) => {
       decks.push(target);
    }
    
-   return {target, decks, borders};
+   return {target, currentTarget: {decks, borders}};
 }
 
 export default addLastShot;

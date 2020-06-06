@@ -1,5 +1,4 @@
 import {checkNewShot, checkShotTarget, addPrevShot, addLastShot, maxShipLength} from '../helpers';
-import addCurrentTarget from '../../add-current-target';
 import shotAtVerticalShip from './shot-at-vertical-ship';
 
 const shotAtHorizontalShip = (matrix, {currentTarget, destroyedShips}, isVertical) => { 
@@ -26,11 +25,14 @@ const shotAtHorizontalShip = (matrix, {currentTarget, destroyedShips}, isVertica
             updatedCurrentTarget = addLastShot(matrix, currentTarget, shot);
          }
       }
-      if(!updatedCurrentTarget) {
-         return shotAtVerticalShip(matrix, {currentTarget, destroyedShips}, isVertical);
-      }
    }
-   return addCurrentTarget(updatedCurrentTarget, destroyedShips, isVertical);
+   if(!updatedCurrentTarget) {
+      return shotAtVerticalShip(matrix, {currentTarget, destroyedShips}, isVertical);
+      
+   }else if(updatedCurrentTarget) {
+      updatedCurrentTarget.currentTarget.isVertical = isVertical;
+   }
+   return updatedCurrentTarget;
 }
 
 export default shotAtHorizontalShip;
