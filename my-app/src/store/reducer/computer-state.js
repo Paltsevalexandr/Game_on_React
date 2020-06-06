@@ -1,6 +1,6 @@
 import createAllShips from '../../helpers/common-functions/random-place-of-ships/create-all-ships';
 import addLabel from '../../helpers/common-functions/labels/add-label';
-import addHatching from '../../helpers/common-functions/labels/hatchings/add-hatching';
+import addHatching from '../../helpers/gameplay/gamer-hatchings/add-hatching';
 import gamerFire from '../../helpers/gameplay/fire-functions/gamer-fire/gamer-fire';
 
 const initialState = {
