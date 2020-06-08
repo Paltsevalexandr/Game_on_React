@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import ComputerField from './computer-field';
 import Labels from '../labels/labels';
-import {addHatching, getGamerFire, selectGamer, getComputerFire} from '../../store/actions';
+import {createOrDeleteHatching, getGamerFire, selectGamer, getComputerFire} from '../../store/actions';
 
 class ComputerFieldContainer extends React.Component {
 
@@ -42,15 +42,15 @@ class ComputerFieldContainer extends React.Component {
     const {
         battleShips, 
         labels,
-        addHatching,
+        createOrDeleteHatching,
         getGamerFire,
         selectGamer,
         gamer } = this.props;
   
     return (
       <ComputerField 
+        createOrDeleteHatching  = {createOrDeleteHatching}
         battleShips  = {battleShips}
-        addHatching  = {addHatching}
         selectGamer  = {selectGamer}
         getGamerFire = {getGamerFire}
         dotsCounter  = {this.dotsCounter}
@@ -78,5 +78,5 @@ const mapStateToProps = ({
 
 export default connect(
   mapStateToProps, 
-  {addHatching, getGamerFire, selectGamer, getComputerFire}
+  {createOrDeleteHatching, getGamerFire, selectGamer, getComputerFire}
 )(ComputerFieldContainer);

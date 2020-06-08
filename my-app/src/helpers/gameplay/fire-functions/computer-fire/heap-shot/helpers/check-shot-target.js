@@ -1,9 +1,6 @@
 const checkShotTarget = (matrix, {colNum, rowNum}) => {
    
-   return (
-      matrix[rowNum][colNum].type === 'deck' ||
-      matrix[rowNum][colNum].type === null
-   );
+   return !matrix[rowNum][colNum].marked;
 }
 
 export default checkShotTarget;

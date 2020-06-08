@@ -1,6 +1,6 @@
-import addLabelToMatrix from './add-label-to-matrix';
+import addHatchingToMatrix from './add-hatching-to-matrix';
 
-const setHatching = (state, hatching) => {
+const addHatching = (state, hatching) => {
 
   const {matrix, labels} = state;
   
@@ -13,7 +13,7 @@ const setHatching = (state, hatching) => {
     case null:
       return {
         ...state,
-        matrix: addLabelToMatrix(matrix, hatching),
+        matrix: addHatchingToMatrix(matrix, rowNum, colNum),
         labels: [...labels, hatching]
       }
     
@@ -22,4 +22,4 @@ const setHatching = (state, hatching) => {
   }
 }
 
-export default setHatching;
+export default addHatching;

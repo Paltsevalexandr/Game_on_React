@@ -26,7 +26,7 @@ const shotAtHorizontalShip = (matrix, {currentTarget, destroyedShips}, isVertica
          }
       }
    }
-   if(!updatedCurrentTarget) {
+   if(!updatedCurrentTarget && isVertical) {
       return shotAtVerticalShip(matrix, {currentTarget, destroyedShips}, isVertical);
       
    }else if(updatedCurrentTarget) {

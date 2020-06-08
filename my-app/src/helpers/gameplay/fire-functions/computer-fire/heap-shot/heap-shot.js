@@ -1,16 +1,12 @@
 import continueShooting from './continue-shooting/continue-shooting';
-import randomShot from '../random-shot/random-shot';
-import {addSunkenShip} from './helpers';
+import finishShipAndRandomShot from './finish-ship-and-random-shot';
 
-const heapShot = (matrix, defeatedShips) => {
+const heapShot = (matrix, defeatedShips, labels) => {
    
    let shotResult = continueShooting(matrix, defeatedShips);
 
    if(!shotResult) {
-      let destroyedShips = addSunkenShip(defeatedShips);
-      shotResult = randomShot(matrix, defeatedShips);
-      shotResult.defeatedShips.destroyedShips = destroyedShips;
-      return shotResult;
+      return finishShipAndRandomShot(matrix, labels, defeatedShips);
    }
 
    const {target, currentTarget} = shotResult;

@@ -10,7 +10,7 @@ import {
 import {
   createAllShips,
   createLabel,
-  addHatching,
+  createOrDeleteHatching,
   getGamerFire,
   show
 } from './computer-actions';
@@ -27,7 +27,7 @@ export {
   randomShipsPlacement,
   createAllShips,
   createLabel,
-  addHatching,
+  createOrDeleteHatching,
   selectGamer,
   getComputerFire,
   getGamerFire,

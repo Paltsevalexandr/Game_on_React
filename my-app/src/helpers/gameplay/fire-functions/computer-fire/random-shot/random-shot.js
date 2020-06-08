@@ -9,7 +9,7 @@ const randomShot = (matrix, {currentTarget, destroyedShips}) => {
     type: findTarget(matrix, shot),
     ...shot
   };
-  console.log('rand')
+  
   if(target.type !== null 
   && target.type !== 'deck') {
     return randomShot(matrix, {currentTarget, destroyedShips});

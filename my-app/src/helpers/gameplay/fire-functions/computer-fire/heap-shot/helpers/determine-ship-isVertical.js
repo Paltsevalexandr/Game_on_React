@@ -1,14 +1,10 @@
 import {
    shipIsVertical,
-   shipIsHorizontal,
-   undefinedOrientation } from './ship-orientation-conditions';
+   shipIsHorizontal } from './ship-orientation-conditions';
 
 const determineShipIsVertical = (matrix, {currentTarget}) => {
    
-   if(undefinedOrientation(currentTarget)) {
-      return undefined;
-
-   } else if(shipIsVertical(matrix, currentTarget)) {
+   if(shipIsVertical(matrix, currentTarget)) {
 
       return true;
 

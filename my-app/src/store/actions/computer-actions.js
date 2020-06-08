@@ -12,9 +12,9 @@ const createLabel = (pageX, pageY) => {
   }
 }
 
-const addHatching = (pageX, pageY) => {
+const createOrDeleteHatching = (pageX, pageY) => {
   return {
-    type: 'ADD_HATCHING',
+    type: 'CREATE_OR_DELETE_HATCHING',
     left: pageX,
     top: pageY
   }
@@ -37,7 +37,7 @@ const show = () => {
 export {
   createAllShips,
   createLabel,
-  addHatching,
+  createOrDeleteHatching,
   getGamerFire,
   show
 }

@@ -11,8 +11,24 @@ const computerFire = (
   },
   fieldIndents) => {
   
-  let {target, defeatedShips: updatedDefeatedShips} = chooseFireMode(matrix, defeatedShips);
-  
+  const result = chooseFireMode(matrix, defeatedShips, labels);
+
+  const {target, defeatedShips: updatedDefeatedShips} = result;
+
+  if(result.updatedMatrix) {
+    const {updatedMatrix, updatedLabels} = result;
+    
+    return {
+      ...args,
+      defeatedShips: updatedDefeatedShips,
+      labels: [
+        ...updatedLabels,
+        createLabel(target, fieldIndents)
+      ],
+      matrix: addShotToMatrix(updatedMatrix, target)
+    };
+  }
+
   return {
     ...args,
     defeatedShips: updatedDefeatedShips,
@@ -22,6 +38,7 @@ const computerFire = (
     ],
     matrix: addShotToMatrix(matrix, target)
   };
+
 }
 
 export default computerFire;

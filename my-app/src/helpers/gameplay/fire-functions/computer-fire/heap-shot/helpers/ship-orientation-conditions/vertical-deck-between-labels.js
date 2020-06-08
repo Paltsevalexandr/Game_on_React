@@ -1,6 +1,6 @@
 const verticalDeckBetweenLabels = (matrix, decks, borders) => {
    const {rowNum: deckRow, colNum: deckCol} = decks[0];
-
+   console.log(borders.filter(({rowNum}) => rowNum === deckRow).length === 2, borders.filter(({rowNum}) => rowNum === deckRow))
    if(borders.filter(({rowNum}) => rowNum === deckRow).length === 2) {
       return true;
       

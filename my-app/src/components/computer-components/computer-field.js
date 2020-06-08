@@ -15,7 +15,7 @@ class ComputerField extends React.Component {
     const {
       gamer,
       battleShips,
-      addHatching, 
+      createOrDeleteHatching, 
       getGamerFire,
       children } = this.props;
     let ships;
@@ -40,7 +40,7 @@ class ComputerField extends React.Component {
           }
         }}
         onContextMenu = {e => {
-          addHatching(e.pageX, e.pageY); 
+          createOrDeleteHatching(e.pageX, e.pageY); 
           e.preventDefault();
         }}>
         {ships}
