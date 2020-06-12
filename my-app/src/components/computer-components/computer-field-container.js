@@ -1,8 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {createOrDeleteHatching, getGamerFire, selectGamer, getComputerFire} from '../../store/actions';
+
 import ComputerField from './computer-field';
 import Labels from '../labels/labels';
-import {createOrDeleteHatching, getGamerFire, selectGamer, getComputerFire} from '../../store/actions';
 
 class ComputerFieldContainer extends React.Component {
 
@@ -21,7 +22,7 @@ class ComputerFieldContainer extends React.Component {
       selectGamer(1);
 
     }else if(prevDots === dots && gamer === 2){
-      setTimeout(getComputerFire, 350);
+      setTimeout(getComputerFire, 600);
     }
   }
 
@@ -40,20 +41,20 @@ class ComputerFieldContainer extends React.Component {
 
   render() {
     const {
-        battleShips, 
         labels,
         createOrDeleteHatching,
         getGamerFire,
         selectGamer,
-        gamer } = this.props;
+        gamer,
+        gameMode } = this.props;
   
     return (
       <ComputerField 
         createOrDeleteHatching  = {createOrDeleteHatching}
-        battleShips  = {battleShips}
         selectGamer  = {selectGamer}
         getGamerFire = {getGamerFire}
         dotsCounter  = {this.dotsCounter}
+        gameMode     = {gameMode}
         labels = {labels}
         gamer  = {gamer}>
 
@@ -64,12 +65,11 @@ class ComputerFieldContainer extends React.Component {
 }
 
 const mapStateToProps = ({
-  computerState: {battleShips, labels},
+  computerState: {labels},
   gameplayState: {gamer},
   gamerState: {labels: gamerLabels} }) => {
 
     return {
-      battleShips,
       labels,
       gamer,
       gamerLabels

@@ -10,6 +10,7 @@ const createAllHatchings = (matrix, labels, {currentTarget}) => {
       const {colNum, rowNum} = hatching;
 
       if(matrix[rowNum] && matrix[rowNum][colNum]) {
+         
          if( !matrix[rowNum][colNum].marked ) {
             matrix = addHatchingToMatrix(matrix, hatching);
             labels.push( createHatching(hatching) );

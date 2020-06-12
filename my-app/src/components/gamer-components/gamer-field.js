@@ -5,7 +5,7 @@ import {
   createBattleShip,
   deleteShipFromMatrix,
   rotateShip,
-  getComputerFire, show } from '../../store/actions';
+  getComputerFire } from '../../store/actions';
 
 import BattleField from './battle-field';
 import BattleShips from './battle-ships';
@@ -20,13 +20,11 @@ const GamerField = ({
   createBattleShip,
   deleteShipFromMatrix,
   rotateShip,
-  getComputerFire,
-  //selectGamer,
-show }) => {
+  getComputerFire }) => {
 
   return(
     <BattleField createBattleShip = {createBattleShip}
-    getComputerFire = {getComputerFire} /*selectGamer = {selectGamer}*/>
+    getComputerFire = {getComputerFire}>
       
       {
         gameMode === 'start'
@@ -38,7 +36,6 @@ show }) => {
           rotateShip           = {rotateShip}/>
       }
       <Labels labels = {labels} />
-          <button onClick = {() => show()}>show</button>
     </BattleField>
   )
 }
@@ -50,11 +47,13 @@ const mapStateToProps = ({gamerState: {battleShips, labels}}) => {
   }
 }
 
-export default connect(mapStateToProps, {
-    getCurrentShip,
-    createBattleShip,
-    deleteShipFromMatrix,
-    rotateShip,
-    getComputerFire,
-    show
-  })(GamerField);
+export default connect(
+  mapStateToProps, 
+    {
+      getCurrentShip,
+      createBattleShip,
+      deleteShipFromMatrix,
+      rotateShip,
+      getComputerFire
+    }
+  )(GamerField);

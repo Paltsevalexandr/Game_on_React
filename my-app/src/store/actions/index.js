@@ -12,7 +12,6 @@ import {
   createLabel,
   createOrDeleteHatching,
   getGamerFire,
-  show
 } from './computer-actions';
 
 import {
@@ -31,5 +30,4 @@ export {
   selectGamer,
   getComputerFire,
   getGamerFire,
-  show,
 }

@@ -4,30 +4,19 @@ const ComputerFieldContainer = lazy(() => import('../computer-components/compute
 const CheckingShipsField = lazy(() => import('./checkingShipsField'));
 
 const FieldsContainer = ({gameMode}) => {
-   
-   /*const renderField = () => {
-      
-      if(gameMode === 'randomPlaycement'
-      || gameMode === 'start') {
-         return <ComputerFieldContainer/>;
-
-      }else if(gameMode === 'playerPlaycement') {
-         return <CheckingShipsField />
-      }
-   }*/
 
    const getField = () => {
       if(gameMode === 'randomPlaycement'
       || gameMode === 'start') {
          return (
-            <Suspense fallback = {<div>loading</div>}>
-               <ComputerFieldContainer/>
+            <Suspense fallback = {<div>loading...</div>}>
+               <ComputerFieldContainer gameMode = {gameMode} />
             </Suspense>
          );
 
       }else if(gameMode === 'playerPlaycement') {
          return (
-            <Suspense fallback = {<div>loading</div>}>
+            <Suspense fallback = {<div>loading...</div>}>
                <CheckingShipsField />
             </Suspense>
          )

@@ -1,9 +1,13 @@
 import React from 'react';
 
-const Priority = () => {
+const Priority = ({gamer}) => {
+
    return (
       <div className = 'priority'>
-         <p>Ход компьютера</p>
+         <p>{`Ходит ${
+               gamer === 1 
+               ? 'игрок' 
+               : 'компьютер'}`}</p>
       </div>
    )
 }
