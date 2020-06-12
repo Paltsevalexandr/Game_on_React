@@ -38,6 +38,7 @@ class GameField extends React.Component {
                 ); }} />
             <Route path = '/game-field' 
               render = {() => this.renderGamePage()} />
+            <Redirect to = '/' />
           </Switch>        
       </div>
     )
