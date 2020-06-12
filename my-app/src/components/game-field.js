@@ -28,12 +28,10 @@ const GameField = () => {
     <div className = 'gameField'>
         <Switch>
           <Route path = '/' exact
-            render = {() => {
-              return (
-                <Suspense fallback = {<div>loading...</div>}>
-                  <StartMenu setGameMode = {setGameMode} />
-                </Suspense>
-              ); }} />
+            render = {() => <Suspense fallback = {<div>loading...</div>}>
+                              <StartMenu setGameMode = {setGameMode} />
+                            </Suspense> } />
+
           <Route path = '/game-field' 
             render = {() => renderGamePage()} />
           <Redirect to = '/' />

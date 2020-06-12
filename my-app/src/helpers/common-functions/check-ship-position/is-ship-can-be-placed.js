@@ -1,12 +1,22 @@
-import isShipTouchRest from './is-ship-touch-rest';
-
-const isShipCanBePlaced = (state, shipZone, newMatrix) => {  
+const isShipCanBePlaced = (
+  { matrix },
+  { shipZoneTop, 
+    shipZoneLeft,
+    shipZoneBottom, 
+    shipZoneRight },
+    newMatrix) => {
   
-  if(isShipTouchRest(state, shipZone, newMatrix)) {
-
-    return true;
+  if(newMatrix) matrix = newMatrix;
+  
+  for(let i = shipZoneTop; i <= shipZoneBottom; i++) {
+    for(let j = shipZoneLeft; j <= shipZoneRight; j++) {
+      
+      if(matrix[i][j].type === 'deck') {
+        return false;
+      }
+    }
   }
-  return false;
+  return true;
 }
 
 export default isShipCanBePlaced;

@@ -29,8 +29,7 @@ const BattleShips = ({
             onMouseDown   = {e => getCurrentShip(name, e.nativeEvent.offsetX, e.nativeEvent.offsetY)}
             onDragStart   = {() => deleteShipFromMatrix()}
             onDoubleClick = {e => rotateShip(e.pageX, e.pageY)}
-            draggable = 'true'>
-          </div>
+            draggable = 'true' />
         );
       })
     }</>
