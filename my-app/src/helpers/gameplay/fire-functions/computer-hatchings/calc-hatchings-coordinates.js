@@ -1,67 +1,19 @@
-const calcHatchingsCoordinates = ({decks, isVertical}) => {
-   let hatchings = [];
-   console.log('vert: ', isVertical)
-   if(decks.length === 1) {
-      const {rowNum, colNum} = decks[0];
+import {
+   hatchingsForVerticalShip,
+   hatchingsForHorizontalShip,
+   hatchingsForOneDeckShip
+} from './add-hatchings-coordinates';
 
-      hatchings.push(
-         {rowNum: rowNum - 1, colNum: colNum - 1, type: 'hatching'}, 
-         {rowNum: rowNum - 1, colNum, type: 'hatching'}, 
-         {rowNum: rowNum - 1, colNum: colNum + 1, type: 'hatching'},
-         {rowNum, colNum: colNum - 1, type: 'hatching'},
-         {rowNum, colNum: colNum + 1, type: 'hatching'},
-         {rowNum: rowNum + 1, colNum: colNum - 1, type: 'hatching'}, 
-         {rowNum: rowNum + 1, colNum, type: 'hatching'}, 
-         {rowNum: rowNum + 1, colNum: colNum + 1, type: 'hatching'}
-      );
+const calcHatchingsCoordinates = ({decks, isVertical}) => {
+   
+   if(decks.length === 1) {
+      return hatchingsForOneDeckShip(decks);
 
    }else if(isVertical) {
-      if(decks.length > 1) {
-         decks.forEach((deck, index) => {
-            let {rowNum, colNum} = deck;
-            if(index === 0) {
-               hatchings.push(
-                  {rowNum: rowNum - 1, colNum: colNum - 1, type: 'hatching'}, 
-                  {rowNum: rowNum - 1, colNum, type: 'hatching'}, 
-                  {rowNum: rowNum - 1, colNum: colNum + 1, type: 'hatching'}
-               );
-
-            }else if(index === decks.length - 1){
-               hatchings.push(
-                  {rowNum: rowNum + 1, colNum: colNum - 1, type: 'hatching'}, 
-                  {rowNum: rowNum + 1, colNum, type: 'hatching'}, 
-                  {rowNum: rowNum + 1, colNum: colNum + 1, type: 'hatching'}
-               )
-            }
-            hatchings.push(
-               {rowNum, colNum: colNum - 1, type: 'hatching'},
-               {rowNum, colNum: colNum + 1, type: 'hatching'})
-         });
-      }
+      return hatchingsForVerticalShip(decks);
    }
 
-   decks.forEach((deck, index) => {
-      let {rowNum, colNum} = deck;
-      if(index === 0) {
-         hatchings.push(
-            {rowNum: rowNum - 1, colNum: colNum - 1, type: 'hatching'}, 
-            {rowNum: rowNum, colNum: colNum - 1, type: 'hatching'}, 
-            {rowNum: rowNum + 1, colNum: colNum - 1, type: 'hatching'}
-         );
-
-      }else if(index === decks.length - 1){
-         hatchings.push(
-            {rowNum: rowNum - 1, colNum: colNum + 1, type: 'hatching'}, 
-            {rowNum: rowNum, colNum: colNum + 1, type: 'hatching'}, 
-            {rowNum: rowNum + 1, colNum: colNum + 1, type: 'hatching'}
-         )
-      }
-      hatchings.push(
-         {rowNum: rowNum - 1, colNum, type: 'hatching'},
-         {rowNum: rowNum + 1, colNum, type: 'hatching'})
-   });
-
-   return hatchings;
+   return hatchingsForHorizontalShip(decks);
 }
 
 export default calcHatchingsCoordinates;

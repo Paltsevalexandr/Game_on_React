@@ -9,8 +9,7 @@ const CheckingShips = ({checkingShips, getCurrentShip}) => {
       <div 
         className = {"ship " + ship}
         draggable = 'true' key = {index}
-        onMouseDown = {e => getCurrentShip(ship, e.nativeEvent.offsetX, e.nativeEvent.offsetY)}>
-      </div>
+        onMouseDown = {e => getCurrentShip(ship, e.nativeEvent.offsetX, e.nativeEvent.offsetY)} />
     );
   });
   return(

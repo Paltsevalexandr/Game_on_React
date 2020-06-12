@@ -6,8 +6,7 @@ const Labels = ({labels}) => {
       return(
         <div key = {index}
           className = {label.type}
-          style = {{left: label.left + 'px', top: label.top + 'px'}}>
-        </div>
+          style = {{left: label.left + 'px', top: label.top + 'px'}} />
       );
     });
     

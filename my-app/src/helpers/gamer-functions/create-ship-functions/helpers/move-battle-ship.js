@@ -1,4 +1,4 @@
-import {calcShipPosition} from '../../common-functions/calc-ship-props';
+import {calcShipPosition} from '../../../common-functions/calc-ship-props';
 
 const moveBattleShip = ({battleShips, currentShip}, {pageX, pageY}) => {
   let updatedShip;

@@ -3,7 +3,7 @@ import React from 'react';
 const StaticBattleShips = ({battleShips}) => {
   
   return (
-    <>{
+    <> {
       battleShips.map(
         ({name, top, left, isVertical}, index) => {
         return(
@@ -19,11 +19,10 @@ const StaticBattleShips = ({battleShips}) => {
             style = {{
               left: left + 'px', 
               top: top + 'px'
-            }}>
-          </div>
+            }} />
         );
       })
-    }</>
+    } </>
   );
 }
 
