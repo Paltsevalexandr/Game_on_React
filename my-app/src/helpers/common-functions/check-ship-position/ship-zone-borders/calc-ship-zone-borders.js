@@ -1,9 +1,10 @@
-import {positionInMatrix, shipZoneSize} from '../matrix-functions';
+import {positionInMatrix, shipZoneSize} from '../../matrix-functions';
 
 const calcShipZoneBorders = (shipLeft, shipTop, {decksNum, isVertical}) => {
   
   const shipZoneTop = positionInMatrix(shipTop) - 1;
   const shipZoneLeft = positionInMatrix(shipLeft) - 1;
+
   let shipZoneRight = shipZoneSize(shipZoneLeft, decksNum);
   let shipZoneBottom = shipZoneTop + 2;
   
@@ -17,7 +18,7 @@ const calcShipZoneBorders = (shipLeft, shipTop, {decksNum, isVertical}) => {
     shipZoneRight, 
     shipZoneBottom, 
     shipZoneLeft 
-    };
+  };
 }
 
 export default calcShipZoneBorders;

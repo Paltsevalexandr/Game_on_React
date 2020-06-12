@@ -9,11 +9,14 @@ import './index.css';
 import './assets/styles/ship.css';
 import './assets/styles/labels.css';
 import './assets/styles/game-start-field.css';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 const App = () => {
   return (
     <Provider store = {store}>
-      <GameField/>
+      <Router>
+        <GameField/>
+      </Router>
     </Provider>
   );
 }

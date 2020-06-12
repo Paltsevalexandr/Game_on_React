@@ -12,7 +12,6 @@ const createOrDeleteHatching = (state, {top, left}) => {
    const rowNum = (hatchingTop - 132) / 33;
    const colNum = (hatchingLeft - 594) / 33;
    
-   console.log(hatchingTop)
    if(!hatchingTop || !hatchingLeft) {
       return state;
 

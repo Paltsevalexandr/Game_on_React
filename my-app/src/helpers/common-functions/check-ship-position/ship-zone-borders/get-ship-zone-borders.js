@@ -1,5 +1,5 @@
 import calcShipZoneBorders from './calc-ship-zone-borders';
-import {calcShipPosition} from '../calc-ship-props';
+import {calcShipPosition} from '../../calc-ship-props';
 
 const getShipZoneBorders = ({currentShip: ship}, action, rotatedShip) => {
   

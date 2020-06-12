@@ -1,61 +1,43 @@
-import React from 'react';
-import {connect} from 'react-redux';
-import {createAllShips, randomShipsPlacement} from '../store/actions'
+import React, {lazy, Suspense, useState} from 'react';
+import {Switch, Route, Redirect} from 'react-router-dom';
 
-import Menu from './start-game-components/menu';
-import FieldsContainer from './start-game-components/fields-container';
-import StartButton from './start-game-components/start-game-button';
-import ControlButtons from './start-game-components/control-buttons';
-import Priority from './start-game-components/priority';
+const StartMenu = lazy(() => import ('./pages/Start-menu'));
+const GamePage = lazy(() => import('./pages/Game-page'));
 
-class GameField extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {gameMode: null};
+const GameField = () => {
+
+  let [gameMode, setGameMode] = useState(null);
+  
+  const setMode = mode => {
+    setGameMode(gameMode = mode);
   }
 
-  setGameMode = mode => {
-    this.setState({gameMode: mode});
+  const renderGamePage = () => {
+    if(gameMode) {
+      return (
+        <Suspense fallback = {<div>loading...</div>}>
+          <GamePage gameMode = {gameMode} 
+                    setGameMode = {setMode} />
+        </Suspense>
+      );
+    }  
+    return <Redirect to = '/' />
   }
   
-  render() {
-    const {
-      battleShips, 
-      createAllShips,
-      randomShipsPlacement } = this.props;
+  return (
+    <div className = 'gameField'>
+        <Switch>
+          <Route path = '/' exact
+            render = {() => <Suspense fallback = {<div>loading...</div>}>
+                              <StartMenu setGameMode = {setGameMode} />
+                            </Suspense> } />
 
-    return (
-      <div className = 'gameField'>
-        { 
-          this.state.gameMode === 'start' 
-        ? <Priority/> 
-        : <div className = 'priority'></div>
-        }
-        {
-          this.state.gameMode
-          ? <FieldsContainer gameMode = {this.state.gameMode} />
-          : <Menu>
-              <ControlButtons 
-                setGameMode = {this.setGameMode}
-                createAllShips = {createAllShips}
-                randomShipsPlacement = {randomShipsPlacement} />
-            </Menu>
-        }
-        {
-          battleShips.length === 10 && this.state.gameMode !== 'start'
-          ? <StartButton setGameMode = {this.setGameMode} />
-          : null
-        }
-      </div>
-    )
-  }
+          <Route path = '/game-field' 
+            render = {() => renderGamePage()} />
+          <Redirect to = '/' />
+        </Switch>        
+    </div>
+  )
 }
 
-const mapStateToProps = ({gamerState: {battleShips}}) => {
-  return {battleShips}
-}
-
-export default connect(
-  mapStateToProps, 
-  { createAllShips,
-    randomShipsPlacement })(GameField);
+export default GameField;

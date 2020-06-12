@@ -1,31 +1,35 @@
-import React from 'react';
+import React, {useRef, useEffect} from 'react';
 import {connect} from 'react-redux';
-import ComputerField from './computer-field';
-import Labels from '../labels/labels';
 import {createOrDeleteHatching, getGamerFire, selectGamer, getComputerFire} from '../../store/actions';
 
-class ComputerFieldContainer extends React.Component {
+import ComputerField from './computer-field';
+import Labels from '../labels/labels';
 
-  componentDidUpdate({gamerLabels: prevGamerLabels}) {
+const ComputerFieldContainer = ({
+  selectGamer, 
+  getComputerFire, 
+  createOrDeleteHatching,
+  getGamerFire,
+  gameMode,
+  gamer,
+  labels,
+  gamerLabels }) => {
+  
+  const prevDots = useRef();
+  if(!prevDots.current) prevDots.current = 0;
 
-    const {
-      gamerLabels, 
-      selectGamer, 
-      getComputerFire, 
-      gamer} = this.props;
+  useEffect(() => {
+    const dots = dotsCounter(gamerLabels);
+      
+    if(prevDots.current < dots) selectGamer(1);
 
-    const prevDots = this.dotsCounter(prevGamerLabels);
-    const dots = this.dotsCounter(gamerLabels);
-
-    if(prevDots < dots) {
-      selectGamer(1);
-
-    }else if(prevDots === dots && gamer === 2){
-      setTimeout(getComputerFire, 350);
+    if(prevDots.current === dots && gamer === 2){
+      setTimeout(getComputerFire, 600);
     }
-  }
+    prevDots.current = dots;
+  });
 
-  dotsCounter = labels => {
+  function dotsCounter(labels) {
     let count = 0;
 
     if(labels.length > 0) {  
@@ -38,38 +42,27 @@ class ComputerFieldContainer extends React.Component {
     return count;
   }
 
-  render() {
-    const {
-        battleShips, 
-        labels,
-        createOrDeleteHatching,
-        getGamerFire,
-        selectGamer,
-        gamer } = this.props;
-  
-    return (
-      <ComputerField 
-        createOrDeleteHatching  = {createOrDeleteHatching}
-        battleShips  = {battleShips}
-        selectGamer  = {selectGamer}
-        getGamerFire = {getGamerFire}
-        dotsCounter  = {this.dotsCounter}
-        labels = {labels}
-        gamer  = {gamer}>
+  return (
+    <ComputerField 
+      createOrDeleteHatching  = {createOrDeleteHatching}
+      selectGamer   = {selectGamer}
+      getGamerFire  = {getGamerFire}
+      dotsCounter   = {dotsCounter}
+      gameMode      = {gameMode}
+      labels        = {labels}
+      gamer         = {gamer}>
 
-        <Labels labels = {labels} />
-      </ComputerField>
-    );
-  }
+      <Labels labels = {labels} />
+    </ComputerField>
+  );
 }
 
 const mapStateToProps = ({
-  computerState: {battleShips, labels},
+  computerState: {labels},
   gameplayState: {gamer},
   gamerState: {labels: gamerLabels} }) => {
 
     return {
-      battleShips,
       labels,
       gamer,
       gamerLabels

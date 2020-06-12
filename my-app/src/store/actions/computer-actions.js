@@ -28,16 +28,9 @@ const getGamerFire = (pageX, pageY) => {
   }
 }
 
-const show = () => {
-  return {
-    type: 'showState'
-  }
-}
-
 export {
   createAllShips,
   createLabel,
   createOrDeleteHatching,
   getGamerFire,
-  show
 }

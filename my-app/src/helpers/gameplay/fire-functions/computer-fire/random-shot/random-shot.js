@@ -4,6 +4,7 @@ import {findTarget} from '../../helpers';
 const randomShot = (matrix, {currentTarget, destroyedShips}) => {
   let decks = [];
   let borders = [];
+  
   let shot = createShot();
   let target = {
     type: findTarget(matrix, shot),
