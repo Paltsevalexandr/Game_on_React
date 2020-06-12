@@ -1,48 +1,45 @@
-import React, {lazy, Suspense} from 'react';
+import React, {lazy, Suspense, useState} from 'react';
 import {Switch, Route, Redirect} from 'react-router-dom';
+
 const StartMenu = lazy(() => import ('./pages/Start-menu'));
 const GamePage = lazy(() => import('./pages/Game-page'));
 
-class GameField extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {gameMode: null};
+const GameField = () => {
+
+  let [gameMode, setGameMode] = useState(null);
+  
+  const setMode = mode => {
+    setGameMode(gameMode = mode);
   }
 
-  setGameMode = mode => {
-    this.setState({gameMode: mode});
-  }
-
-  renderGamePage() {
-    if(this.state.gameMode) {
+  const renderGamePage = () => {
+    if(gameMode) {
       return (
         <Suspense fallback = {<div>loading...</div>}>
-          <GamePage gameMode = {this.state.gameMode} 
-                    setGameMode = {this.setGameMode} />
+          <GamePage gameMode = {gameMode} 
+                    setGameMode = {setMode} />
         </Suspense>
       );
     }  
     return <Redirect to = '/' />
   }
   
-  render() {
-    return (
-      <div className = 'gameField'>
-          <Switch>
-            <Route path = '/' exact
-              render = {() => {
-                return (
-                  <Suspense fallback = {<div>loading...</div>}>
-                    <StartMenu setGameMode = {this.setGameMode} />
-                  </Suspense>
-                ); }} />
-            <Route path = '/game-field' 
-              render = {() => this.renderGamePage()} />
-            <Redirect to = '/' />
-          </Switch>        
-      </div>
-    )
-  }
+  return (
+    <div className = 'gameField'>
+        <Switch>
+          <Route path = '/' exact
+            render = {() => {
+              return (
+                <Suspense fallback = {<div>loading...</div>}>
+                  <StartMenu setGameMode = {setGameMode} />
+                </Suspense>
+              ); }} />
+          <Route path = '/game-field' 
+            render = {() => renderGamePage()} />
+          <Redirect to = '/' />
+        </Switch>        
+    </div>
+  )
 }
 
 export default GameField;
