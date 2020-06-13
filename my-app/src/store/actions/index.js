@@ -4,7 +4,7 @@ import {
   deleteShipFromMatrix,
   rotateShip,
   randomShipsPlacement,
-  getComputerFire,
+  computerFire
 } from './gamer-actions';
 
 import {
@@ -28,6 +28,6 @@ export {
   createLabel,
   createOrDeleteHatching,
   selectGamer,
-  getComputerFire,
+  computerFire,
   getGamerFire,
 }

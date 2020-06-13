@@ -4,8 +4,7 @@ import {
   getCurrentShip,
   createBattleShip,
   deleteShipFromMatrix,
-  rotateShip,
-  getComputerFire } from '../../store/actions';
+  rotateShip } from '../../store/actions';
 
 import BattleField from './battle-field';
 import BattleShips from './battle-ships';
@@ -19,13 +18,10 @@ const GamerField = ({
   getCurrentShip,
   createBattleShip,
   deleteShipFromMatrix,
-  rotateShip,
-  getComputerFire }) => {
+  rotateShip }) => {
 
   return(
-    <BattleField createBattleShip = {createBattleShip}
-    getComputerFire = {getComputerFire}>
-      
+    <BattleField createBattleShip = {createBattleShip}>
       {
         gameMode === 'start'
         ? <StaticBattleShips battleShips = {battleShips}/>
@@ -53,7 +49,6 @@ export default connect(
       getCurrentShip,
       createBattleShip,
       deleteShipFromMatrix,
-      rotateShip,
-      getComputerFire
+      rotateShip
     }
   )(GamerField);

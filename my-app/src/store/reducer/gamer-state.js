@@ -24,6 +24,7 @@ const initialState = {
     currentTarget: {name: undefined, decks: [], borders: []},
     destroyedShips: []
   }
+
 }
 const gamerState = (state = initialState, action) => {
   
@@ -56,7 +57,7 @@ const gamerState = (state = initialState, action) => {
         matrix 
       };
     
-    case 'GET_COMPUTER_FIRE':
+    case 'COMPUTER_FIRE':
       const fieldIndents = {fieldTop: 132, fieldLeft: 132};
       return computerFire(state, fieldIndents);
      

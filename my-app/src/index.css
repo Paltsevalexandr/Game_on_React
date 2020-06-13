@@ -28,6 +28,10 @@ button {
 button:hover {
   cursor: pointer;
 }
+a {
+  color: blue;
+  text-decoration: none;
+}
 .gameField {
   display: flex;
   flex-direction: column;

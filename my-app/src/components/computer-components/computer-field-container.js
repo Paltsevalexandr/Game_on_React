@@ -1,13 +1,13 @@
 import React, {useRef, useEffect} from 'react';
 import {connect} from 'react-redux';
-import {createOrDeleteHatching, getGamerFire, selectGamer, getComputerFire} from '../../store/actions';
+import {createOrDeleteHatching, getGamerFire, selectGamer, computerFire} from '../../store/actions';
 
 import ComputerField from './computer-field';
 import Labels from '../labels/labels';
 
 const ComputerFieldContainer = ({
   selectGamer, 
-  getComputerFire, 
+  computerFire, 
   createOrDeleteHatching,
   getGamerFire,
   gameMode,
@@ -24,7 +24,7 @@ const ComputerFieldContainer = ({
     if(prevDots.current < dots) selectGamer(1);
 
     if(prevDots.current === dots && gamer === 2){
-      setTimeout(getComputerFire, 600);
+      setTimeout(computerFire, 750);
     }
     prevDots.current = dots;
   });
@@ -71,5 +71,5 @@ const mapStateToProps = ({
 
 export default connect(
   mapStateToProps, 
-  {createOrDeleteHatching, getGamerFire, selectGamer, getComputerFire}
+  {createOrDeleteHatching, getGamerFire, selectGamer, computerFire}
 )(ComputerFieldContainer);

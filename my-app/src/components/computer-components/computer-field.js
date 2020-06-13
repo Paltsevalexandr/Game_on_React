@@ -1,24 +1,28 @@
-import React from 'react';
+import React, {useRef, useEffect} from 'react';
 
-class ComputerField extends React.Component {
-  componentDidUpdate({labels: prevLabels}) {
-    
-    const {labels, dotsCounter,selectGamer} = this.props;
-    const prevDots = dotsCounter(prevLabels);
-    const dots = dotsCounter(labels);
-    
-    if(prevDots < dots) {
-      selectGamer(2);
-    }
-  }
-  render() {
-    const {
-      gamer,
-      createOrDeleteHatching, 
-      getGamerFire,
-      gameMode,
-      children } = this.props;
-    
+const ComputerField = ({
+    gamer,
+    createOrDeleteHatching, 
+    getGamerFire,
+    gameMode,
+    labels,
+    dotsCounter, 
+    selectGamer,
+    children }) => {
+
+    const prevDots = useRef();
+    if(!prevDots.current) prevDots.current = 0;
+
+    useEffect(() => {
+      const dots = dotsCounter(labels);
+
+      if(prevDots.current < dots) {
+        selectGamer(2);
+      }
+
+      prevDots.current = dots;
+    });
+
     return(
       <div className   = "battleField"
         onClick = {e => {
@@ -36,7 +40,6 @@ class ComputerField extends React.Component {
         {children}
       </div>
     );
-  }
 }
 
 export default ComputerField;
