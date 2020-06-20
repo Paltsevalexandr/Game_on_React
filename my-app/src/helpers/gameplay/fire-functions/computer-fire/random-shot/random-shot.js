@@ -3,7 +3,6 @@ import {findTarget} from '../../helpers';
 
 const randomShot = (matrix, {currentTarget, destroyedShips}) => {
   let decks = [];
-  let borders = [];
   
   let shot = createShot();
   let target = {
@@ -29,7 +28,6 @@ const randomShot = (matrix, {currentTarget, destroyedShips}) => {
     defeatedShips: {
       currentTarget: {
         decks, 
-        borders,
         isVertical: undefined
       },
       destroyedShips

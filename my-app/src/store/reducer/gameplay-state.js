@@ -1,5 +1,6 @@
 const initialState = {
   gamer: 1,
+  winner: ''
 };
 
 const gameplayState = (state = initialState, action) => {
@@ -9,6 +10,13 @@ const gameplayState = (state = initialState, action) => {
       return {
         ...state,
         gamer: action.gamer,
+      }
+
+    case 'SELECT_WINNER':
+      console.log('action ', action.winner)
+      return {
+        gamer: 0,
+        winner: action.winner
       }
 
     default:

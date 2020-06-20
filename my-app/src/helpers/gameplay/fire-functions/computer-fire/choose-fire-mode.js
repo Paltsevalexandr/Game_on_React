@@ -1,5 +1,5 @@
 import randomShot from './random-shot/random-shot';
-import heapShot from './heap-shot/heap-shot';
+import continueShooting from './continue-shooting/continue-shooting';
 
 const chooseFireMode = (matrix, defeatedShips, labels) => {
    const {currentTarget: {decks}} = defeatedShips;
@@ -8,7 +8,7 @@ const chooseFireMode = (matrix, defeatedShips, labels) => {
       return randomShot(matrix, defeatedShips);
       
    }
-   return heapShot(matrix, defeatedShips, labels);
+   return continueShooting(matrix, defeatedShips, labels);
 }
 
 export default chooseFireMode;

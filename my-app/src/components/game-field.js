@@ -4,7 +4,7 @@ import {Switch, Route, Redirect} from 'react-router-dom';
 const StartMenu = lazy(() => import ('./pages/Start-menu'));
 const GamePage = lazy(() => import('./pages/Game-page'));
 
-const GameField = () => {
+const GameField = ({winner}) => {
 
   let [gameMode, setGameMode] = useState(null);
   

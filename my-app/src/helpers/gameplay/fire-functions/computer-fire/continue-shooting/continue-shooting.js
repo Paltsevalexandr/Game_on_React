@@ -1,9 +1,9 @@
-import continueShooting from './continue-shooting/continue-shooting';
+import heapShot from './heap-shot/heap-shot';
 import finishShipAndRandomShot from './finish-ship-and-random-shot';
 
-const heapShot = (matrix, defeatedShips, labels) => {
+const continueShooting = (matrix, defeatedShips, labels) => {
    
-   let shotResult = continueShooting(matrix, defeatedShips);
+   let shotResult = heapShot(matrix, defeatedShips);
 
    if(!shotResult) {
       return finishShipAndRandomShot(matrix, labels, defeatedShips);
@@ -21,4 +21,4 @@ const heapShot = (matrix, defeatedShips, labels) => {
    };
 }
 
-export default heapShot;
+export default continueShooting;

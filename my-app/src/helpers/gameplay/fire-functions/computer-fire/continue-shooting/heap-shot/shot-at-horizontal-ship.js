@@ -15,10 +15,10 @@ const shotAtHorizontalShip = (matrix, {currentTarget, destroyedShips}, isVertica
       && checkShotTarget(matrix, shot)) {
 
          updatedCurrentTarget = addPrevShot(matrix, currentTarget, shot);
-
+         
       }else {
          shot = {rowNum, colNum: colLast + 1};
-
+         
          if(checkNewShot(shot) 
          && checkShotTarget(matrix, shot)) {
          
@@ -26,7 +26,7 @@ const shotAtHorizontalShip = (matrix, {currentTarget, destroyedShips}, isVertica
          }
       }
    }
-   if(!updatedCurrentTarget && isVertical) {
+   if(!updatedCurrentTarget && isVertical !== false) {
       return shotAtVerticalShip(matrix, {currentTarget, destroyedShips}, isVertical);
       
    }else if(updatedCurrentTarget) {

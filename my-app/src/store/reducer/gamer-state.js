@@ -21,7 +21,7 @@ const initialState = {
       .fill(Array(10)
         .fill({type: null})),
   defeatedShips: {
-    currentTarget: {name: undefined, decks: [], borders: []},
+    currentTarget: {name: undefined, decks: []},
     destroyedShips: []
   }
 

@@ -5,13 +5,17 @@ import FieldsContainer from '../start-game-components/fields-container';
 import StartButton from '../start-game-components/start-game-button';
 import Priority from '../start-game-components/priority';
 
-const GamePage = ({gameMode, gamer, setGameMode, battleShips}) => {
+const GamePage = ({gameMode, gamer, setGameMode, battleShips, winner}) => {
+   
    return (
       <>
-         { 
-            gameMode === 'start' 
-            ? <Priority gamer = {gamer} /> 
-            : <div className = 'priority'></div>
+         {
+            winner.length > 0
+            ? <div className = 'priority'>{`Победил ${winner}`}</div>
+
+            : gameMode === 'start' 
+               ? <Priority gamer = {gamer} /> 
+               : <div className = 'priority'></div>
          }
 
          <FieldsContainer gameMode = {gameMode} />
@@ -25,8 +29,8 @@ const GamePage = ({gameMode, gamer, setGameMode, battleShips}) => {
    )
 }
 
-const mapStateToProps = ({gamerState: {battleShips}, gameplayState: {gamer}}) => {
-   return {battleShips, gamer}
+const mapStateToProps = ({gamerState: {battleShips}, gameplayState: {gamer, winner}}) => {
+   return {battleShips, gamer, winner}
 }
  
 export default connect(mapStateToProps)(GamePage);

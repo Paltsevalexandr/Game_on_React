@@ -16,6 +16,7 @@ import {
 
 import {
   selectGamer,
+  selectWinner
 } from './gameplay-actions';
 
 export {
@@ -30,4 +31,5 @@ export {
   selectGamer,
   computerFire,
   getGamerFire,
+  selectWinner
 }

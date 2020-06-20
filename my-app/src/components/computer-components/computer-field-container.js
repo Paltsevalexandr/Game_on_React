@@ -1,6 +1,6 @@
 import React, {useRef, useEffect} from 'react';
 import {connect} from 'react-redux';
-import {createOrDeleteHatching, getGamerFire, selectGamer, computerFire} from '../../store/actions';
+import {createOrDeleteHatching, getGamerFire, selectGamer, computerFire, selectWinner} from '../../store/actions';
 
 import ComputerField from './computer-field';
 import Labels from '../labels/labels';
@@ -12,34 +12,44 @@ const ComputerFieldContainer = ({
   getGamerFire,
   gameMode,
   gamer,
+  destroyedShips,
   labels,
+  selectWinner,
   gamerLabels }) => {
   
   const prevDots = useRef();
   if(!prevDots.current) prevDots.current = 0;
 
-  useEffect(() => {
-    const dots = dotsCounter(gamerLabels);
-      
-    if(prevDots.current < dots) selectGamer(1);
+  useEffect(() => {    
+    if(destroyedShips.length === 1) {
+      selectWinner('computer');
 
-    if(prevDots.current === dots && gamer === 2){
-      setTimeout(computerFire, 750);
+    }else if(defeatedDecksCounter() === 20) {
+      selectWinner('gamer');
+
+    }else {
+      const dots = dotsCounter(gamerLabels);
+      
+      if(prevDots.current < dots) selectGamer(1);
+
+      if(prevDots.current === dots && gamer === 2){
+        setTimeout(computerFire, 750);
+      }
+      prevDots.current = dots;
     }
-    prevDots.current = dots;
   });
 
-  function dotsCounter(labels) {
-    let count = 0;
+  const dotsCounter = labels => {
+    const dots = labels.filter(({type}) => type === 'dot');
 
-    if(labels.length > 0) {  
-      for(let label of labels) {
-        if(label.type === 'dot') {
-          count++;
-        }
-      }
-    }
-    return count;
+    return dots.length;
+    
+  }
+
+  const defeatedDecksCounter = () => {
+    const defeatedDecks = labels.filter(({type}) => type === 'cross');
+
+    return defeatedDecks.length;
   }
 
   return (
@@ -50,8 +60,8 @@ const ComputerFieldContainer = ({
       dotsCounter   = {dotsCounter}
       gameMode      = {gameMode}
       labels        = {labels}
-      gamer         = {gamer}>
-
+      gamer         = {gamer}
+    >
       <Labels labels = {labels} />
     </ComputerField>
   );
@@ -60,16 +70,18 @@ const ComputerFieldContainer = ({
 const mapStateToProps = ({
   computerState: {labels},
   gameplayState: {gamer},
-  gamerState: {labels: gamerLabels} }) => {
+  gamerState: {labels: gamerLabels, defeatedShips: {destroyedShips}}, win}) => {
 
     return {
+      destroyedShips,
       labels,
       gamer,
-      gamerLabels
+      gamerLabels,
+      win
     }
 }
 
 export default connect(
   mapStateToProps, 
-  {createOrDeleteHatching, getGamerFire, selectGamer, computerFire}
+  {createOrDeleteHatching, getGamerFire, selectGamer, computerFire, selectWinner}
 )(ComputerFieldContainer);

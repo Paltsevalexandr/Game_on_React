@@ -5,6 +5,14 @@ const selectGamer = gamer => {
   }
 }
 
+const selectWinner = winner => {
+  return {
+    type: 'SELECT_WINNER',
+    winner
+  }
+}
+
 export {
   selectGamer,
+  selectWinner
 };

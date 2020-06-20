@@ -1,20 +1,18 @@
 import {findTarget} from '../../../helpers';
 
-const addLastShot = (matrix, {decks, borders}, shot) => {
+const addLastShot = (matrix, {decks}, shot) => {
    
    let target = {
       type: findTarget(matrix, shot),
       ...shot
    };
    
-   if(target.type === null) {
-      borders.push(target);
-
-   }else {
+   if(target.type) {
       decks.push(target);
+
    }
    
-   return {target, currentTarget: {decks, borders}};
+   return {target, currentTarget: {decks}};
 }
 
 export default addLastShot;

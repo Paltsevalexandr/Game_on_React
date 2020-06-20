@@ -3,34 +3,33 @@ import createLabel from '../labels/create-label';
 import {addShotToMatrix} from '../helpers';
 
 const computerFire = (
-  {
-    matrix, 
+  { matrix, 
     labels, 
     defeatedShips,
-    ...args
-  },
+    ...rest },
   fieldIndents) => {
-  
+
+  if(defeatedShips.destroyedShips.length === 1) {
+    return { 
+      matrix, 
+      labels, 
+      defeatedShips,
+      ...rest 
+    }
+  }
+
   const result = chooseFireMode(matrix, defeatedShips, labels);
 
   const {target, defeatedShips: updatedDefeatedShips} = result;
 
   if(result.updatedMatrix) {
     const {updatedMatrix, updatedLabels} = result;
-    
-    return {
-      ...args,
-      defeatedShips: updatedDefeatedShips,
-      labels: [
-        ...updatedLabels,
-        createLabel(target, fieldIndents)
-      ],
-      matrix: addShotToMatrix(updatedMatrix, target)
-    };
+    matrix = updatedMatrix;
+    labels = updatedLabels;
   }
 
   return {
-    ...args,
+    ...rest,
     defeatedShips: updatedDefeatedShips,
     labels: [
       ...labels,
