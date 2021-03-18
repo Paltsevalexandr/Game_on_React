@@ -13,7 +13,6 @@ const gameplayState = (state = initialState, action) => {
       }
 
     case 'SELECT_WINNER':
-      console.log('action ', action.winner)
       return {
         gamer: 0,
         winner: action.winner

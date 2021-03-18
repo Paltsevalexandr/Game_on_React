@@ -21,7 +21,7 @@ const ComputerFieldContainer = ({
   if(!prevDots.current) prevDots.current = 0;
 
   useEffect(() => {    
-    if(destroyedShips.length === 1) {
+    if(destroyedShips.length === 10) {
       selectWinner('computer');
 
     }else if(defeatedDecksCounter() === 20) {
@@ -48,7 +48,6 @@ const ComputerFieldContainer = ({
 
   const defeatedDecksCounter = () => {
     const defeatedDecks = labels.filter(({type}) => type === 'cross');
-
     return defeatedDecks.length;
   }
 

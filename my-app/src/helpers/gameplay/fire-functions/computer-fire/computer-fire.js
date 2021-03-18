@@ -9,7 +9,7 @@ const computerFire = (
     ...rest },
   fieldIndents) => {
 
-  if(defeatedShips.destroyedShips.length === 1) {
+  if(defeatedShips.destroyedShips.length === 10) {
     return { 
       matrix, 
       labels, 
